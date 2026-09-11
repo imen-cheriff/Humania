@@ -12,8 +12,8 @@ target/
 *.iws
 *.iml
 *.ipr
-Humania\src\main\resources\anthropic.properties
-Humania\src\main\resources\application.properties
+Humania/src/main/resources/anthropic.properties
+Humania/src/main/resources/application.properties
 
 ### Eclipse ###
 .apt_generated
