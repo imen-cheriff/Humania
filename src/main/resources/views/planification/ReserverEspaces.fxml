@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="800.0" prefWidth="1280.0" spacing="0"
+      styleClass="main-container"
+      stylesheets="@reserver-espaces.css"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="planification.controllers.ReservEspaceCont">
+
+    <!-- ══════════════ HEADER ══════════════ -->
+    <HBox alignment="CENTER_LEFT" styleClass="page-header">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label styleClass="page-title" text="Réserver un Espace" />
+            <Label styleClass="page-subtitle" text="Parcourez et réservez les espaces disponibles" />
+        </VBox>
+    </HBox>
+
+    <!-- ══════════════ SEARCH BAR ══════════════ -->
+    <HBox styleClass="search-bar-container">
+        <VBox.margin><Insets bottom="16" left="28" right="28" top="16" /></VBox.margin>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="search-box">
+            <Label styleClass="search-icon" text="🔍" />
+            <TextField fx:id="searchField" onKeyReleased="#handleSearch"
+                       promptText="Rechercher un espace..."
+                       styleClass="search-field" HBox.hgrow="ALWAYS" />
+        </HBox>
+    </HBox>
+
+
+    <!-- ══════════════ FILTER BAR ══════════════ -->
+    <HBox fx:id="filterBar" alignment="CENTER_LEFT" spacing="8" styleClass="filter-bar">
+        <VBox.margin><Insets bottom="0" left="28" right="28" top="0" /></VBox.margin>
+
+        <!-- Type group -->
+        <Label styleClass="filter-label" text="Type :" />
+        <ToggleButton fx:id="btnTypeTous"    text="Tous"          styleClass="filter-toggle, filter-toggle-selected" selected="true"  onAction="#handleTypeFilter" userData="ALL"       />
+        <ToggleButton fx:id="btnTypeReunion" text="🏢 Réunion"    styleClass="filter-toggle"                         selected="false" onAction="#handleTypeFilter" userData="REUNION"   />
+        <ToggleButton fx:id="btnTypeCo"      text="💺 Coworking"  styleClass="filter-toggle"                         selected="false" onAction="#handleTypeFilter" userData="COWORKING" />
+
+        <!-- Spacer -->
+
+        <!-- Status group -->
+        <Label styleClass="filter-label" text="Statut :" />
+        <ToggleButton fx:id="btnStatutTous"   text="Tous"          styleClass="filter-toggle, filter-toggle-selected" selected="true"  onAction="#handleStatutFilter" userData="ALL"        />
+        <ToggleButton fx:id="btnStatutDispo"  text="● Disponible"  styleClass="filter-toggle, filter-toggle-dispo"    selected="false" onAction="#handleStatutFilter" userData="DISPONIBLE" />
+        <ToggleButton fx:id="btnStatutOccupe" text="● Occupé"      styleClass="filter-toggle, filter-toggle-occupe"   selected="false" onAction="#handleStatutFilter" userData="OCCUPE"     />
+    </HBox>
+
+    <!-- ══════════════ CARDS AREA ══════════════ -->
+    <StackPane fx:id="centerStack" VBox.vgrow="ALWAYS">
+        <ScrollPane fitToWidth="true" styleClass="cards-scroll" StackPane.alignment="TOP_LEFT">
+            <TilePane fx:id="cardsContainer"
+                      alignment="TOP_LEFT"
+                      hgap="24" vgap="24"
+                      prefColumns="3"
+                      prefTileWidth="380.0"
+                      prefTileHeight="460.0"
+                      styleClass="cards-tile">
+                <TilePane.margin><Insets bottom="30" left="28" right="28" top="10" /></TilePane.margin>
+            </TilePane>
+        </ScrollPane>
+    </StackPane>
+
+</VBox>

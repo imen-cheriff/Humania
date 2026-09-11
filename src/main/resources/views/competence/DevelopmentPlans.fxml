@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="competence.controllers.DevelopmentPlansController"
+            style="-fx-background-color: #F5F7FA;">
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: #F5F7FA;">
+            <VBox spacing="24" style="-fx-padding: 30;">
+
+                <!-- ══ HEADER ══════════════════════════════════════════════ -->
+                <HBox alignment="CENTER_LEFT">
+                    <VBox spacing="4">
+                        <Label text="Individual Development Plans - PDI"
+                               style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+                        <Label text="Track and manage employee development goals"
+                               style="-fx-font-size: 13; -fx-text-fill: #6B7280;"/>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnCreatePDI" text="＋  Create PDI"
+                            onAction="#handleCreatePDI"
+                            style="-fx-background-color: #2C3E8C; -fx-text-fill: white;
+                                   -fx-font-weight: bold; -fx-font-size: 13;
+                                   -fx-padding: 12 24; -fx-background-radius: 10;
+                                   -fx-cursor: hand;
+                                   -fx-effect: dropshadow(gaussian,rgba(44,62,140,0.3),8,0,0,3);"/>
+                </HBox>
+
+                <!-- ══ STAT CARDS ══════════════════════════════════════════ -->
+                <GridPane hgap="16" vgap="16">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                    </columnConstraints>
+
+                    <!-- Active Plans -->
+                    <VBox GridPane.columnIndex="0" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:14;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.07),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#2C3E8C;-fx-background-radius:14 14 0 0;"/>
+                        <VBox spacing="10" style="-fx-padding:16 18;">
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Label text="🎯"
+                                       style="-fx-font-size:22;-fx-background-color:#EFF6FF;
+                                              -fx-padding:10;-fx-background-radius:10;"/>
+                                <VBox spacing="2">
+                                    <Label fx:id="lblActivePlans" text="0"
+                                           style="-fx-font-size:30;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                                    <Label text="Active Plans"
+                                           style="-fx-font-size:11;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="📋  Plans de développement actifs"
+                                   style="-fx-font-size:10;-fx-text-fill:#2C3E8C;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Avg Progress -->
+                    <VBox GridPane.columnIndex="1" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:14;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.07),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#10B981;-fx-background-radius:14 14 0 0;"/>
+                        <VBox spacing="10" style="-fx-padding:16 18;">
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Label text="📈"
+                                       style="-fx-font-size:22;-fx-background-color:#D1FAE5;
+                                              -fx-padding:10;-fx-background-radius:10;"/>
+                                <VBox spacing="2">
+                                    <Label fx:id="lblAvgProgress" text="0%"
+                                           style="-fx-font-size:30;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                                    <Label text="Avg. Progress"
+                                           style="-fx-font-size:11;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="🚀  Progression moyenne des PDI"
+                                   style="-fx-font-size:10;-fx-text-fill:#10B981;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Actions Due -->
+                    <VBox GridPane.columnIndex="2" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:14;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.07),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#F59E0B;-fx-background-radius:14 14 0 0;"/>
+                        <VBox spacing="10" style="-fx-padding:16 18;">
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Label text="⏰"
+                                       style="-fx-font-size:22;-fx-background-color:#FEF3C7;
+                                              -fx-padding:10;-fx-background-radius:10;"/>
+                                <VBox spacing="2">
+                                    <Label fx:id="lblActionsDue" text="0"
+                                           style="-fx-font-size:30;-fx-font-weight:bold;-fx-text-fill:#DC2626;"/>
+                                    <Label text="Actions Due"
+                                           style="-fx-font-size:11;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="⚡  Actions à réaliser bientôt"
+                                   style="-fx-font-size:10;-fx-text-fill:#F59E0B;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Completed -->
+                    <VBox GridPane.columnIndex="3" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:14;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.07),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#8B5CF6;-fx-background-radius:14 14 0 0;"/>
+                        <VBox spacing="10" style="-fx-padding:16 18;">
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Label text="✅"
+                                       style="-fx-font-size:22;-fx-background-color:#EDE9FE;
+                                              -fx-padding:10;-fx-background-radius:10;"/>
+                                <VBox spacing="2">
+                                    <Label fx:id="lblCompleted" text="0"
+                                           style="-fx-font-size:30;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                                    <Label text="Completed"
+                                           style="-fx-font-size:11;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="🏁  PDI complètement finalisés"
+                                   style="-fx-font-size:10;-fx-text-fill:#8B5CF6;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+                </GridPane>
+
+                <!-- ══ PDI LIST ═════════════════════════════════════════════ -->
+                <VBox fx:id="vboxPDIList" spacing="20">
+                    <!-- Injected dynamically -->
+                </VBox>
+
+                <!-- Empty State -->
+                <VBox fx:id="vboxEmptyPDI" alignment="CENTER" spacing="14"
+                      visible="false" managed="false" style="-fx-padding: 60 0;">
+                    <Label text="📋" style="-fx-font-size: 52;"/>
+                    <Label text="Aucun plan de développement"
+                           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                    <Label text="Créez votre premier PDI pour commencer à suivre la progression."
+                           style="-fx-font-size: 13; -fx-text-fill: #6B7280;"/>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20.0" alignment="TOP_CENTER" prefWidth="550.0"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="planification.controllers.AjouterEspaceContr">
+
+    <!-- ToggleGroup déclaré ici pour que $typeGroup soit résolu partout -->
+    <fx:define>
+        <ToggleGroup fx:id="typeGroup"/>
+    </fx:define>
+
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+
+    <Label text="Formulaire de Salle" style="-fx-font-weight: bold;">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Label>
+
+    <GridPane hgap="15.0" vgap="15.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="120.0" prefWidth="130.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="250.0" />
+        </columnConstraints>
+
+        <children>
+            <!-- Type d'espace -->
+            <Label text="Type d'espace :" GridPane.rowIndex="0" style="-fx-font-weight: bold;" />
+            <HBox spacing="20.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <RadioButton fx:id="radioReunion"   text="🏢  Salle de réunion"
+                             toggleGroup="$typeGroup" selected="true" />
+                <RadioButton fx:id="radioCoworking" text="💺  Coworking"
+                             toggleGroup="$typeGroup" />
+            </HBox>
+
+            <Label text="Nom :" GridPane.rowIndex="1" />
+            <TextField fx:id="nomField" promptText="Entrez le nom de la salle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label text="Capacité :" GridPane.rowIndex="2" />
+            <Spinner fx:id="capaciteSpinner" editable="true" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+            <Label text="Étage :" GridPane.rowIndex="3" />
+            <Spinner fx:id="etageSpinner" editable="true" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+            <Label text="URL Image :" GridPane.rowIndex="4" />
+            <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <TextField fx:id="urlImageField" prefWidth="200.0" promptText="Chemin de l'image" />
+                <Button text="Parcourir..." onAction="#parcourirImage" />
+            </HBox>
+
+            <Label text="Disponible :" GridPane.rowIndex="5" />
+            <CheckBox fx:id="disponibleCheckbox" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+            <Label text="Équipements :" GridPane.rowIndex="6" />
+            <GridPane hgap="20.0" vgap="8.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                </columnConstraints>
+                <children>
+                    <CheckBox fx:id="equipement1" text="Projecteur" GridPane.rowIndex="0" />
+                    <CheckBox fx:id="equipement2" text="Tableau blanc" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <CheckBox fx:id="equipement3" text="Ordinateur" GridPane.rowIndex="1" />
+                    <CheckBox fx:id="equipement4" text="Climatisation" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <CheckBox fx:id="equipement5" text="Wifi" GridPane.rowIndex="2" />
+                    <CheckBox fx:id="equipement6" text="Imprimante" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <CheckBox fx:id="equipement7" text="Téléphone" GridPane.rowIndex="3" />
+                    <CheckBox fx:id="equipement8" text="Visioconférence" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                </children>
+            </GridPane>
+        </children>
+    </GridPane>
+
+    <HBox spacing="15.0" alignment="CENTER_RIGHT">
+        <Button text="Annuler" fx:id="btnAnnuler" style="-fx-background-color: #f44336; -fx-text-fill: white;" />
+        <Button text="Enregistrer la salle" fx:id="btnEnregistrer"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"
+                onAction="#enregistrerSalle" />
+    </HBox>
+</VBox>

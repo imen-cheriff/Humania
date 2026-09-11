@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="competence.controllers.CompetencyCatalogController"
+            style="-fx-background-color: #f5f7fa;">
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: #f5f7fa; -fx-background-color: #f5f7fa;">
+            <VBox spacing="20" style="-fx-padding: 30;">
+
+                <!-- ══ Header ══ -->
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <VBox spacing="5">
+                        <Label text="Competency Catalog"
+                               style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #1a1d23;"/>
+                        <Label text="Manage skills and competencies"
+                               style="-fx-font-size: 14; -fx-text-fill: #6c757d;"/>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <!-- ★ NOUVEAU : Toggle Mes Compétences ★ -->
+                    <Button fx:id="btnToggleMySkills"
+                            text="👤  Mes Compétences"
+                            style="-fx-background-color:#EEF2FF;-fx-text-fill:#4F46E5;
+                                   -fx-font-weight:bold;-fx-padding:10 18;
+                                   -fx-background-radius:10;-fx-cursor:hand;
+                                   -fx-border-color:#C7D2FE;-fx-border-width:1;-fx-border-radius:10;"/>
+
+                    <Button fx:id="btnAddCompetency"
+                            text="+ Ajouter une compétence"
+                            onAction="#handleAddCompetency"
+                            style="-fx-background-color: #2c7be5; -fx-text-fill: white;
+                                   -fx-font-weight: bold; -fx-padding: 12 24;
+                                   -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 13;"/>
+                </HBox>
+
+                <!-- ══ STATS CARDS ══ -->
+                <GridPane hgap="16">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                    </columnConstraints>
+
+                    <!-- Card 1 - Total Competencies (bleu) -->
+                    <VBox GridPane.columnIndex="0" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:12;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#3B82F6;-fx-background-radius:12 12 0 0;"/>
+                        <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                            <HBox spacing="14" alignment="CENTER_LEFT">
+                                <Label text="🎯"
+                                       style="-fx-font-size:20;-fx-background-color:#DBEAFE;
+                                              -fx-padding:10;-fx-background-radius:8;"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="lblTotalCompetencies" text="0"
+                                           style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                                    <Label fx:id="lblSubTotal" text="Total Compétences"
+                                           style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label fx:id="lblLinkTotal" text="📋  Référentiel complet"
+                                   style="-fx-font-size:11;-fx-text-fill:#3B82F6;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Card 2 - Categories (violet) -->
+                    <VBox GridPane.columnIndex="1" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:12;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#8B5CF6;-fx-background-radius:12 12 0 0;"/>
+                        <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                            <HBox spacing="14" alignment="CENTER_LEFT">
+                                <Label text="📚"
+                                       style="-fx-font-size:20;-fx-background-color:#EDE9FE;
+                                              -fx-padding:10;-fx-background-radius:8;"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="lblTotalCategories" text="0"
+                                           style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                                    <Label fx:id="lblSubCategories" text="Catégories"
+                                           style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label fx:id="lblLinkCategories" text="🏷️  Domaines de compétence"
+                                   style="-fx-font-size:11;-fx-text-fill:#8B5CF6;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Card 3 - Critiques (orange) -->
+                    <VBox GridPane.columnIndex="2" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:12;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#F59E0B;-fx-background-radius:12 12 0 0;"/>
+                        <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                            <HBox spacing="14" alignment="CENTER_LEFT">
+                                <Label text="🚨"
+                                       style="-fx-font-size:20;-fx-background-color:#FEF3C7;
+                                              -fx-padding:10;-fx-background-radius:8;"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="lblCriticalCompetencies" text="0"
+                                           style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#DC2626;"/>
+                                    <Label fx:id="lblSubCritical" text="Critiques"
+                                           style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label fx:id="lblLinkCritical" text="🔑  Compétences critiques"
+                                   style="-fx-font-size:11;-fx-text-fill:#F59E0B;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Card 4 - Niveau moyen (vert) -->
+                    <VBox GridPane.columnIndex="3" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:12;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#10B981;-fx-background-radius:12 12 0 0;"/>
+                        <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                            <HBox spacing="14" alignment="CENTER_LEFT">
+                                <Label text="📈"
+                                       style="-fx-font-size:20;-fx-background-color:#D1FAE5;
+                                              -fx-padding:10;-fx-background-radius:8;"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="lblAvgMaxLevel" text="0.0"
+                                           style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                                    <Label fx:id="lblSubAvg" text="Niveau Max Moyen"
+                                           style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label fx:id="lblLinkAvg" text="⭐  Niveau moyen requis"
+                                   style="-fx-font-size:11;-fx-text-fill:#10B981;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+                </GridPane>
+
+                <!-- ══ Filters (barre de recherche) ══ -->
+                <HBox spacing="15" alignment="CENTER_LEFT"
+                      style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;
+                             -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.05),8,0,0,2);">
+                    <Label text="🔍" style="-fx-font-size: 16;"/>
+                    <TextField fx:id="searchCompetenciesField"
+                               promptText="Search competencies..."
+                               prefWidth="300"
+                               style="-fx-background-color: #f5f7fa; -fx-border-radius: 5;
+                                      -fx-background-radius: 5; -fx-padding: 8;"/>
+
+                    <MenuButton fx:id="menuFilterCategory"
+                                text="All Categories"
+                                prefWidth="200"
+                                style="-fx-background-color: #f5f7fa; -fx-background-radius: 5; -fx-text-fill: #2c3e50;">
+                        <graphic>
+                            <HBox spacing="5" alignment="CENTER_LEFT">
+                                <Label text="🔽" style="-fx-font-size: 12;"/>
+                            </HBox>
+                        </graphic>
+                    </MenuButton>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <!-- Toggle Grille / Liste -->
+                    <HBox spacing="5" style="-fx-border-color: #e3e8ef; -fx-border-radius: 5; -fx-padding: 5;">
+                        <Button fx:id="btnGridView" text="🔲" onAction="#handleGridView"
+                                style="-fx-background-color: #2c7be5; -fx-text-fill: white;
+                                       -fx-padding: 5 10; -fx-background-radius: 3; -fx-cursor: hand;"/>
+                        <Button fx:id="btnListView" text="☰" onAction="#handleListView"
+                                style="-fx-background-color: transparent; -fx-text-fill: #6c757d;
+                                       -fx-padding: 5 10; -fx-background-radius: 3; -fx-cursor: hand;"/>
+                    </HBox>
+                </HBox>
+
+                <!-- ══ VUE CATALOGUE : Grid ══ -->
+                <GridPane fx:id="gridCompetencies" hgap="20" vgap="20" visible="true" managed="true"/>
+
+                <!-- ══ VUE CATALOGUE : Liste accordéon ══ -->
+                <VBox fx:id="vboxListView" spacing="20" visible="false" managed="false"/>
+
+                <!-- ══ ★ NOUVEAU : VUE "MES COMPÉTENCES" ★ ══
+                     Panneau injecté dynamiquement par le controller.
+                     Visible=false par défaut, géré par handleToggleMySkills(). -->
+                <VBox fx:id="vboxMySkills"
+                      spacing="16"
+                      visible="false"
+                      managed="false"
+                      style="-fx-padding: 0;"/>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

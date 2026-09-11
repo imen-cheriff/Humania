@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane
+        xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="recrutement.controllers.FormPosteExterneController"
+        prefWidth="560"
+        prefHeight="620"
+        style="-fx-background-color: #ffffff;
+           -fx-background-radius: 16;
+           -fx-border-radius: 16;
+           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 24, 0, 0, 6);">
+
+    <top>
+        <VBox style="-fx-background-color: #ffffff; -fx-background-radius: 16 16 0 0;">
+            <padding><Insets top="24" right="28" bottom="0" left="28"/></padding>
+            <HBox alignment="CENTER_LEFT">
+                <VBox HBox.hgrow="ALWAYS" spacing="4">
+                    <Label fx:id="formTitle" text="Ajouter un Poste Externe"
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 18px; -fx-font-weight: 700; -fx-text-fill: #0f172a;"/>
+                    <Label text="Remplissez toutes les informations de l'offre"
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                </VBox>
+                <Button fx:id="btnClose" text="✕" onAction="#handleClose"
+                        style="-fx-background-color: #f1f5f9; -fx-border-color: transparent; -fx-text-fill: #64748b;
+                           -fx-font-size: 14px; -fx-font-weight: 700; -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 6 10 6 10;"/>
+            </HBox>
+            <Region prefHeight="20"/>
+            <Separator style="-fx-background-color: #e2e8f0;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" style="-fx-background: transparent; -fx-border-color: transparent;">
+            <VBox spacing="14" style="-fx-background-color: #ffffff;">
+                <padding><Insets top="20" right="28" bottom="40" left="28"/></padding>
+
+                <!-- Titre -->
+                <VBox spacing="6">
+                    <Label text="TITRE *" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <TextField fx:id="txtTitre" promptText="Ex: Développeur Full Stack"
+                               style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc;
+                                  -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9 12 9 12;"/>
+                </VBox>
+
+                <!-- Description -->
+                <VBox spacing="6">
+                    <Label text="DESCRIPTION" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <TextArea fx:id="txtDescription" promptText="Décrivez le poste, les missions..."
+                              prefRowCount="3" wrapText="true"
+                              style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc;
+                                 -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9 12 9 12;"/>
+                </VBox>
+
+                <!-- Type contrat + Statut -->
+                <HBox spacing="14">
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="TYPE DE CONTRAT *" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <ComboBox fx:id="cmbTypeContrat" prefWidth="10000"
+                                  style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8;"/>
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="STATUT *" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <ComboBox fx:id="cmbStatut" prefWidth="10000"
+                                  style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Salaire + Expérience requise -->
+                <HBox spacing="14">
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="SALAIRE" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <TextField fx:id="txtSalaire" promptText="Ex: 45000"
+                                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc;
+                                      -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9 12 9 12;"/>
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="EXPÉRIENCE REQUISE (années)" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <TextField fx:id="txtExperienceRequise" promptText="Ex: 3"
+                                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc;
+                                      -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9 12 9 12;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Nombre employé + Priorité -->
+                <HBox spacing="14">
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="NOMBRE EMPLOYÉ" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <TextField fx:id="txtNombreEmploye" promptText="Ex: 1"
+                                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc;
+                                      -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9 12 9 12;"/>
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="PRIORITÉ" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <ComboBox fx:id="cmbPriorite" prefWidth="10000"
+                                  style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Compétences + Niveau d'étude -->
+                <HBox spacing="14">
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="COMPÉTENCES REQUISES" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <TextField fx:id="txtCompetencesRequises" promptText="Ex: Java, Spring, SQL..."
+                                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc;
+                                      -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9 12 9 12;"/>
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="NIVEAU D'ÉTUDE REQUIS" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <TextField fx:id="txtNiveauEtudeRequis" promptText="Ex: Bac+5, Licence..."
+                                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-background-color: #f8fafc;
+                                      -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9 12 9 12;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Date publication + Date clôture -->
+                <HBox spacing="14">
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="DATE PUBLICATION" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <DatePicker fx:id="datePickerPublication"
+                                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;"/>
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS" spacing="6">
+                        <Label text="DATE CLÔTURE" style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                        <DatePicker fx:id="datePickerCloture"
+                                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <VBox style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 16 16;">
+            <Separator style="-fx-background-color: #e2e8f0;"/>
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <padding><Insets top="16" right="28" bottom="20" left="28"/></padding>
+                <Button fx:id="btnAnnuler" text="Annuler" onAction="#handleClose"
+                        style="-fx-background-color: #f1f5f9; -fx-border-color: transparent; -fx-text-fill: #475569;
+                           -fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-font-weight: 600;
+                           -fx-background-radius: 8; -fx-padding: 10 20 10 20; -fx-cursor: hand;"/>
+                <Button fx:id="btnEnregistrer" text="💾  Enregistrer" onAction="#handleEnregistrer"
+                        style="-fx-background-color: #3b82f6; -fx-border-color: transparent; -fx-text-fill: white;
+                           -fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-font-weight: 700;
+                           -fx-background-radius: 8; -fx-padding: 10 22 10 22; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

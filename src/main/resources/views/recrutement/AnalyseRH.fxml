@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="recrutement.controllers.AnalyseRHController"
+            style="-fx-background-color: #F5F7FA;">
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: #F5F7FA; -fx-background: #F5F7FA; -fx-border-color: transparent;">
+            <VBox spacing="0" style="-fx-background-color: #F5F7FA;">
+                <padding><Insets top="32" right="40" bottom="40" left="40"/></padding>
+
+                <!-- PAGE HEADER -->
+                <HBox alignment="CENTER_LEFT">
+                    <VBox HBox.hgrow="ALWAYS" spacing="4">
+                        <Label text="Analyse RH"
+                               style="-fx-font-family: 'Segoe UI'; -fx-font-size: 26px; -fx-font-weight: 700; -fx-text-fill: #0f172a;"/>
+                        <Label text="Indicateurs clés de recrutement et tendances"
+                               style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-text-fill: #64748b;"/>
+                    </VBox>
+                </HBox>
+
+                <Region prefHeight="24"/>
+
+                <!-- KPI CARDS ROW - 5 cards with colored top bars -->
+                <HBox spacing="16">
+                    <!-- Candidatures Internes -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0"
+                          style="-fx-background-color: white; -fx-background-radius: 14;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);">
+                        <Region prefHeight="4"
+                                style="-fx-background-color: linear-gradient(to right,#7C3AED,#A78BFA);
+                                       -fx-background-radius: 14 14 0 0;"/>
+                        <VBox spacing="6" style="-fx-padding: 16 20 16 20;">
+                            <Label text="🔄" style="-fx-font-size: 20px;"/>
+                            <Label fx:id="kpiInternes" text="—"
+                                   style="-fx-font-size: 30px; -fx-font-weight: 700; -fx-text-fill: #7C3AED;"/>
+                            <Label text="Candidatures Internes"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                            <Label text="↗ Mobilité interne"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #7C3AED;"/>
+                        </VBox>
+                    </VBox>
+                    <!-- Candidatures Externes -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0"
+                          style="-fx-background-color: white; -fx-background-radius: 14;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);">
+                        <Region prefHeight="4"
+                                style="-fx-background-color: linear-gradient(to right,#4F46E5,#818CF8);
+                                       -fx-background-radius: 14 14 0 0;"/>
+                        <VBox spacing="6" style="-fx-padding: 16 20 16 20;">
+                            <Label text="👤" style="-fx-font-size: 20px;"/>
+                            <Label fx:id="kpiExternes" text="—"
+                                   style="-fx-font-size: 30px; -fx-font-weight: 700; -fx-text-fill: #4F46E5;"/>
+                            <Label text="Candidatures Externes"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                            <Label text="↗ Recrutement externe"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #4F46E5;"/>
+                        </VBox>
+                    </VBox>
+                    <!-- Taux d'Acceptation -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0"
+                          style="-fx-background-color: white; -fx-background-radius: 14;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);">
+                        <Region prefHeight="4"
+                                style="-fx-background-color: linear-gradient(to right,#10B981,#34D399);
+                                       -fx-background-radius: 14 14 0 0;"/>
+                        <VBox spacing="6" style="-fx-padding: 16 20 16 20;">
+                            <Label text="✅" style="-fx-font-size: 20px;"/>
+                            <Label fx:id="kpiTaux" text="—"
+                                   style="-fx-font-size: 30px; -fx-font-weight: 700; -fx-text-fill: #059669;"/>
+                            <Label text="Taux d'Acceptation"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                            <Label text="→ Niveau de sélection"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #059669;"/>
+                        </VBox>
+                    </VBox>
+                    <!-- Score IA -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0"
+                          style="-fx-background-color: white; -fx-background-radius: 14;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);">
+                        <Region prefHeight="4"
+                                style="-fx-background-color: linear-gradient(to right,#F59E0B,#FBBF24);
+                                       -fx-background-radius: 14 14 0 0;"/>
+                        <VBox spacing="6" style="-fx-padding: 16 20 16 20;">
+                            <Label text="🤖" style="-fx-font-size: 20px;"/>
+                            <Label fx:id="kpiScore" text="—"
+                                   style="-fx-font-size: 30px; -fx-font-weight: 700; -fx-text-fill: #D97706;"/>
+                            <Label text="Score IA Moyen"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                            <Label text="→ Matching candidats"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #D97706;"/>
+                        </VBox>
+                    </VBox>
+                    <!-- Postes ouverts -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0"
+                          style="-fx-background-color: white; -fx-background-radius: 14;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);">
+                        <Region prefHeight="4"
+                                style="-fx-background-color: linear-gradient(to right,#0EA5E9,#38BDF8);
+                                       -fx-background-radius: 14 14 0 0;"/>
+                        <VBox spacing="6" style="-fx-padding: 16 20 16 20;">
+                            <Label text="📌" style="-fx-font-size: 20px;"/>
+                            <Label fx:id="kpiPostes" text="—"
+                                   style="-fx-font-size: 30px; -fx-font-weight: 700; -fx-text-fill: #0EA5E9;"/>
+                            <Label text="Postes Ouverts"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                            <Label text="↗ Offres actives"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #0EA5E9;"/>
+                        </VBox>
+                    </VBox>
+                </HBox>
+
+                <Region prefHeight="24"/>
+
+                <!-- CHARTS ROW: BAR + PIE -->
+                <HBox spacing="20">
+                    <!-- Bar Chart -->
+                    <VBox spacing="12" HBox.hgrow="ALWAYS" prefHeight="300"
+                          style="-fx-background-color: white; -fx-background-radius: 14;
+                                 -fx-border-color: #e2e8f0; -fx-border-radius: 14; -fx-border-width: 1;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                        <padding><Insets top="20" right="20" bottom="16" left="20"/></padding>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="📊" style="-fx-font-size: 16px;"/>
+                            <VBox spacing="2">
+                                <Label text="Candidatures par type de contrat"
+                                       style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: #0f172a;"/>
+                                <Label text="Distribution CDI, CDD, Stagiaire, Mission"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                            </VBox>
+                        </HBox>
+                        <BarChart fx:id="barChart" legendVisible="false" VBox.vgrow="ALWAYS"
+                                  style="-fx-background-color: transparent; -fx-padding: 0;">
+                            <xAxis><CategoryAxis tickLabelFill="#64748b"/></xAxis>
+                            <yAxis><NumberAxis lowerBound="0" upperBound="10" tickUnit="1" tickLabelFill="#64748b"/></yAxis>
+                        </BarChart>
+                    </VBox>
+                    <!-- Pie Chart -->
+                    <VBox spacing="12" HBox.hgrow="ALWAYS" prefHeight="300"
+                          style="-fx-background-color: white; -fx-background-radius: 14;
+                                 -fx-border-color: #e2e8f0; -fx-border-radius: 14; -fx-border-width: 1;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                        <padding><Insets top="20" right="20" bottom="16" left="20"/></padding>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="🥧" style="-fx-font-size: 16px;"/>
+                            <VBox spacing="2">
+                                <Label text="Répartition par statut"
+                                       style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: #0f172a;"/>
+                                <Label text="Accepté, En cours, Refusé"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                            </VBox>
+                        </HBox>
+                        <PieChart fx:id="pieChart" legendVisible="true" legendSide="BOTTOM"
+                                  labelsVisible="true" VBox.vgrow="ALWAYS"
+                                  style="-fx-background-color: transparent;"/>
+                    </VBox>
+                </HBox>
+
+                <Region prefHeight="20"/>
+
+                <!-- LINE CHART -->
+                <VBox spacing="12" prefHeight="280"
+                      style="-fx-background-color: white; -fx-background-radius: 14;
+                             -fx-border-color: #e2e8f0; -fx-border-radius: 14; -fx-border-width: 1;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 3);">
+                    <padding><Insets top="20" right="20" bottom="16" left="20"/></padding>
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="📈" style="-fx-font-size: 16px;"/>
+                        <VBox spacing="2">
+                            <Label text="Évolution des candidatures"
+                                   style="-fx-font-family: 'Segoe UI'; -fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: #0f172a;"/>
+                            <Label text="Tendance mensuelle — internes et externes"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                        </VBox>
+                    </HBox>
+                    <LineChart fx:id="lineChart" legendVisible="true" legendSide="BOTTOM"
+                               VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: transparent; -fx-padding: 0;">
+                        <xAxis><CategoryAxis label="Mois" tickLabelFill="#64748b"/></xAxis>
+                        <yAxis><NumberAxis lowerBound="0" upperBound="10" tickUnit="2"
+                                           label="Nombre" tickLabelFill="#64748b"/></yAxis>
+                    </LineChart>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="communication.controllers.GroupDetailController"
+            style="-fx-background-color: #EEF0FB;">
+
+    <!-- ═══════════════════════════════════════════
+         HEADER DU GROUPE
+    ═══════════════════════════════════════════ -->
+    <top>
+        <VBox style="-fx-background-color: #FFFFFF;
+                     -fx-border-color: #E8EAF6;
+                     -fx-border-width: 0 0 1.5 0;
+                     -fx-padding: 18 24;
+                     -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.08), 12, 0, 0, 3);">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <!-- Avatar groupe -->
+                <StackPane fx:id="groupAvatarPane"
+                           style="-fx-background-color: #7C3AED; -fx-background-radius: 9999px;
+                                  -fx-effect: dropshadow(gaussian, rgba(124,58,237,0.4), 10, 0, 0, 3);"
+                           minWidth="56" minHeight="56" maxWidth="56" maxHeight="56">
+                    <Label fx:id="groupAvatarLabel" text="G"
+                           style="-fx-font-size: 22px; -fx-font-weight: 800; -fx-text-fill: white;"/>
+                </StackPane>
+
+                <!-- Infos groupe -->
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label fx:id="groupNameLabel"
+                               style="-fx-font-size: 20px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+                        <!-- Badge admin -->
+                        <Label fx:id="adminBadge" text="👑 Admin"
+                               style="-fx-background-color: #EDFBF4; -fx-text-fill: #059669;
+                                      -fx-font-size: 11px; -fx-font-weight: 700;
+                                      -fx-background-radius: 9999px; -fx-padding: 3 10;"
+                               visible="false" managed="false"/>
+                    </HBox>
+                    <Label fx:id="groupDescLabel"
+                           style="-fx-font-size: 13px; -fx-text-fill: #6B7280;" wrapText="true"/>
+                    <Label fx:id="groupMembersLabel"
+                           style="-fx-font-size: 12px; -fx-text-fill: #A0A8CC; -fx-font-weight: 600;"/>
+                </VBox>
+
+                <!-- Boutons actions -->
+                <HBox spacing="8" alignment="CENTER_RIGHT">
+                    <Button fx:id="settingsBtn" text="⚙️ Gérer"
+                            style="-fx-background-color: #7C3AED; -fx-text-fill: white;
+                                   -fx-font-size: 12px; -fx-font-weight: 700;
+                                   -fx-padding: 8 18; -fx-background-radius: 9999px;
+                                   -fx-cursor: hand; -fx-border-width: 0;"
+                            visible="false" managed="false"/>
+                    <Button fx:id="backBtn" text="← Retour"
+                            style="-fx-background-color: white; -fx-text-fill: #7C3AED;
+                                   -fx-font-size: 13px; -fx-font-weight: 700;
+                                   -fx-padding: 8 18; -fx-background-radius: 9999px;
+                                   -fx-cursor: hand; -fx-border-color: #C4B5FD;
+                                   -fx-border-width: 1.5;"/>
+                </HBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ═══════════════════════════════════════════
+         FEED DU GROUPE
+    ═══════════════════════════════════════════ -->
+    <center>
+        <ScrollPane fx:id="groupFeedScrollPane" fitToWidth="true"
+                    style="-fx-background-color: transparent; -fx-background: #EEF0FB; -fx-border-width: 0;">
+
+            <VBox alignment="TOP_CENTER"
+                  style="-fx-background-color: #EEF0FB; -fx-padding: 0 0 32 0;">
+
+                <VBox maxWidth="700" minWidth="400" spacing="18"
+                      style="-fx-padding: 24 0 0 0;">
+
+                    <!-- ╔══════════════════════════════════╗
+                         ║     CREATE POST CARD             ║
+                         ╚══════════════════════════════════╝ -->
+                    <VBox fx:id="createPostBox"
+                          style="-fx-background-color: #FFFFFF;
+                                 -fx-background-radius: 22px;
+                                 -fx-border-color: #E8EAF6;
+                                 -fx-border-width: 1.5;
+                                 -fx-border-radius: 22px;
+                                 -fx-padding: 22 22 18 22;
+                                 -fx-spacing: 16;
+                                 -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.09), 22, 0, 0, 6);">
+
+                        <!-- Row 1: Avatar + Input -->
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <!-- Avatar cercle dégradé -->
+                            <StackPane minWidth="46" maxWidth="46" minHeight="46" maxHeight="46"
+                                       style="-fx-background-color: linear-gradient(to bottom right, #A29BFE, #6C5CE7);
+                                              -fx-background-radius: 9999px;
+                                              -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.4), 10, 0, 0, 3);">
+                                <Label fx:id="currentUserAvatar" text="JD"
+                                       style="-fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 16px;
+                                              -fx-alignment: center;"/>
+                            </StackPane>
+
+                            <!-- Champ de saisie -->
+                            <TextField fx:id="postContentField"
+                                       promptText="Partagez quelque chose avec le groupe..."
+                                       HBox.hgrow="ALWAYS"
+                                       style="-fx-background-color: #F4F5FB;
+                                              -fx-background-radius: 50px;
+                                              -fx-border-color: #E8EAF6;
+                                              -fx-border-width: 1.5;
+                                              -fx-border-radius: 50px;
+                                              -fx-padding: 13 22;
+                                              -fx-font-size: 13.5px;
+                                              -fx-text-fill: #1A1D2E;
+                                              -fx-prompt-text-fill: #A0A8CC;"/>
+                        </HBox>
+
+                        <!-- Row 2: Image Preview (hidden by default) -->
+                        <HBox fx:id="imagePreviewBox" spacing="14" alignment="CENTER_LEFT"
+                              visible="false" managed="false"
+                              style="-fx-background-color: #F0EEFF;
+                                     -fx-background-radius: 16px;
+                                     -fx-border-color: #C8B8FF;
+                                     -fx-border-width: 1.5;
+                                     -fx-border-radius: 16px;
+                                     -fx-padding: 14;">
+                            <ImageView fx:id="imagePreview" fitWidth="80" fitHeight="80" preserveRatio="true"/>
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="🖼  Image attachée"
+                                       style="-fx-font-size: 12px; -fx-font-weight: 700; -fx-text-fill: #6C5CE7;"/>
+                                <Label fx:id="imageUrlLabel"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #A0A8CC;" wrapText="true"/>
+                            </VBox>
+                            <Button fx:id="removeImageBtn" text="✕"
+                                    style="-fx-background-color: #FFE5DF;
+                                           -fx-text-fill: #E17055;
+                                           -fx-font-size: 13px; -fx-font-weight: 800;
+                                           -fx-cursor: hand; -fx-background-radius: 9px;
+                                           -fx-border-width: 0; -fx-padding: 5 9;"/>
+                        </HBox>
+
+                        <!-- Row 3: Action buttons + Publish -->
+                        <HBox spacing="0" alignment="CENTER_LEFT">
+
+                            <!-- Boutons gauche -->
+                            <HBox spacing="8" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                                <Button fx:id="imageBtn" text="🖼  Image"
+                                        style="-fx-background-color: #EFF6FF;
+                                               -fx-text-fill: #3B82F6;
+                                               -fx-border-color: #BFDBFE;
+                                               -fx-border-width: 1.5;
+                                               -fx-border-radius: 50px;
+                                               -fx-background-radius: 50px;
+                                               -fx-font-size: 12px; -fx-font-weight: 600;
+                                               -fx-cursor: hand; -fx-padding: 8 18;"/>
+                                <Button fx:id="pollBtn" text="📊  Sondage"
+                                        style="-fx-background-color: #FDF4FF;
+                                               -fx-text-fill: #9333EA;
+                                               -fx-border-color: #E9D5FF;
+                                               -fx-border-width: 1.5;
+                                               -fx-border-radius: 50px;
+                                               -fx-background-radius: 50px;
+                                               -fx-font-size: 12px; -fx-font-weight: 600;
+                                               -fx-cursor: hand; -fx-padding: 8 18;"/>
+                            </HBox>
+
+                            <!-- Bouton Publier -->
+                            <Button fx:id="groupPublishBtn" text="Publier"
+                                    style="-fx-background-color: linear-gradient(to right, #7C3AED, #6C5CE7);
+                                           -fx-text-fill: white;
+                                           -fx-font-size: 13px; -fx-font-weight: 700;
+                                           -fx-padding: 10 26;
+                                           -fx-background-radius: 50px;
+                                           -fx-cursor: hand; -fx-border-width: 0;
+                                           -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.45), 12, 0, 0, 4);"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- ═══════════════════════════════════
+                         LISTE DES PUBLICATIONS
+                    ═══════════════════════════════════ -->
+                    <VBox fx:id="groupPublicationsList" spacing="18"/>
+
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- ═══════════════════════════════════════════
+         SIDEBAR DROITE — Membres
+    ═══════════════════════════════════════════ -->
+    <right>
+        <VBox style="-fx-background-color: #FFFFFF;
+                     -fx-border-color: #E8EAF6;
+                     -fx-border-width: 0 0 0 1.5;
+                     -fx-padding: 24 16;
+                     -fx-pref-width: 270;
+                     -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.07), 14, 0, -2, 0);"
+              spacing="16">
+
+            <!-- Header membres -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <StackPane minWidth="32" maxWidth="32" minHeight="32" maxHeight="32"
+                           style="-fx-background-color: #F0EEFF; -fx-background-radius: 10px;">
+                    <Label text="👥" style="-fx-font-size: 14px;"/>
+                </StackPane>
+                <Label text="Membres"
+                       style="-fx-font-size: 15px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+            </HBox>
+
+            <Separator style="-fx-opacity: 0.5;"/>
+
+            <ScrollPane fitToWidth="true"
+                        style="-fx-border-width: 0; -fx-background: transparent; -fx-background-color: transparent;"
+                        VBox.vgrow="ALWAYS">
+                <VBox fx:id="membersList" spacing="10"/>
+            </ScrollPane>
+        </VBox>
+    </right>
+
+</BorderPane>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="competence.controllers.MyLearningController"
+            fitToWidth="true"
+            style="-fx-background:#F5F7FA; -fx-background-color:#F5F7FA; -fx-border-color:transparent;">
+
+    <VBox spacing="20" style="-fx-padding:30; -fx-background-color:#F5F7FA;">
+
+        <!-- ══════════════  HEADER  ══════════════════════════════════════ -->
+        <HBox alignment="CENTER_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="My Learning"
+                       style="-fx-font-size:28;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                <Label text="Track your progress and continue where you left off"
+                       style="-fx-font-size:14;-fx-text-fill:#6C757D;"/>
+            </VBox>
+            <Button fx:id="btnBrowseCatalog"
+                    text="Browse Catalog →"
+                    onAction="#handleBrowseCatalog"
+                    style="-fx-background-color:#2563EB;-fx-text-fill:white;
+                           -fx-font-weight:bold;-fx-font-size:13;
+                           -fx-padding:12 24;-fx-background-radius:8;
+                           -fx-cursor:hand;"/>
+        </HBox>
+
+        <!-- ══════════════  STATS CARDS  ════════════════════════════════ -->
+        <GridPane hgap="20" vgap="20">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="25"/>
+                <ColumnConstraints percentWidth="25"/>
+                <ColumnConstraints percentWidth="25"/>
+                <ColumnConstraints percentWidth="25"/>
+            </columnConstraints>
+
+            <!-- Card 1 - In Progress (bleu) -->
+            <VBox GridPane.columnIndex="0" spacing="0"
+                  style="-fx-background-color:white;-fx-background-radius:12;
+                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                <Region prefHeight="5"
+                        style="-fx-background-color:#2563EB;-fx-background-radius:12 12 0 0;"/>
+                <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                    <HBox alignment="CENTER_LEFT" spacing="14">
+                        <Label text="▶"
+                               style="-fx-font-size:20;-fx-text-fill:#2563EB;
+                              -fx-background-color:#EFF6FF;
+                              -fx-padding:10;-fx-background-radius:8;"/>
+                        <VBox spacing="3">
+                            <Label fx:id="lblInProgress" text="0"
+                                   style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                            <Label text="In Progress"
+                                   style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                        </VBox>
+                    </HBox>
+                    <Label text="📘  Formations en cours"
+                           style="-fx-font-size:11;-fx-text-fill:#2563EB;-fx-font-weight:bold;"/>
+                </VBox>
+            </VBox>
+
+            <!-- Card 2 - Completed (vert) -->
+            <VBox GridPane.columnIndex="1" spacing="0"
+                  style="-fx-background-color:white;-fx-background-radius:12;
+                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                <Region prefHeight="5"
+                        style="-fx-background-color:#059669;-fx-background-radius:12 12 0 0;"/>
+                <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                    <HBox alignment="CENTER_LEFT" spacing="14">
+                        <Label text="✓"
+                               style="-fx-font-size:20;-fx-text-fill:#059669;
+                              -fx-background-color:#D1FAE5;
+                              -fx-padding:10;-fx-background-radius:8;"/>
+                        <VBox spacing="3">
+                            <Label fx:id="lblCompleted" text="0"
+                                   style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                            <Label text="Completed"
+                                   style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                        </VBox>
+                    </HBox>
+                    <Label text="🎓  Formations terminées"
+                           style="-fx-font-size:11;-fx-text-fill:#059669;-fx-font-weight:bold;"/>
+                </VBox>
+            </VBox>
+
+            <!-- Card 3 - Total Hours (orange) -->
+            <VBox GridPane.columnIndex="2" spacing="0"
+                  style="-fx-background-color:white;-fx-background-radius:12;
+                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                <Region prefHeight="5"
+                        style="-fx-background-color:#D97706;-fx-background-radius:12 12 0 0;"/>
+                <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                    <HBox alignment="CENTER_LEFT" spacing="14">
+                        <Label text="⏱"
+                               style="-fx-font-size:20;-fx-text-fill:#D97706;
+                              -fx-background-color:#FEF3C7;
+                              -fx-padding:10;-fx-background-radius:8;"/>
+                        <VBox spacing="3">
+                            <Label fx:id="lblTotalHours" text="0h"
+                                   style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                            <Label text="Total Hours"
+                                   style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                        </VBox>
+                    </HBox>
+                    <Label text="⏰  Heures de formation cumulées"
+                           style="-fx-font-size:11;-fx-text-fill:#D97706;-fx-font-weight:bold;"/>
+                </VBox>
+            </VBox>
+
+            <!-- Card 4 - Certificates (violet) -->
+            <VBox GridPane.columnIndex="3" spacing="0"
+                  style="-fx-background-color:white;-fx-background-radius:12;
+                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                <Region prefHeight="5"
+                        style="-fx-background-color:#7C3AED;-fx-background-radius:12 12 0 0;"/>
+                <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                    <HBox alignment="CENTER_LEFT" spacing="14">
+                        <Label text="🏆"
+                               style="-fx-font-size:20;-fx-text-fill:#7C3AED;
+                              -fx-background-color:#F3E8FF;
+                              -fx-padding:10;-fx-background-radius:8;"/>
+                        <VBox spacing="3">
+                            <Label fx:id="lblCertificates" text="0"
+                                   style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                            <Label text="Certificates"
+                                   style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                        </VBox>
+                    </HBox>
+                    <Label text="🏅  Certificats obtenus"
+                           style="-fx-font-size:11;-fx-text-fill:#7C3AED;-fx-font-weight:bold;"/>
+                </VBox>
+            </VBox>
+        </GridPane>
+
+
+        <!-- ══════════════  SEARCH & FILTER BAR  ════════════════════════ -->
+        <HBox spacing="15" alignment="CENTER_LEFT"
+              style="-fx-background-color:white;-fx-padding:15;-fx-background-radius:10;
+                     -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.06),8,0,0,2);">
+
+            <Label text="🔍" style="-fx-font-size:16;"/>
+
+            <TextField fx:id="searchField"
+                       promptText="Search trainings..."
+                       prefWidth="280"
+                       onKeyReleased="#handleSearch"
+                       style="-fx-background-color:#F5F7FA;
+                              -fx-border-color:#E5E7EB;-fx-border-radius:6;
+                              -fx-background-radius:6;-fx-padding:8 12;
+                              -fx-font-size:13;"/>
+
+            <ComboBox fx:id="cbFilterStatus"
+                      promptText="All Statuses"
+                      prefWidth="160"
+                      onAction="#handleSearch"
+                      style="-fx-background-color:#F5F7FA;-fx-background-radius:6;"/>
+
+            <ComboBox fx:id="cbFilterCategory"
+                      promptText="All Categories"
+                      prefWidth="180"
+                      onAction="#handleSearch"
+                      style="-fx-background-color:#F5F7FA;-fx-background-radius:6;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="✕  Clear"
+                    onAction="#handleClearFilters"
+                    style="-fx-background-color:transparent;-fx-text-fill:#6B7280;
+                           -fx-font-size:12;-fx-padding:8 14;
+                           -fx-border-color:#E5E7EB;-fx-border-radius:6;
+                           -fx-background-radius:6;-fx-cursor:hand;"/>
+        </HBox>
+
+        <!-- ══════════════  CONTINUE LEARNING  ══════════════════════════ -->
+        <VBox spacing="12">
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="2" HBox.hgrow="ALWAYS">
+                    <Label text="Continue Learning"
+                           style="-fx-font-size:18;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                    <Label text="Pick up where you left off"
+                           style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                </VBox>
+            </HBox>
+            <!-- Controller injects HBox rows of 2 cards here -->
+            <VBox fx:id="vboxContinueLearning" spacing="16"/>
+        </VBox>
+
+        <!-- ══════════════  COMPLETED  ══════════════════════════════════ -->
+        <VBox spacing="12">
+            <Label text="Completed Courses"
+                   style="-fx-font-size:18;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+            <VBox fx:id="vboxCompleted" spacing="10"/>
+        </VBox>
+
+    </VBox>
+</ScrollPane>

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="attendance.gui.AbsencesCongesController"
+           style="-fx-background-color: #f0f4ff; -fx-padding: 32px;">
+
+    <!-- ================================================
+         VUE MES ABSENCES
+         ================================================ -->
+    <VBox fx:id="viewMesAbsences" spacing="20">
+
+        <!-- En-tête avec dégradé subtil -->
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: linear-gradient(to right, #667eea, #7c8ff5); -fx-background-radius: 16; -fx-padding: 24px 28px; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.35), 18, 0, 0, 6);">
+            <VBox spacing="4">
+                <Label text="🕐 Autorisations d'absence"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Label text="Gérez vos demandes d'autorisation de sortie"
+                       style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.80);"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="＋  Nouvelle autorisation" onAction="#ajouterAbsence"
+                    style="-fx-background-color: white; -fx-text-fill: #667eea; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 11px 24px; -fx-background-radius: 50; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"/>
+        </HBox>
+
+        <!-- Filtres redessinés -->
+        <HBox spacing="10" alignment="CENTER_LEFT"
+              style="-fx-background-color: white; -fx-padding: 16px 20px; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 3); -fx-border-color: #e8eeff; -fx-border-width: 1; -fx-border-radius: 14;">
+            <Label text="🔍" style="-fx-font-size: 14px; -fx-text-fill: #94a3b8;"/>
+            <TextField fx:id="txtRechercheAbsence" promptText="Rechercher une autorisation..." HBox.hgrow="ALWAYS"
+                       style="-fx-font-size: 13px; -fx-padding: 9px 12px; -fx-background-radius: 8; -fx-border-color: transparent; -fx-background-color: #f8faff;"/>
+            <Separator orientation="VERTICAL" style="-fx-padding: 4 0;"/>
+            <Label text="Statut :" style="-fx-font-size: 12px; -fx-text-fill: #94a3b8; -fx-font-weight: bold;"/>
+            <ComboBox fx:id="comboStatutAbsence" prefWidth="155"
+                      style="-fx-font-size: 12px; -fx-background-radius: 8; -fx-border-color: #e8eeff; -fx-border-radius: 8; -fx-border-width: 1;"/>
+            <Label text="Type :" style="-fx-font-size: 12px; -fx-text-fill: #94a3b8; -fx-font-weight: bold;"/>
+            <ComboBox fx:id="comboTypeAbsence" prefWidth="155"
+                      style="-fx-font-size: 12px; -fx-background-radius: 8; -fx-border-color: #e8eeff; -fx-border-radius: 8; -fx-border-width: 1;"/>
+            <Button text="↻  Actualiser" onAction="#actualiserAbsences"
+                    style="-fx-background-color: #f0f4ff; -fx-text-fill: #667eea; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 9px 18px; -fx-background-radius: 8; -fx-cursor: hand; -fx-border-color: #d0d8ff; -fx-border-width: 1; -fx-border-radius: 8;"/>
+        </HBox>
+
+        <!-- Formulaire demande d'autorisation — redessiné -->
+        <VBox fx:id="formAbsence" visible="false" managed="false" spacing="0"
+              style="-fx-background-color: white; -fx-background-radius: 16; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.12), 20, 0, 0, 6); -fx-border-color: #e8eeff; -fx-border-width: 1; -fx-border-radius: 16;">
+
+            <!-- Bandeau titre formulaire -->
+            <HBox style="-fx-background-color: linear-gradient(to right, #f0f4ff, #e8eeff); -fx-padding: 18px 24px; -fx-background-radius: 16 16 0 0; -fx-border-color: #e8eeff; -fx-border-width: 0 0 1 0;"
+                  alignment="CENTER_LEFT" spacing="12">
+                <Label text="📝" style="-fx-font-size: 18px;"/>
+                <VBox>
+                    <Label text="Nouvelle demande d'autorisation"
+                           style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <Label text="Renseignez les informations ci-dessous"
+                           style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+                <!-- Pastille limite -->
+                <Region HBox.hgrow="ALWAYS"/>
+                <HBox spacing="6" alignment="CENTER"
+                      style="-fx-background-color: #fef3c7; -fx-padding: 6px 14px; -fx-background-radius: 20;">
+                    <Label text="⚠️" style="-fx-font-size: 12px;"/>
+                    <Label text="30 min – 4h maximum"
+                           style="-fx-font-size: 11px; -fx-text-fill: #92400e; -fx-font-weight: bold;"/>
+                </HBox>
+            </HBox>
+
+            <!-- Corps du formulaire -->
+            <VBox spacing="18" style="-fx-padding: 22px 24px;">
+
+                <!-- Ligne 1 : Date + Heures + Durée -->
+                <HBox spacing="16">
+
+                    <!-- Date -->
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="DATE" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <DatePicker fx:id="dpDebutAbsence" maxWidth="Infinity"
+                                    style="-fx-font-size: 13px;"/>
+                    </VBox>
+
+                    <!-- Heure début -->
+                    <VBox spacing="6">
+                        <Label text="HEURE DÉBUT" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <HBox spacing="4" alignment="CENTER">
+                            <ComboBox fx:id="comboHeureDebut" prefWidth="75" promptText="HH"
+                                      style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                            <Label text=":" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+                            <ComboBox fx:id="comboMinuteDebut" prefWidth="75" promptText="MM"
+                                      style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Flèche -->
+                    <VBox alignment="BOTTOM_CENTER" style="-fx-padding: 0 0 8 0;">
+                        <Label text="→" style="-fx-font-size: 20px; -fx-text-fill: #cbd5e1;"/>
+                    </VBox>
+
+                    <!-- Heure fin -->
+                    <VBox spacing="6">
+                        <Label text="HEURE FIN" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <HBox spacing="4" alignment="CENTER">
+                            <ComboBox fx:id="comboHeureFin" prefWidth="75" promptText="HH"
+                                      style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                            <Label text=":" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+                            <ComboBox fx:id="comboMinuteFin" prefWidth="75" promptText="MM"
+                                      style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Durée calculée -->
+                    <VBox spacing="6" prefWidth="130">
+                        <Label text="DURÉE CALCULÉE" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <TextField fx:id="txtDureeHeures" promptText="—" editable="false"
+                                   style="-fx-padding: 9px 12px; -fx-border-color: #e8eeff; -fx-border-radius: 8; -fx-border-width: 1; -fx-background-radius: 8; -fx-background-color: #f8faff; -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Séparateur léger -->
+                <Separator style="-fx-opacity: 0.4;"/>
+
+                <!-- Ligne 2 : Statut + Type + Motif -->
+                <HBox spacing="16">
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="STATUT" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <ComboBox fx:id="comboStatutFormAbsence" maxWidth="Infinity"
+                                  style="-fx-font-size: 13px; -fx-background-radius: 8; -fx-border-color: #e8eeff; -fx-border-radius: 8; -fx-border-width: 1;"/>
+                    </VBox>
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="TYPE D'AUTORISATION" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <ComboBox fx:id="comboTypeFormAbsence" maxWidth="Infinity"
+                                  style="-fx-font-size: 13px; -fx-background-radius: 8; -fx-border-color: #e8eeff; -fx-border-radius: 8; -fx-border-width: 1;"/>
+                    </VBox>
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <HBox spacing="4" alignment="CENTER_LEFT">
+                            <Label text="MOTIF" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                            <Label text="*requis*" style="-fx-font-size: 10px; -fx-text-fill: #ef4444;"/>
+                        </HBox>
+                        <TextField fx:id="txtMotifAbsence" promptText="Ex : Rendez-vous médical…"
+                                   style="-fx-padding: 9px 12px; -fx-border-color: #e8eeff; -fx-border-radius: 8; -fx-border-width: 1; -fx-background-radius: 8; -fx-font-size: 13px;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Boutons d'action -->
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="❌  Annuler" onAction="#annulerFormAbsence"
+                            style="-fx-background-color: #f8fafc; -fx-text-fill: #64748b; -fx-font-size: 13px; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand; -fx-border-color: #e2e8f0; -fx-border-width: 1; -fx-border-radius: 8;"/>
+                    <Button text="💾  Enregistrer la demande" onAction="#enregistrerAbsence"
+                            style="-fx-background-color: linear-gradient(to right, #667eea, #7c8ff5); -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 28px; -fx-background-radius: 8; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.4), 10, 0, 0, 3);"/>
+                </HBox>
+            </VBox>
+        </VBox>
+
+        <!-- Conteneur cartes absences -->
+        <VBox fx:id="containerAbsences" spacing="10"
+              style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 3); -fx-border-color: #e8eeff; -fx-border-width: 1; -fx-border-radius: 14;">
+            <VBox fx:id="emptyStateAbsences" alignment="CENTER" spacing="14" style="-fx-padding: 60px 40px;">
+                <Label text="🕐" style="-fx-font-size: 48px; -fx-opacity: 0.20;"/>
+                <Label text="Aucune autorisation trouvée"
+                       style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #cbd5e1;"/>
+                <Label text="Cliquez sur « Nouvelle autorisation » pour commencer"
+                       style="-fx-font-size: 12px; -fx-text-fill: #e2e8f0;"/>
+            </VBox>
+        </VBox>
+    </VBox>
+
+    <!-- ================================================
+         VUE MES CONGES
+         ================================================ -->
+    <VBox fx:id="viewMesConges" visible="false" managed="false" spacing="20">
+
+        <!-- En-tête -->
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: linear-gradient(to right, #059669, #10b981); -fx-background-radius: 16; -fx-padding: 24px 28px; -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.35), 18, 0, 0, 6);">
+            <VBox spacing="4">
+                <Label text="🌴 Mes congés"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Label text="Gérez vos demandes de congés"
+                       style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.80);"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="＋  Nouveau congé" onAction="#ajouterConge"
+                    style="-fx-background-color: white; -fx-text-fill: #059669; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 11px 24px; -fx-background-radius: 50; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"/>
+        </HBox>
+
+        <!-- Filtres -->
+        <HBox spacing="10" alignment="CENTER_LEFT"
+              style="-fx-background-color: white; -fx-padding: 16px 20px; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 3); -fx-border-color: #d1fae5; -fx-border-width: 1; -fx-border-radius: 14;">
+            <Label text="🔍" style="-fx-font-size: 14px; -fx-text-fill: #94a3b8;"/>
+            <TextField fx:id="txtRechercheConge" promptText="Rechercher un congé..." HBox.hgrow="ALWAYS"
+                       style="-fx-font-size: 13px; -fx-padding: 9px 12px; -fx-background-radius: 8; -fx-border-color: transparent; -fx-background-color: #f0fdf4;"/>
+            <Separator orientation="VERTICAL" style="-fx-padding: 4 0;"/>
+            <Label text="Statut :" style="-fx-font-size: 12px; -fx-text-fill: #94a3b8; -fx-font-weight: bold;"/>
+            <ComboBox fx:id="comboStatutConge" prefWidth="155"
+                      style="-fx-font-size: 12px; -fx-background-radius: 8; -fx-border-color: #d1fae5; -fx-border-radius: 8; -fx-border-width: 1;"/>
+            <Label text="Type :" style="-fx-font-size: 12px; -fx-text-fill: #94a3b8; -fx-font-weight: bold;"/>
+            <ComboBox fx:id="comboTypeCongeFiltre" prefWidth="185"
+                      style="-fx-font-size: 12px; -fx-background-radius: 8; -fx-border-color: #d1fae5; -fx-border-radius: 8; -fx-border-width: 1;"/>
+            <Button text="↻  Actualiser" onAction="#actualiserConges"
+                    style="-fx-background-color: #f0fdf4; -fx-text-fill: #059669; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 9px 18px; -fx-background-radius: 8; -fx-cursor: hand; -fx-border-color: #a7f3d0; -fx-border-width: 1; -fx-border-radius: 8;"/>
+        </HBox>
+
+        <!-- Formulaire congé — redessiné -->
+        <VBox fx:id="formConge" visible="false" managed="false" spacing="0"
+              style="-fx-background-color: white; -fx-background-radius: 16; -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.12), 20, 0, 0, 6); -fx-border-color: #d1fae5; -fx-border-width: 1; -fx-border-radius: 16;">
+
+            <!-- Bandeau titre -->
+            <HBox style="-fx-background-color: linear-gradient(to right, #f0fdf4, #dcfce7); -fx-padding: 18px 24px; -fx-background-radius: 16 16 0 0; -fx-border-color: #d1fae5; -fx-border-width: 0 0 1 0;"
+                  alignment="CENTER_LEFT" spacing="12">
+                <Label text="📋" style="-fx-font-size: 18px;"/>
+                <VBox>
+                    <Label text="Nouvelle demande de congé"
+                           style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <Label text="Renseignez les dates et informations du congé"
+                           style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Corps du formulaire congé -->
+            <VBox spacing="18" style="-fx-padding: 22px 24px;">
+
+                <!-- Ligne 1 : Dates + jours -->
+                <HBox spacing="16">
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="DATE DÉBUT" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <DatePicker fx:id="dpDebutConge" maxWidth="Infinity"
+                                    style="-fx-font-size: 13px;"/>
+                    </VBox>
+
+                    <VBox alignment="BOTTOM_CENTER" style="-fx-padding: 0 0 8 0;">
+                        <Label text="→" style="-fx-font-size: 20px; -fx-text-fill: #a7f3d0;"/>
+                    </VBox>
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="DATE FIN" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <DatePicker fx:id="dpFinConge" maxWidth="Infinity"
+                                    style="-fx-font-size: 13px;"/>
+                    </VBox>
+
+                    <VBox spacing="6" prefWidth="140">
+                        <Label text="NOMBRE DE JOURS" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <TextField fx:id="txtNbrJoursConge" promptText="Sélectionnez les dates..." editable="false"
+                                   style="-fx-padding: 9px 12px; -fx-border-color: #d1fae5; -fx-border-radius: 8; -fx-border-width: 1; -fx-background-radius: 8; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-color: #f0fdf4; -fx-text-fill: #059669;"/>
+                    </VBox>
+                </HBox>
+
+                <Separator style="-fx-opacity: 0.4;"/>
+
+                <!-- Ligne 2 : Statut + Type + Motif -->
+                <HBox spacing="16">
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="STATUT" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <ComboBox fx:id="comboStatutFormConge" maxWidth="Infinity"
+                                  style="-fx-font-size: 13px; -fx-background-radius: 8; -fx-border-color: #d1fae5; -fx-border-radius: 8; -fx-border-width: 1;"/>
+                    </VBox>
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="TYPE DE CONGÉ" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <ComboBox fx:id="comboTypeFormConge" maxWidth="Infinity"
+                                  style="-fx-font-size: 13px; -fx-background-radius: 8; -fx-border-color: #d1fae5; -fx-border-radius: 8; -fx-border-width: 1;"/>
+                    </VBox>
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="MOTIF (optionnel)" style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                        <TextField fx:id="txtMotifConge" promptText="Ex : Vacances en famille…"
+                                   style="-fx-padding: 9px 12px; -fx-border-color: #d1fae5; -fx-border-radius: 8; -fx-border-width: 1; -fx-background-radius: 8; -fx-font-size: 13px;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Boutons -->
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="❌  Annuler" onAction="#annulerFormConge"
+                            style="-fx-background-color: #f8fafc; -fx-text-fill: #64748b; -fx-font-size: 13px; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand; -fx-border-color: #e2e8f0; -fx-border-width: 1; -fx-border-radius: 8;"/>
+                    <Button text="💾  Enregistrer le congé" onAction="#enregistrerConge"
+                            style="-fx-background-color: linear-gradient(to right, #059669, #10b981); -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 28px; -fx-background-radius: 8; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.4), 10, 0, 0, 3);"/>
+                </HBox>
+            </VBox>
+        </VBox>
+
+        <!-- Conteneur cartes congés -->
+        <VBox fx:id="containerConges" spacing="10"
+              style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 3); -fx-border-color: #d1fae5; -fx-border-width: 1; -fx-border-radius: 14;">
+            <VBox fx:id="emptyStateConges" alignment="CENTER" spacing="14" style="-fx-padding: 60px 40px;">
+                <Label text="🌴" style="-fx-font-size: 48px; -fx-opacity: 0.20;"/>
+                <Label text="Aucun congé trouvé"
+                       style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #cbd5e1;"/>
+                <Label text="Cliquez sur « Nouveau congé » pour commencer"
+                       style="-fx-font-size: 12px; -fx-text-fill: #e2e8f0;"/>
+            </VBox>
+        </VBox>
+    </VBox>
+
+</StackPane>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:id="feedRootPane"
+            fx:controller="communication.controllers.FeedController"
+            style="-fx-background-color: #EEF0FB;"
+            stylesheets="@../../style/humania-components.css, @../../style/feed.css">
+
+    <!-- ════════════════════════════════════════════════
+         LEFT SIDEBAR — built programmatically
+    ════════════════════════════════════════════════ -->
+    <left>
+        <VBox fx:id="sidebarContainer"
+              style="-fx-background-color: #FFFFFF;
+                     -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.09), 20, 0, 3, 0);"
+              prefWidth="262" minWidth="262" maxWidth="262"/>
+    </left>
+
+    <!-- ════════════════════════════════════════════════
+         CENTER FEED
+    ════════════════════════════════════════════════ -->
+    <center>
+        <ScrollPane fx:id="feedScrollPane" fitToWidth="true"
+                    style="-fx-background-color: transparent; -fx-background: #EEF0FB; -fx-border-width: 0;"
+                    styleClass="scroll-pane">
+
+            <!-- Feed wrapper - centered column -->
+            <VBox alignment="TOP_CENTER"
+                  style="-fx-background-color: #EEF0FB; -fx-padding: 0 0 32 0;">
+
+                <VBox maxWidth="700" minWidth="500"
+                      style="-fx-spacing: 18; -fx-padding: 24 0 0 0;">
+
+                    <!-- ╔══════════════════════════════════════╗
+                         ║     CREATE POST CARD                 ║
+                         ╚══════════════════════════════════════╝ -->
+                    <VBox style="-fx-background-color: #FFFFFF;
+                                 -fx-background-radius: 22px;
+                                 -fx-border-color: #E8EAF6;
+                                 -fx-border-width: 1.5;
+                                 -fx-border-radius: 22px;
+                                 -fx-padding: 22 22 18 22;
+                                 -fx-spacing: 16;
+                                 -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.09), 22, 0, 0, 6);">
+
+                        <!-- Row 1: Avatar + Input -->
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <!-- Avatar circle -->
+                            <StackPane minWidth="46" maxWidth="46" minHeight="46" maxHeight="46"
+                                       style="-fx-background-color: linear-gradient(to bottom right, #A29BFE, #6C5CE7);
+                                              -fx-background-radius: 9999px;
+                                              -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.4), 10, 0, 0, 3);">
+                                <Label fx:id="createPostAvatar" text="IC"
+                                       style="-fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 16px;
+                                              -fx-alignment: center;"/>
+                            </StackPane>
+
+                            <!-- Input field -->
+                            <TextField fx:id="postContentField"
+                                       promptText="Partagez quelque chose avec votre équipe..."
+                                       styleClass="post-input"
+                                       HBox.hgrow="ALWAYS"
+                                       style="-fx-background-color: #F4F5FB;
+                                              -fx-background-radius: 50px;
+                                              -fx-border-color: #E8EAF6;
+                                              -fx-border-width: 1.5;
+                                              -fx-border-radius: 50px;
+                                              -fx-padding: 13 22;
+                                              -fx-font-size: 13.5px;
+                                              -fx-text-fill: #1A1D2E;
+                                              -fx-prompt-text-fill: #A0A8CC;"/>
+                        </HBox>
+
+                        <!-- Row 2: Visibility selector -->
+                        <HBox spacing="10" alignment="CENTER_LEFT"
+                              style="-fx-padding: 0 0 0 60;">
+                            <Label text="Publier dans :"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #A0A8CC; -fx-font-weight: 600;"/>
+                            <ComboBox fx:id="visibilitySelector" promptText="Sélectionner..."
+                                      style="-fx-pref-width: 200px;"/>
+                        </HBox>
+
+                        <!-- Row 3: Image preview (hidden) -->
+                        <HBox fx:id="imagePreviewBox" spacing="14" alignment="CENTER_LEFT"
+                              visible="false" managed="false"
+                              style="-fx-background-color: #F0EEFF;
+                                     -fx-background-radius: 16px;
+                                     -fx-border-color: #C8B8FF;
+                                     -fx-border-width: 1.5;
+                                     -fx-border-radius: 16px;
+                                     -fx-padding: 14;">
+                            <ImageView fx:id="imagePreview" fitWidth="80" fitHeight="80" preserveRatio="true"/>
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="🖼  Image attachée"
+                                       style="-fx-font-size: 12px; -fx-font-weight: 700; -fx-text-fill: #6C5CE7;"/>
+                                <Label fx:id="imageUrlLabel"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #A0A8CC;" wrapText="true"/>
+                            </VBox>
+                            <Button fx:id="removeImageBtn" text="✕"
+                                    style="-fx-background-color: #FFE5DF;
+                                           -fx-text-fill: #E17055;
+                                           -fx-font-size: 13px; -fx-font-weight: 800;
+                                           -fx-cursor: hand; -fx-background-radius: 9px;
+                                           -fx-border-width: 0; -fx-padding: 5 9;"/>
+                        </HBox>
+
+                        <!-- Row 4: Action buttons + Publish -->
+                        <HBox spacing="0" alignment="CENTER_LEFT">
+
+                            <!-- Left action chips -->
+                            <HBox spacing="8" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                                <Button fx:id="imageBtn" text="🖼  Image"
+                                        styleClass="btn-icon"
+                                        style="-fx-background-color: #EFF6FF;
+                                               -fx-text-fill: #3B82F6;
+                                               -fx-border-color: #BFDBFE;
+                                               -fx-border-width: 1.5;
+                                               -fx-border-radius: 50px;
+                                               -fx-background-radius: 50px;
+                                               -fx-font-size: 12px; -fx-font-weight: 600;
+                                               -fx-cursor: hand; -fx-padding: 8 18;"/>
+                                <Button fx:id="pollBtn" text="📊  Sondage"
+                                        styleClass="btn-icon"
+                                        style="-fx-background-color: #FDF4FF;
+                                               -fx-text-fill: #9333EA;
+                                               -fx-border-color: #E9D5FF;
+                                               -fx-border-width: 1.5;
+                                               -fx-border-radius: 50px;
+                                               -fx-background-radius: 50px;
+                                               -fx-font-size: 12px; -fx-font-weight: 600;
+                                               -fx-cursor: hand; -fx-padding: 8 18;"/>
+                            </HBox>
+
+                            <!-- Publish button -->
+                            <Button fx:id="publishBtn" text="✦  Publier"
+                                    styleClass="btn-publish"
+                                    style="-fx-background-color: linear-gradient(to right, #6C5CE7, #A29BFE);
+                                           -fx-text-fill: white;
+                                           -fx-font-size: 13px; -fx-font-weight: 700;
+                                           -fx-background-radius: 50px;
+                                           -fx-border-width: 0;
+                                           -fx-cursor: hand;
+                                           -fx-padding: 10 28;
+                                           -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.45), 14, 0, 0, 5);"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- ╔══════════════════════════════════════╗
+                         ║     SEARCH BAR                       ║
+                         ╚══════════════════════════════════════╝ -->
+                    <HBox alignment="CENTER_LEFT" spacing="0"
+                          style="-fx-background-color: #FFFFFF;
+                                 -fx-background-radius: 50px;
+                                 -fx-border-color: #E8EAF6;
+                                 -fx-border-width: 1.5;
+                                 -fx-border-radius: 50px;
+                                 -fx-padding: 0 18;
+                                 -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.06), 12, 0, 0, 3);">
+                        <Label text="🔍" style="-fx-font-size: 15px; -fx-padding: 0 8 0 0;"/>
+                        <TextField fx:id="searchField"
+                                   promptText="Rechercher publications, personnes..."
+                                   styleClass="search-bar"
+                                   HBox.hgrow="ALWAYS"
+                                   style="-fx-background-color: transparent;
+                                          -fx-background-radius: 0;
+                                          -fx-border-width: 0;
+                                          -fx-padding: 13 0;
+                                          -fx-font-size: 13.5px;
+                                          -fx-text-fill: #1A1D2E;
+                                          -fx-prompt-text-fill: #A0A8CC;"/>
+                    </HBox>
+
+                    <!-- ╔══════════════════════════════════════╗
+                         ║     PUBLICATIONS LIST                ║
+                         ╚══════════════════════════════════════╝ -->
+                    <VBox fx:id="publicationsList" spacing="18"/>
+
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- ════════════════════════════════════════════════
+         RIGHT SIDEBAR
+    ════════════════════════════════════════════════ -->
+    <right>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background-color: transparent; -fx-background: #EEF0FB;
+                           -fx-border-width: 0; -fx-padding: 0;"
+                    styleClass="scroll-pane">
+            <VBox fx:id="rightSidebar"
+                  style="-fx-padding: 24 16 24 8; -fx-spacing: 18; -fx-pref-width: 288; -fx-min-width: 268;">
+
+                <!-- ── Suggestions Card ── -->
+                <VBox style="-fx-background-color: #FFFFFF;
+                             -fx-background-radius: 20px;
+                             -fx-border-color: #E8EAF6;
+                             -fx-border-width: 1.5;
+                             -fx-border-radius: 20px;
+                             -fx-padding: 20;
+                             -fx-spacing: 4;
+                             -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.08), 18, 0, 0, 5);">
+
+                    <!-- Widget header -->
+                    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 4 0;">
+                        <StackPane minWidth="34" maxWidth="34" minHeight="34" maxHeight="34"
+                                   style="-fx-background-color: #F0EEFF; -fx-background-radius: 10px;">
+                            <Label text="✨" style="-fx-font-size: 16px;"/>
+                        </StackPane>
+                        <VBox spacing="1">
+                            <Label text="Suggestions"
+                                   style="-fx-font-size: 14px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+                            <Label text="Personnes à suivre"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #A0A8CC;"/>
+                        </VBox>
+                    </HBox>
+
+                    <Separator style="-fx-padding: 4 0 8 0;">
+                        <VBox.margin><Insets top="8" bottom="10"/></VBox.margin>
+                    </Separator>
+
+                    <VBox fx:id="suggestionsList" spacing="14"/>
+                </VBox>
+
+                <!-- ── Trending Card ── -->
+                <VBox style="-fx-background-color: #FFFFFF;
+                             -fx-background-radius: 20px;
+                             -fx-border-color: #E8EAF6;
+                             -fx-border-width: 1.5;
+                             -fx-border-radius: 20px;
+                             -fx-padding: 20;
+                             -fx-spacing: 4;
+                             -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.08), 18, 0, 0, 5);">
+
+                    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 4 0;">
+                        <StackPane minWidth="34" maxWidth="34" minHeight="34" maxHeight="34"
+                                   style="-fx-background-color: #FFF4EC; -fx-background-radius: 10px;">
+                            <Label text="🔥" style="-fx-font-size: 16px;"/>
+                        </StackPane>
+                        <VBox spacing="1">
+                            <Label text="Tendances"
+                                   style="-fx-font-size: 14px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+                            <Label text="Sujets populaires"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #A0A8CC;"/>
+                        </VBox>
+                    </HBox>
+
+                    <Separator>
+                        <VBox.margin><Insets top="8" bottom="10"/></VBox.margin>
+                    </Separator>
+
+                    <VBox spacing="6">
+                        <!-- Trending item 1 -->
+                        <HBox spacing="12" alignment="CENTER_LEFT"
+                              style="-fx-padding: 10 12; -fx-background-color: #F4F5FB;
+                                     -fx-background-radius: 12px; -fx-cursor: hand;">
+                            <Label text="#"
+                                   style="-fx-font-size: 15px; -fx-font-weight: 900;
+                                          -fx-text-fill: #6C5CE7; -fx-min-width: 16;"/>
+                            <VBox spacing="1" HBox.hgrow="ALWAYS">
+                                <Label text="Leadership"
+                                       style="-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #1A1D2E;"/>
+                                <Label text="Tendance · RH"
+                                       style="-fx-font-size: 10.5px; -fx-text-fill: #A0A8CC;"/>
+                            </VBox>
+                            <Label text="↑"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #00B894; -fx-font-weight: 700;"/>
+                        </HBox>
+                        <!-- Trending item 2 -->
+                        <HBox spacing="12" alignment="CENTER_LEFT"
+                              style="-fx-padding: 10 12; -fx-background-color: #F4F5FB;
+                                     -fx-background-radius: 12px; -fx-cursor: hand;">
+                            <Label text="#"
+                                   style="-fx-font-size: 15px; -fx-font-weight: 900;
+                                          -fx-text-fill: #00CEC9; -fx-min-width: 16;"/>
+                            <VBox spacing="1" HBox.hgrow="ALWAYS">
+                                <Label text="Innovation"
+                                       style="-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #1A1D2E;"/>
+                                <Label text="Populaire"
+                                       style="-fx-font-size: 10.5px; -fx-text-fill: #A0A8CC;"/>
+                            </VBox>
+                            <Label text="↑"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #00B894; -fx-font-weight: 700;"/>
+                        </HBox>
+                        <!-- Trending item 3 -->
+                        <HBox spacing="12" alignment="CENTER_LEFT"
+                              style="-fx-padding: 10 12; -fx-background-color: #F4F5FB;
+                                     -fx-background-radius: 12px; -fx-cursor: hand;">
+                            <Label text="#"
+                                   style="-fx-font-size: 15px; -fx-font-weight: 900;
+                                          -fx-text-fill: #FDCB6E; -fx-min-width: 16;"/>
+                            <VBox spacing="1" HBox.hgrow="ALWAYS">
+                                <Label text="TeamBuilding"
+                                       style="-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #1A1D2E;"/>
+                                <Label text="En hausse"
+                                       style="-fx-font-size: 10.5px; -fx-text-fill: #A0A8CC;"/>
+                            </VBox>
+                            <Label text="→"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #FDCB6E; -fx-font-weight: 700;"/>
+                        </HBox>
+                        <!-- Trending item 4 -->
+                        <HBox spacing="12" alignment="CENTER_LEFT"
+                              style="-fx-padding: 10 12; -fx-background-color: #F4F5FB;
+                                     -fx-background-radius: 12px; -fx-cursor: hand;">
+                            <Label text="#"
+                                   style="-fx-font-size: 15px; -fx-font-weight: 900;
+                                          -fx-text-fill: #E17055; -fx-min-width: 16;"/>
+                            <VBox spacing="1" HBox.hgrow="ALWAYS">
+                                <Label text="Management"
+                                       style="-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #1A1D2E;"/>
+                                <Label text="Actif"
+                                       style="-fx-font-size: 10.5px; -fx-text-fill: #A0A8CC;"/>
+                            </VBox>
+                            <Label text="●"
+                                   style="-fx-font-size: 8px; -fx-text-fill: #E17055;"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </right>
+
+</BorderPane>

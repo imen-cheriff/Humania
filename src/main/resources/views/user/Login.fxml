@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="640" prefWidth="1060"
+            style="-fx-background-color: #f8f7ff;"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="utilisateur.controllers.LoginController">
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- LEFT PANEL — White, editorial, geometric            -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <left>
+        <StackPane prefWidth="460" style="-fx-background-color: white;">
+
+            <!-- Decorative geometric background shapes -->
+            <Pane mouseTransparent="true">
+
+                <!-- Large soft circle top-right -->
+                <Circle centerX="400" centerY="80" radius="160"
+                        fill="transparent"
+                        stroke="#ede9fe" strokeWidth="1.5"/>
+
+                <!-- Medium circle -->
+                <Circle centerX="380" centerY="100" radius="100"
+                        fill="transparent"
+                        stroke="#ddd6fe" strokeWidth="1"/>
+
+                <!-- Bottom-left accent arc -->
+                <Circle centerX="40" centerY="560" radius="180"
+                        fill="transparent"
+                        stroke="#ede9fe" strokeWidth="1.5"/>
+
+                <!-- Small filled accent dot top-left -->
+                <Circle centerX="60" centerY="60" radius="8"
+                        fill="#7c3aed"/>
+                <Circle centerX="85" centerY="60" radius="5"
+                        fill="#c4b5fd"/>
+                <Circle centerX="104" centerY="60" radius="3"
+                        fill="#ede9fe"/>
+
+                <!-- Thin horizontal rule accent -->
+                <Rectangle x="40" y="300" width="60" height="2"
+                           fill="#7c3aed" arcWidth="2" arcHeight="2"/>
+                <Rectangle x="108" y="300" width="20" height="2"
+                           fill="#c4b5fd" arcWidth="2" arcHeight="2"/>
+
+                <!-- Bottom right small dot cluster -->
+                <Circle centerX="400" centerY="580" radius="6" fill="#ede9fe"/>
+                <Circle centerX="416" centerY="572" radius="4" fill="#ddd6fe"/>
+                <Circle centerX="430" centerY="565" radius="3" fill="#c4b5fd"/>
+            </Pane>
+
+            <!-- Main content -->
+            <VBox alignment="CENTER_LEFT" spacing="0"
+                  style="-fx-padding: 60 50 60 50;">
+
+                <!-- Logo + Brand -->
+                <HBox alignment="CENTER_LEFT" spacing="14" style="-fx-padding: 0 0 48 0;">
+                    <StackPane prefWidth="46" prefHeight="46"
+                               style="-fx-background-color: #7c3aed; -fx-background-radius: 13;
+                                      -fx-effect: dropshadow(gaussian,rgba(124,58,237,0.35),12,0,0,4);">
+                        <ImageView fitHeight="28" fitWidth="28" preserveRatio="true">
+                            <image><Image url="@../../images/logo.png"/></image>
+                        </ImageView>
+                    </StackPane>
+                    <Label text="HUMANIA"
+                           style="-fx-text-fill: #1a1a2e; -fx-font-size: 20px; -fx-font-weight: bold;
+                                  -fx-letter-spacing: 3;"/>
+                </HBox>
+
+                <!-- Hero headline -->
+                <VBox spacing="14" style="-fx-padding: 0 0 40 0;">
+                    <Label text="Bienvenue" wrapText="true"
+                           style="-fx-text-fill: #1a1a2e; -fx-font-size: 42px; -fx-font-weight: bold;">
+                    </Label>
+                    <Label text="de retour." wrapText="true"
+                           style="-fx-text-fill: #7c3aed; -fx-font-size: 42px; -fx-font-weight: bold;">
+                    </Label>
+                    <Label text="Gérez votre équipe et vos ressources humaines en toute simplicité."
+                           wrapText="true" maxWidth="340"
+                           style="-fx-text-fill: #6b7280; -fx-font-size: 14px; -fx-line-spacing: 4;">
+                    </Label>
+                </VBox>
+
+                <!-- Feature list -->
+                <VBox spacing="16" style="-fx-padding: 0 0 48 0;">
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <StackPane prefWidth="32" prefHeight="32"
+                                   style="-fx-background-color: #ede9fe; -fx-background-radius: 8;">
+                            <Label text="👥" style="-fx-font-size: 14;"/>
+                        </StackPane>
+                        <Label text="Gestion complète des utilisateurs"
+                               style="-fx-text-fill: #374151; -fx-font-size: 13;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <StackPane prefWidth="32" prefHeight="32"
+                                   style="-fx-background-color: #ede9fe; -fx-background-radius: 8;">
+                            <Label text="🔒" style="-fx-font-size: 14;"/>
+                        </StackPane>
+                        <Label text="Authentification sécurisée et MFA"
+                               style="-fx-text-fill: #374151; -fx-font-size: 13;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <StackPane prefWidth="32" prefHeight="32"
+                                   style="-fx-background-color: #ede9fe; -fx-background-radius: 8;">
+                            <Label text="📊" style="-fx-font-size: 14;"/>
+                        </StackPane>
+                        <Label text="Tableaux de bord et exports"
+                               style="-fx-text-fill: #374151; -fx-font-size: 13;"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Quote -->
+                <VBox spacing="4">
+                    <Label text="&quot; La simplicité est la sophistication suprême &quot;"
+                           wrapText="true" maxWidth="340"
+                           style="-fx-text-fill: #9ca3af; -fx-font-size: 12px; -fx-font-style: italic;"/>
+                    <Label text="— Leonardo da Vinci"
+                           style="-fx-text-fill: #c4b5fd; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+                </VBox>
+
+            </VBox>
+        </StackPane>
+    </left>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- RIGHT PANEL — Form                                  -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <center>
+        <StackPane style="-fx-background-color: #f8f7ff;">
+
+            <!-- Subtle background decoration -->
+            <Pane mouseTransparent="true">
+                <Circle centerX="530" centerY="80" radius="220"
+                        fill="transparent" stroke="#ede9fe" strokeWidth="1"/>
+                <Circle centerX="530" centerY="600" radius="160"
+                        fill="transparent" stroke="#ede9fe" strokeWidth="1"/>
+            </Pane>
+
+            <VBox alignment="CENTER" style="-fx-padding: 40;">
+
+                <VBox maxWidth="400" spacing="0"
+                      style="-fx-background-color: white;
+                             -fx-background-radius: 20;
+                             -fx-border-color: #ede9fe; -fx-border-radius: 20; -fx-border-width: 1;
+                             -fx-effect: dropshadow(gaussian, rgba(124,58,237,0.10), 32, 0, 0, 8);
+                             -fx-padding: 40 36 36 36;">
+
+                    <!-- Header -->
+                    <VBox spacing="6" style="-fx-padding: 0 0 28 0;">
+                        <Label text="Connexion"
+                               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1a1a2e;"/>
+                        <Label text="Saisissez vos identifiants pour accéder à votre espace."
+                               wrapText="true"
+                               style="-fx-font-size: 12.5px; -fx-text-fill: #9ca3af;"/>
+                    </VBox>
+
+                    <!-- Email field -->
+                    <VBox spacing="6" style="-fx-padding: 0 0 16 0;">
+                        <Label text="Adresse email"
+                               style="-fx-font-size: 12px; -fx-font-weight: bold;
+                                      -fx-text-fill: #374151; -fx-letter-spacing: 0.5;"/>
+                        <HBox alignment="CENTER_LEFT" spacing="0"
+                              style="-fx-background-color: #faf9ff;
+                                     -fx-background-radius: 10;
+                                     -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-border-width: 1.5;">
+                            <Label text="✉" style="-fx-font-size: 15px; -fx-padding: 0 2 0 14;
+                                                   -fx-text-fill: #7c3aed;"/>
+                            <TextField fx:id="emailField"
+                                       promptText="vous@entreprise.com"
+                                       HBox.hgrow="ALWAYS"
+                                       style="-fx-background-color: transparent;
+                                              -fx-border-color: transparent;
+                                              -fx-padding: 11 12; -fx-font-size: 13.5px;
+                                              -fx-text-fill: #1a1a2e;
+                                              -fx-prompt-text-fill: #d1d5db;"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Password field -->
+                    <VBox spacing="6" style="-fx-padding: 0 0 8 0;">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="Mot de passe"
+                                   style="-fx-font-size: 12px; -fx-font-weight: bold;
+                                          -fx-text-fill: #374151; -fx-letter-spacing: 0.5;"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="Oublié ?" onAction="#forgotPassword"
+                                    style="-fx-background-color: transparent; -fx-border-color: transparent;
+                                           -fx-text-fill: #7c3aed; -fx-font-size: 11.5px;
+                                           -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 0;"/>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="0"
+                              style="-fx-background-color: #faf9ff;
+                                     -fx-background-radius: 10;
+                                     -fx-border-color: #e5e7eb; -fx-border-radius: 10; -fx-border-width: 1.5;">
+                            <Label text="🔑" style="-fx-font-size: 14px; -fx-padding: 0 2 0 14;"/>
+                            <PasswordField fx:id="passwordField"
+                                           promptText="••••••••••••"
+                                           HBox.hgrow="ALWAYS"
+                                           style="-fx-background-color: transparent;
+                                                  -fx-border-color: transparent;
+                                                  -fx-padding: 11 12; -fx-font-size: 13.5px;
+                                                  -fx-text-fill: #1a1a2e;
+                                                  -fx-prompt-text-fill: #d1d5db;"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Attempts warning label -->
+                    <Label fx:id="attemptsLabel"
+                           text="" visible="false" managed="false"
+                           wrapText="true" prefWidth="330"
+                           style="-fx-text-fill: #b45309; -fx-font-size: 11.5px;
+                                  -fx-background-color: #fffbeb; -fx-background-radius: 8;
+                                  -fx-border-color: #fde68a; -fx-border-radius: 8; -fx-border-width: 1;
+                                  -fx-padding: 9 12; -fx-font-weight: bold;">
+                        <VBox.margin><Insets top="4"/></VBox.margin>
+                    </Label>
+
+                    <!-- Lockout label -->
+                    <Label fx:id="lockoutLabel"
+                           text="" visible="false" managed="false"
+                           wrapText="true" prefWidth="330"
+                           style="-fx-text-fill: #dc2626; -fx-font-size: 11.5px;
+                                  -fx-background-color: #fef2f2; -fx-background-radius: 8;
+                                  -fx-border-color: #fecaca; -fx-border-radius: 8; -fx-border-width: 1;
+                                  -fx-padding: 9 12; -fx-font-weight: bold;">
+                        <VBox.margin><Insets top="4"/></VBox.margin>
+                    </Label>
+
+                    <!-- Login button -->
+                    <Button fx:id="loginButton" onAction="#login"
+                            prefHeight="46" prefWidth="330"
+                            text="Se connecter →"
+                            style="-fx-background-color: #7c3aed;
+                                   -fx-text-fill: white; -fx-background-radius: 11;
+                                   -fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand;
+                                   -fx-effect: dropshadow(gaussian, rgba(124,58,237,0.40), 14, 0, 0, 4);">
+                        <VBox.margin><Insets top="20" bottom="20"/></VBox.margin>
+                    </Button>
+
+                    <!-- Divider -->
+                    <HBox alignment="CENTER" prefWidth="330" spacing="12"
+                          style="-fx-padding: 0 0 16 0;">
+                        <Separator HBox.hgrow="ALWAYS"
+                                   style="-fx-background-color: #e5e7eb;"/>
+                        <Label text="ou continuer avec"
+                               style="-fx-text-fill: #9ca3af; -fx-font-size: 11px;"/>
+                        <Separator HBox.hgrow="ALWAYS"
+                                   style="-fx-background-color: #e5e7eb;"/>
+                    </HBox>
+
+                    <!-- Google + Face buttons row -->
+                    <HBox spacing="10" prefWidth="330">
+
+                        <!-- Google -->
+                        <Button onAction="#googleLogin"
+                                prefHeight="44" HBox.hgrow="ALWAYS"
+                                text="🌐  Google"
+                                style="-fx-background-color: white;
+                                       -fx-border-color: #e5e7eb; -fx-border-width: 1.5;
+                                       -fx-border-radius: 10; -fx-background-radius: 10;
+                                       -fx-text-fill: #374151; -fx-font-weight: bold;
+                                       -fx-font-size: 13px; -fx-cursor: hand;
+                                       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 2);"/>
+
+                        <!-- Face -->
+                        <Button onAction="#faceLogin"
+                                prefHeight="44" HBox.hgrow="ALWAYS"
+                                text="📸  Visage"
+                                style="-fx-background-color: #d1fae5;
+                                       -fx-border-color: #6ee7b7; -fx-border-width: 1.5;
+                                       -fx-border-radius: 10; -fx-background-radius: 10;
+                                       -fx-text-fill: #065f46; -fx-font-weight: bold;
+                                       -fx-font-size: 13px; -fx-cursor: hand;
+                                       -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.15), 6, 0, 0, 2);"/>
+                    </HBox>
+
+                </VBox>
+            </VBox>
+        </StackPane>
+    </center>
+
+</BorderPane>

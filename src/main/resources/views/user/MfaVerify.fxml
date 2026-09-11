@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane style="-fx-background-color: #f0f2f5;"
+            prefWidth="1000" prefHeight="600"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="utilisateur.controllers.MfaVerifyController">
+
+    <center>
+        <StackPane>
+            <VBox alignment="CENTER" spacing="24" maxWidth="420"
+                  style="-fx-background-color: white; -fx-padding: 50 40;
+                         -fx-background-radius: 20;
+                         -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 20, 0, 0, 5);">
+
+                <!-- Icon -->
+                <Label text="🔐" style="-fx-font-size: 48px;"/>
+
+                <!-- Title -->
+                <VBox alignment="CENTER" spacing="8">
+                    <Label text="Vérification en deux étapes"
+                           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+                    <Label fx:id="userLabel" text=""
+                           style="-fx-font-size: 13px; -fx-text-fill: #718096; -fx-wrap-text: true;"
+                           maxWidth="340"/>
+                    <Label text="Ouvrez votre application d'authentification et saisissez le code à 6 chiffres."
+                           style="-fx-font-size: 12px; -fx-text-fill: #a0aec0; -fx-wrap-text: true;
+                                  -fx-text-alignment: center;"
+                           maxWidth="320" wrapText="true"/>
+                </VBox>
+
+                <!-- Code input -->
+                <VBox spacing="8" prefWidth="340">
+                    <Label text="Code de vérification"
+                           style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+                    <TextField fx:id="codeField"
+                               promptText="000000"
+                               maxWidth="340"
+                               style="-fx-font-size: 28px; -fx-font-weight: bold;
+                                      -fx-alignment: center; -fx-letter-spacing: 8px;
+                                      -fx-background-color: #f7fafc;
+                                      -fx-border-color: #e2e8f0; -fx-border-radius: 10;
+                                      -fx-background-radius: 10; -fx-padding: 14;
+                                      -fx-text-fill: #1a202c;"/>
+                    <Label fx:id="errorLabel" text=""
+                           style="-fx-text-fill: #e53e3e; -fx-font-size: 12px;"/>
+                </VBox>
+
+                <!-- Verify button -->
+                <Button fx:id="verifyBtn" text="Vérifier le code"
+                        prefWidth="340" prefHeight="50"
+                        onAction="#handleVerify"
+                        style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+                               -fx-text-fill: white; -fx-background-radius: 12;
+                               -fx-font-weight: bold; -fx-font-size: 15px; -fx-cursor: hand;
+                               -fx-effect: dropshadow(three-pass-box, rgba(102,126,234,0.4), 10, 0, 0, 4);"/>
+
+                <!-- Cancel -->
+                <Button text="← Retour à la connexion"
+                        prefWidth="340" prefHeight="40"
+                        onAction="#handleCancel"
+                        style="-fx-background-color: transparent;
+                               -fx-border-color: #e2e8f0; -fx-border-radius: 10;
+                               -fx-background-radius: 10; -fx-text-fill: #718096;
+                               -fx-font-size: 13px; -fx-cursor: hand;"/>
+
+                <!-- Helper note -->
+                <Label text="Le code change toutes les 30 secondes."
+                       style="-fx-font-size: 11px; -fx-text-fill: #a0aec0;"/>
+
+            </VBox>
+        </StackPane>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="competence.controllers.ModulesViewController"
+            style="-fx-background-color: #F8FAFF;">
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background: #F8FAFF; -fx-background-color: #F8FAFF;
+                           -fx-border-color: transparent;
+                           -fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
+            <VBox spacing="0">
+
+                <!-- HEADER BANNER -->
+                <VBox spacing="0"
+                      style="-fx-background-color: white;
+                             -fx-border-color: #E5E7EB;
+                             -fx-border-width: 0 0 1 0;
+                             -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.06),8,0,0,2);">
+
+                    <HBox alignment="CENTER_LEFT" spacing="12"
+                          style="-fx-padding: 16 32 12 32; -fx-background-color: white;">
+                        <Button fx:id="btnBack" text="← Retour"
+                                onAction="#handleBack"
+                                style="-fx-background-color: #F3F4F6;
+                                       -fx-text-fill: #374151; -fx-font-size: 12;
+                                       -fx-padding: 8 18; -fx-background-radius: 8;
+                                       -fx-cursor: hand; -fx-border-color: #E5E7EB;
+                                       -fx-border-radius: 8; -fx-border-width: 1;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="lblModuleCount" text="0/0 modules"
+                               style="-fx-font-size: 12; -fx-text-fill: #6B7280;
+                                      -fx-background-color: #F3F4F6;
+                                      -fx-padding: 6 14; -fx-background-radius: 8;
+                                      -fx-border-color: #E5E7EB; -fx-border-width: 1;
+                                      -fx-border-radius: 8;"/>
+                    </HBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="20"
+                          style="-fx-padding: 4 32 20 32; -fx-background-color: white;">
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="✦  MODULE PROGRESS"
+                                   style="-fx-font-size: 10; -fx-text-fill: #4F46E5;
+                                          -fx-font-weight: bold;"/>
+                            <Label fx:id="lblFormationTitre" text="Formation"
+                                   style="-fx-font-size: 24; -fx-font-weight: bold;
+                                          -fx-text-fill: #111827; -fx-wrap-text: true;"/>
+                            <HBox fx:id="hboxFormateur" alignment="CENTER_LEFT" spacing="6"
+                                  visible="false" managed="false">
+                                <Label text="👤" style="-fx-font-size: 12;"/>
+                                <Label fx:id="lblFormateur" text=""
+                                       style="-fx-font-size: 12; -fx-text-fill: #6B7280;"/>
+                            </HBox>
+                            <Label fx:id="lblTypeFormation" text=""
+                                   style="-fx-font-size: 11; -fx-text-fill: #4F46E5;
+                                          -fx-background-color: #EDE9FE;
+                                          -fx-padding: 4 14; -fx-background-radius: 20;
+                                          -fx-font-weight: bold;"/>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="2"
+                              style="-fx-background-color: #F5F3FF;
+                                     -fx-background-radius: 18;
+                                     -fx-border-color: #DDD6FE;
+                                     -fx-border-width: 1.5;
+                                     -fx-border-radius: 18;
+                                     -fx-padding: 20 26;">
+                            <Label fx:id="lblProgressPct" text="0%"
+                                   style="-fx-font-size: 38; -fx-font-weight: bold;
+                                          -fx-text-fill: #4F46E5;"/>
+                            <Label text="complété"
+                                   style="-fx-font-size: 11; -fx-text-fill: #9CA3AF;
+                                          -fx-alignment: center;"/>
+                        </VBox>
+                    </HBox>
+
+                    <StackPane prefHeight="5">
+                        <Region fx:id="barTrack" prefHeight="5" maxWidth="Infinity"
+                                style="-fx-background-color: #E5E7EB;"/>
+                        <Region fx:id="barFill" prefHeight="5" prefWidth="0"
+                                style="-fx-background-color: linear-gradient(to right,#4F46E5,#7C3AED,#EC4899);"
+                                StackPane.alignment="CENTER_LEFT"/>
+                    </StackPane>
+                </VBox>
+
+                <!-- AI + YOUTUBE ACTIONS BAR -->
+                <HBox alignment="CENTER_LEFT" spacing="12"
+                      style="-fx-padding: 16 40 12 40; -fx-background-color: white;
+                             -fx-border-color: #E5E7EB; -fx-border-width: 0 0 1 0;">
+
+                    <!-- Skills Gap Analysis -->
+                    <Button fx:id="btnSkillsGap" text="🤖  Analyse des compétences"
+                            onAction="#handleSkillsGap"
+                            style="-fx-background-color: linear-gradient(to right,#4F46E5,#7C3AED);
+                                   -fx-text-fill: white; -fx-font-size: 12; -fx-font-weight: bold;
+                                   -fx-padding: 9 18; -fx-background-radius: 10; -fx-cursor: hand;
+                                   -fx-effect: dropshadow(gaussian,rgba(79,70,229,0.35),8,0,0,3);"/>
+
+                    <!-- YouTube Video Suggestions -->
+                    <Button fx:id="btnYoutubeSuggest" text="🎬  Vidéos suggérées"
+                            onAction="#handleYoutubeSuggest"
+                            style="-fx-background-color: #DC2626; -fx-text-fill: white;
+                                   -fx-font-size: 12; -fx-font-weight: bold;
+                                   -fx-padding: 9 18; -fx-background-radius: 10; -fx-cursor: hand;
+                                   -fx-effect: dropshadow(gaussian,rgba(220,38,38,0.3),8,0,0,3);"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Button text="📄 Exporter PDF" onAction="#handleExportPDF"
+                            style="-fx-background-color:white;-fx-text-fill:#2563EB;-fx-font-weight:bold;
+                                   -fx-padding:12 24;-fx-background-radius:8;
+                                   -fx-border-color:#2563EB;-fx-border-radius:8;-fx-cursor:hand;"/>
+
+                    <!-- AI Status indicator -->
+                    <Label fx:id="lblAiStatus" text=""
+                           style="-fx-font-size: 11; -fx-text-fill: #6B7280; -fx-font-style: italic;"/>
+                </HBox>
+
+                <!-- SECTION TITLE -->
+                <HBox alignment="CENTER_LEFT" spacing="12"
+                      style="-fx-padding: 26 40 14 40; -fx-background-color: #F8FAFF;">
+                    <Label text="Contenu du cours"
+                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1F2937;"/>
+                    <Region HBox.hgrow="ALWAYS" prefHeight="1"
+                            style="-fx-background-color: #E5E7EB; -fx-max-height:1; -fx-translate-y:1;"/>
+                </HBox>
+
+                <!-- MODULE LIST -->
+                <VBox fx:id="vboxModules" spacing="12"
+                      style="-fx-padding: 0 40 48 40; -fx-background-color: #F8FAFF;"/>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

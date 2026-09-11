@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="0" style="-fx-background-color: #f5f6fa;" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="utilisateur.controllers.ProfilController">
+
+    <!-- Top accent bar -->
+    <HBox prefHeight="4" style="-fx-background-color: linear-gradient(to right, #7c3aed, #6366f1, #38bdf8);"/>
+
+    <VBox spacing="0" VBox.vgrow="ALWAYS">
+        <padding><Insets top="0" right="0" bottom="28" left="0"/></padding>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- HERO HEADER BANNER                         -->
+        <!-- ══════════════════════════════════════════ -->
+        <HBox alignment="CENTER_LEFT" style="
+            -fx-background-color: linear-gradient(to right, #ffffff, #f5f3ff);
+            -fx-border-color: transparent transparent #e9e4fb transparent;
+            -fx-border-width: 0 0 1 0;
+            -fx-padding: 24 32 24 32;">
+
+            <!-- Avatar badge -->
+            <StackPane prefWidth="64" prefHeight="64" style="
+                -fx-background-color: linear-gradient(to bottom right, #7c3aed, #6366f1);
+                -fx-background-radius: 18;
+                -fx-effect: dropshadow(gaussian, rgba(124,58,237,0.30), 12, 0, 0, 4);">
+                <Label text="👤" style="-fx-font-size: 26;"/>
+            </StackPane>
+
+            <VBox spacing="3" style="-fx-padding: 0 0 0 16;">
+                <Label text="Mon Profil" style="-fx-text-fill: #1a1a2e;">
+                    <font><Font name="System Bold" size="22"/></font>
+                </Label>
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Label text="●" style="-fx-text-fill: #7c3aed; -fx-font-size: 8;"/>
+                    <Label text="Gérez vos informations personnelles et la sécurité de votre compte"
+                           style="-fx-text-fill: #6b7280; -fx-font-size: 12;"/>
+                </HBox>
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <!-- ══════════════════════════════════════════ -->
+        <!-- CONTENT                                    -->
+        <!-- ══════════════════════════════════════════ -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="
+            -fx-background: transparent; -fx-background-color: transparent;
+            -fx-border-color: transparent; -fx-padding: 0;">
+
+            <VBox spacing="20" style="-fx-padding: 28 32 28 32;">
+
+                <!-- ── Main Profile Card ── -->
+                <VBox spacing="0" style="
+                    -fx-background-color: white;
+                    -fx-background-radius: 16;
+                    -fx-border-color: #e5e7eb; -fx-border-radius: 16; -fx-border-width: 1;
+                    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 20, 0, 0, 4);
+                    -fx-padding: 28;">
+
+                    <!-- Section label -->
+                    <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 0 0 20 0;">
+                        <Label text="✏️" style="-fx-font-size: 14;"/>
+                        <Label text="Informations personnelles"
+                               style="-fx-font-weight: bold; -fx-font-size: 13; -fx-text-fill: #374151;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="* champs obligatoires"
+                               style="-fx-font-size: 11; -fx-text-fill: #9ca3af;"/>
+                    </HBox>
+
+                    <Separator style="-fx-background-color: #f3f4f6;"/>
+                    <VBox style="-fx-padding: 20 0 0 0;">
+
+                    <!-- Photo + Fields side-by-side -->
+                    <HBox spacing="36" alignment="TOP_LEFT">
+
+                        <!-- LEFT: circular preview + buttons -->
+                        <VBox spacing="12" alignment="CENTER" minWidth="150">
+                            <Label text="Photo de profil"
+                                   style="-fx-font-size: 11; -fx-text-fill: #9ca3af; -fx-font-weight: bold;"/>
+
+                            <StackPane fx:id="photoPane"
+                                       prefWidth="110" prefHeight="110" alignment="CENTER"
+                                       style="
+                                           -fx-background-color: #ede9fe;
+                                           -fx-background-radius: 55;
+                                           -fx-border-color: #c4b5fd;
+                                           -fx-border-radius: 55; -fx-border-width: 3;
+                                           -fx-effect: dropshadow(gaussian,rgba(124,58,237,0.18),18,0,0,0);
+                                       ">
+                                <Label fx:id="photoInitialsLabel" text="?"
+                                       style="-fx-text-fill: #7c3aed; -fx-font-size: 34; -fx-font-weight: bold;"/>
+                            </StackPane>
+
+                            <Button text="📁  Parcourir..."
+                                    onAction="#handleParcourirImage"
+                                    style="
+                                        -fx-background-color: white;
+                                        -fx-border-color: #d1d5db; -fx-border-radius: 8;
+                                        -fx-background-radius: 8; -fx-text-fill: #374151;
+                                        -fx-font-size: 11; -fx-padding: 7 16; -fx-cursor: hand;"/>
+
+                            <Button fx:id="deletePhotoBtn"
+                                    text="✕  Supprimer"
+                                    onAction="#handleSupprimerPhoto"
+                                    visible="false" managed="false"
+                                    style="
+                                        -fx-background-color: #fee2e2;
+                                        -fx-border-color: #fca5a5; -fx-border-radius: 8;
+                                        -fx-background-radius: 8; -fx-text-fill: #dc2626;
+                                        -fx-font-size: 11; -fx-padding: 6 14; -fx-cursor: hand;"/>
+
+                            <TextField fx:id="urlImageField" visible="false" managed="false"/>
+                        </VBox>
+
+                        <!-- RIGHT: form fields -->
+                        <VBox HBox.hgrow="ALWAYS" spacing="0">
+                            <GridPane hgap="16" vgap="14">
+
+                                <Label text="Nom *" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                       style="-fx-font-size:12; -fx-text-fill:#6b7280; -fx-font-weight: bold;"/>
+                                <TextField fx:id="nomField" promptText="Nom" prefWidth="300"
+                                           GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                           style="-fx-background-color: #f9fafb; -fx-text-fill: #111827;
+                                                  -fx-prompt-text-fill: #9ca3af; -fx-border-color: #e5e7eb;
+                                                  -fx-border-radius: 8; -fx-background-radius: 8;
+                                                  -fx-padding: 9 14; -fx-font-size: 13;"/>
+
+                                <Label text="Prenom *" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                       style="-fx-font-size:12; -fx-text-fill:#6b7280; -fx-font-weight: bold;"/>
+                                <TextField fx:id="prenomField" promptText="Prenom" prefWidth="300"
+                                           GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                           style="-fx-background-color: #f9fafb; -fx-text-fill: #111827;
+                                                  -fx-prompt-text-fill: #9ca3af; -fx-border-color: #e5e7eb;
+                                                  -fx-border-radius: 8; -fx-background-radius: 8;
+                                                  -fx-padding: 9 14; -fx-font-size: 13;"/>
+
+                                <Label text="Email *" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                                       style="-fx-font-size:12; -fx-text-fill:#6b7280; -fx-font-weight: bold;"/>
+                                <TextField fx:id="emailField" promptText="Email" prefWidth="300"
+                                           GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                           style="-fx-background-color: #f9fafb; -fx-text-fill: #111827;
+                                                  -fx-prompt-text-fill: #9ca3af; -fx-border-color: #e5e7eb;
+                                                  -fx-border-radius: 8; -fx-background-radius: 8;
+                                                  -fx-padding: 9 14; -fx-font-size: 13;"/>
+
+                                <Label text="Username *" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                                       style="-fx-font-size:12; -fx-text-fill:#6b7280; -fx-font-weight: bold;"/>
+                                <TextField fx:id="usernameField" promptText="Username" prefWidth="300"
+                                           GridPane.columnIndex="1" GridPane.rowIndex="3"
+                                           style="-fx-background-color: #f9fafb; -fx-text-fill: #111827;
+                                                  -fx-prompt-text-fill: #9ca3af; -fx-border-color: #e5e7eb;
+                                                  -fx-border-radius: 8; -fx-background-radius: 8;
+                                                  -fx-padding: 9 14; -fx-font-size: 13;"/>
+
+                                <Label text="Telephone" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                                       style="-fx-font-size:12; -fx-text-fill:#6b7280; -fx-font-weight: bold;"/>
+                                <TextField fx:id="numtelField" promptText="Optionnel" prefWidth="300"
+                                           GridPane.columnIndex="1" GridPane.rowIndex="4"
+                                           style="-fx-background-color: #f9fafb; -fx-text-fill: #111827;
+                                                  -fx-prompt-text-fill: #9ca3af; -fx-border-color: #e5e7eb;
+                                                  -fx-border-radius: 8; -fx-background-radius: 8;
+                                                  -fx-padding: 9 14; -fx-font-size: 13;"/>
+
+                                <Label text="Nouveau mot de passe" GridPane.columnIndex="0" GridPane.rowIndex="5"
+                                       style="-fx-font-size:12; -fx-text-fill:#6b7280; -fx-font-weight: bold;"/>
+                                <PasswordField fx:id="nouveauMotDePasseField"
+                                               promptText="Laisser vide pour ne pas changer" prefWidth="300"
+                                               GridPane.columnIndex="1" GridPane.rowIndex="5"
+                                               style="-fx-background-color: #f9fafb; -fx-text-fill: #111827;
+                                                      -fx-prompt-text-fill: #9ca3af; -fx-border-color: #e5e7eb;
+                                                      -fx-border-radius: 8; -fx-background-radius: 8;
+                                                      -fx-padding: 9 14; -fx-font-size: 13;"/>
+
+                                <Label text="Confirmer mot de passe" GridPane.columnIndex="0" GridPane.rowIndex="6"
+                                       style="-fx-font-size:12; -fx-text-fill:#6b7280; -fx-font-weight: bold;"/>
+                                <PasswordField fx:id="confirmMotDePasseField"
+                                               promptText="Confirmer si vous changez" prefWidth="300"
+                                               GridPane.columnIndex="1" GridPane.rowIndex="6"
+                                               style="-fx-background-color: #f9fafb; -fx-text-fill: #111827;
+                                                      -fx-prompt-text-fill: #9ca3af; -fx-border-color: #e5e7eb;
+                                                      -fx-border-radius: 8; -fx-background-radius: 8;
+                                                      -fx-padding: 9 14; -fx-font-size: 13;"/>
+                            </GridPane>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Hidden backward-compat field -->
+                    <TextField fx:id="pdpField" visible="false" managed="false"/>
+
+                    <!-- Save button -->
+                    <HBox style="-fx-padding: 22 0 0 0;">
+                        <Button text="  💾  Enregistrer les modifications  " onAction="#handleEnregistrer" style="
+                            -fx-background-color: linear-gradient(to right, #7c3aed, #6366f1);
+                            -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13;
+                            -fx-background-radius: 10; -fx-padding: 11 28; -fx-cursor: hand;
+                            -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.28), 14, 0, 0, 4);"/>
+                    </HBox>
+
+                    </VBox>
+                </VBox>
+
+                <!-- ══════════════════════════════════════════ -->
+                <!-- SECURITY SECTION HEADER                   -->
+                <!-- ══════════════════════════════════════════ -->
+                <HBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 8 0 4 2;">
+                    <Label text="🔒" style="-fx-font-size: 14;"/>
+                    <Label text="Sécurité du compte"
+                           style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #374151;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Renforcez la protection de votre compte"
+                           style="-fx-font-size: 11; -fx-text-fill: #9ca3af;"/>
+                </HBox>
+
+                <!-- ── Face + MFA side by side ── -->
+                <HBox spacing="16" fillHeight="true">
+
+                    <!-- ── Face Recognition Card ── -->
+                    <VBox spacing="14" HBox.hgrow="ALWAYS" style="
+                        -fx-background-color: white;
+                        -fx-background-radius: 14;
+                        -fx-border-color: #e5e7eb; -fx-border-radius: 14; -fx-border-width: 1;
+                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 16, 0, 0, 3);
+                        -fx-padding: 22;">
+
+                        <!-- Icon badge -->
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <StackPane prefWidth="40" prefHeight="40" style="
+                                -fx-background-color: #ecfdf5;
+                                -fx-background-radius: 10;
+                                -fx-border-color: #a7f3d0; -fx-border-radius: 10; -fx-border-width: 1;">
+                                <Label text="🪪" style="-fx-font-size: 18;"/>
+                            </StackPane>
+                            <VBox spacing="2">
+                                <Label text="Reconnaissance faciale"
+                                       style="-fx-font-weight: bold; -fx-font-size: 13; -fx-text-fill: #111827;"/>
+                                <Label text="Connexion sans mot de passe"
+                                       style="-fx-font-size: 10; -fx-text-fill: #9ca3af;"/>
+                            </VBox>
+                        </HBox>
+
+                        <Separator style="-fx-background-color: #f3f4f6;"/>
+
+                        <Label text="Enregistrez votre visage pour vous connecter rapidement et en toute sécurité."
+                               style="-fx-font-size: 11; -fx-text-fill: #6b7280;"
+                               wrapText="true"/>
+                        <Label fx:id="faceStatusLabel" text="Chargement..."
+                               style="-fx-font-size: 12px; -fx-text-fill: #9ca3af;"/>
+
+                        <Region VBox.vgrow="ALWAYS"/>
+
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button fx:id="enrollFaceBtn"
+                                    text="Enregistrer mon visage"
+                                    onAction="#handleEnregistrerVisage"
+                                    style="
+                                        -fx-background-color: #d1fae5;
+                                        -fx-border-color: #6ee7b7; -fx-border-radius: 8;
+                                        -fx-background-radius: 8;
+                                        -fx-text-fill: #065f46; -fx-font-weight: bold;
+                                        -fx-font-size: 12; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                            <Button fx:id="deleteFaceBtn"
+                                    text="✕ Supprimer"
+                                    onAction="#handleSupprimerVisage"
+                                    visible="false" managed="false"
+                                    style="
+                                        -fx-background-color: #fee2e2;
+                                        -fx-border-color: #fca5a5; -fx-border-radius: 8;
+                                        -fx-background-radius: 8;
+                                        -fx-text-fill: #dc2626; -fx-font-weight: bold;
+                                        -fx-font-size: 12; -fx-padding: 8 14; -fx-cursor: hand;"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- ── MFA Card ── -->
+                    <VBox spacing="14" HBox.hgrow="ALWAYS" style="
+                        -fx-background-color: white;
+                        -fx-background-radius: 14;
+                        -fx-border-color: #e5e7eb; -fx-border-radius: 14; -fx-border-width: 1;
+                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 16, 0, 0, 3);
+                        -fx-padding: 22;">
+
+                        <!-- Icon badge -->
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <StackPane prefWidth="40" prefHeight="40" style="
+                                -fx-background-color: #f5f3ff;
+                                -fx-background-radius: 10;
+                                -fx-border-color: #ddd6fe; -fx-border-radius: 10; -fx-border-width: 1;">
+                                <Label text="🔐" style="-fx-font-size: 18;"/>
+                            </StackPane>
+                            <VBox spacing="2">
+                                <Label text="Double authentification"
+                                       style="-fx-font-weight: bold; -fx-font-size: 13; -fx-text-fill: #111827;"/>
+                                <Label text="Google Authenticator · Authy"
+                                       style="-fx-font-size: 10; -fx-text-fill: #9ca3af;"/>
+                            </VBox>
+                        </HBox>
+
+                        <Separator style="-fx-background-color: #f3f4f6;"/>
+
+                        <Label text="Protégez votre compte avec un code temporaire à usage unique (TOTP)."
+                               style="-fx-font-size: 11; -fx-text-fill: #6b7280;"
+                               wrapText="true"/>
+
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <Label text="Statut :" style="-fx-font-size: 12; -fx-text-fill: #6b7280;"/>
+                            <Label fx:id="mfaStatusLabel" text="Desactivee"
+                                   style="-fx-text-fill: #dc2626; -fx-font-weight: bold; -fx-font-size: 12;"/>
+                        </HBox>
+
+                        <Region VBox.vgrow="ALWAYS"/>
+
+                        <Button fx:id="mfaToggleBtn" text="Activer MFA"
+                                onAction="#handleMfaToggle"
+                                style="
+                                    -fx-background-color: linear-gradient(to right, #4f46e5, #7c3aed);
+                                    -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 12;
+                                    -fx-background-radius: 8; -fx-padding: 8 22; -fx-cursor: hand;
+                                    -fx-effect: dropshadow(gaussian, rgba(79,70,229,0.22), 10, 0, 0, 3);"/>
+                    </VBox>
+
+                </HBox>
+
+            </VBox>
+        </ScrollPane>
+    </VBox>
+
+</VBox>

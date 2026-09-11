@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="attendance.gui.ValidationsSoldesController"
+           style="-fx-background-color: #f0f4ff; -fx-padding: 32px;">
+
+    <!-- ================================================
+         VUE VALIDATIONS
+         ================================================ -->
+    <VBox fx:id="viewValidations" spacing="20">
+
+        <!-- En-tête -->
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: linear-gradient(to right, #f59e0b, #fbbf24); -fx-background-radius: 16; -fx-padding: 24px 28px; -fx-effect: dropshadow(gaussian, rgba(245,158,11,0.35), 18, 0, 0, 6);">
+            <VBox spacing="4">
+                <Label text="⚖️ Validations"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Label text="Gérez les demandes d'absence de votre équipe"
+                       style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.85);"/>
+            </VBox>
+        </HBox>
+
+        <!-- 3 cartes stats -->
+        <HBox spacing="14">
+
+            <!-- Orange - En attente -->
+            <VBox HBox.hgrow="ALWAYS" spacing="0"
+                  style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(245,158,11,0.10), 12, 0, 0, 4); -fx-border-color: #fef3c7; -fx-border-width: 1; -fx-border-radius: 14;">
+                <Region style="-fx-background-color: #f59e0b; -fx-background-radius: 14 14 0 0; -fx-pref-height: 4;"/>
+                <VBox spacing="14" style="-fx-padding: 20px;">
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <StackPane style="-fx-background-color: #fef3c7; -fx-background-radius: 10; -fx-min-width: 44; -fx-min-height: 44; -fx-max-width: 44; -fx-max-height: 44;">
+                            <Label text="⏰" style="-fx-font-size: 20px;"/>
+                        </StackPane>
+                        <Label text="En attente" style="-fx-font-size: 12px; -fx-text-fill: #64748b; -fx-font-weight: 600;"/>
+                    </HBox>
+                    <Label fx:id="lblDemandesAttente" text="—"
+                           style="-fx-font-size: 38px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <HBox alignment="CENTER_LEFT" spacing="6"
+                          style="-fx-background-color: #fffbeb; -fx-background-radius: 8; -fx-padding: 7px 12px;">
+                        <Label text="⚠️" style="-fx-font-size: 11px;"/>
+                        <Label text="Demandes à valider"
+                               style="-fx-font-size: 11px; -fx-text-fill: #f59e0b; -fx-font-weight: 600;"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- Bleu - Taux -->
+            <VBox HBox.hgrow="ALWAYS" spacing="0"
+                  style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.10), 12, 0, 0, 4); -fx-border-color: #dbeafe; -fx-border-width: 1; -fx-border-radius: 14;">
+                <Region style="-fx-background-color: #3b82f6; -fx-background-radius: 14 14 0 0; -fx-pref-height: 4;"/>
+                <VBox spacing="14" style="-fx-padding: 20px;">
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <StackPane style="-fx-background-color: #dbeafe; -fx-background-radius: 10; -fx-min-width: 44; -fx-min-height: 44; -fx-max-width: 44; -fx-max-height: 44;">
+                            <Label text="📉" style="-fx-font-size: 20px;"/>
+                        </StackPane>
+                        <Label text="Taux d'absence" style="-fx-font-size: 12px; -fx-text-fill: #64748b; -fx-font-weight: 600;"/>
+                    </HBox>
+                    <Label fx:id="lblTauxAbsence" text="—"
+                           style="-fx-font-size: 38px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <HBox alignment="CENTER_LEFT" spacing="6"
+                          style="-fx-background-color: #eff6ff; -fx-background-radius: 8; -fx-padding: 7px 12px;">
+                        <Label text="📊" style="-fx-font-size: 11px;"/>
+                        <Label text="Moyenne entreprise"
+                               style="-fx-font-size: 11px; -fx-text-fill: #3b82f6; -fx-font-weight: 600;"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- Vert - Approuvées -->
+            <VBox HBox.hgrow="ALWAYS" spacing="0"
+                  style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.10), 12, 0, 0, 4); -fx-border-color: #d1fae5; -fx-border-width: 1; -fx-border-radius: 14;">
+                <Region style="-fx-background-color: #10b981; -fx-background-radius: 14 14 0 0; -fx-pref-height: 4;"/>
+                <VBox spacing="14" style="-fx-padding: 20px;">
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <StackPane style="-fx-background-color: #d1fae5; -fx-background-radius: 10; -fx-min-width: 44; -fx-min-height: 44; -fx-max-width: 44; -fx-max-height: 44;">
+                            <Label text="✅" style="-fx-font-size: 20px;"/>
+                        </StackPane>
+                        <Label text="Approuvées" style="-fx-font-size: 12px; -fx-text-fill: #64748b; -fx-font-weight: 600;"/>
+                    </HBox>
+                    <Label fx:id="lblApprouvees" text="—"
+                           style="-fx-font-size: 38px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <HBox alignment="CENTER_LEFT" spacing="6"
+                          style="-fx-background-color: #ecfdf5; -fx-background-radius: 8; -fx-padding: 7px 12px;">
+                        <Label text="✓" style="-fx-font-size: 11px; -fx-text-fill: #10b981; -fx-font-weight: bold;"/>
+                        <Label text="Validées ce mois"
+                               style="-fx-font-size: 11px; -fx-text-fill: #10b981; -fx-font-weight: 600;"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </HBox>
+
+        <!-- Demandes à traiter -->
+        <VBox spacing="0"
+              style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(245,158,11,0.08), 14, 0, 0, 4); -fx-border-color: #fef3c7; -fx-border-width: 1; -fx-border-radius: 14;">
+
+            <!-- Bandeau titre -->
+            <HBox alignment="CENTER_LEFT" spacing="10"
+                  style="-fx-background-color: linear-gradient(to right, #fffbeb, #fef9ee); -fx-padding: 18px 22px; -fx-background-radius: 14 14 0 0; -fx-border-color: #fef3c7; -fx-border-width: 0 0 1 0;">
+                <Label text="⏳" style="-fx-font-size: 18px;"/>
+                <VBox>
+                    <Label text="Demandes à traiter"
+                           style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <Label text="Approuvez ou refusez les demandes en attente"
+                           style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+            </HBox>
+
+            <VBox fx:id="containerValidations" spacing="10" style="-fx-padding: 16px;">
+                <VBox fx:id="emptyStateValidations" alignment="CENTER" spacing="14" style="-fx-padding: 50px 40px;">
+                    <Label text="✅" style="-fx-font-size: 46px; -fx-opacity: 0.20;"/>
+                    <Label text="Aucune demande en attente"
+                           style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #cbd5e1;"/>
+                    <Label text="Toutes les demandes ont été traitées"
+                           style="-fx-font-size: 12px; -fx-text-fill: #e2e8f0;"/>
+                </VBox>
+            </VBox>
+        </VBox>
+
+        <!-- Planning d'équipe -->
+        <VBox spacing="0"
+              style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 3); -fx-border-color: #e8eeff; -fx-border-width: 1; -fx-border-radius: 14;">
+
+            <HBox alignment="CENTER_LEFT" spacing="10"
+                  style="-fx-padding: 18px 22px 14px 22px; -fx-border-color: #f0f4ff; -fx-border-width: 0 0 1 0;">
+                <Label text="📅" style="-fx-font-size: 18px;"/>
+                <VBox>
+                    <Label text="Planning d'équipe"
+                           style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <Label text="Congés planifiés par collaborateur"
+                           style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+            </HBox>
+
+            <VBox fx:id="containerPlanning" spacing="8" style="-fx-padding: 14px 16px;">
+                <Label text="Aucun planning à afficher pour le moment."
+                       style="-fx-text-fill: #94a3b8; -fx-font-size: 13px; -fx-padding: 16px 0;"/>
+            </VBox>
+        </VBox>
+
+        <!-- Calendrier équipe -->
+        <VBox spacing="0"
+              style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 3); -fx-border-color: #e8eeff; -fx-border-width: 1; -fx-border-radius: 14;">
+
+            <HBox alignment="CENTER_LEFT" spacing="10"
+                  style="-fx-padding: 18px 22px 14px 22px; -fx-border-color: #f0f4ff; -fx-border-width: 0 0 1 0;">
+                <Label text="🗓️" style="-fx-font-size: 18px;"/>
+                <VBox spacing="2">
+                    <Label text="Calendrier de l'équipe"
+                           style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <Label text="Vue d'ensemble des congés et absences par employé"
+                           style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+            </HBox>
+
+            <VBox fx:id="calendarContainer" style="-fx-padding: 0;"/>
+        </VBox>
+
+    </VBox>
+    <!-- FIN viewValidations -->
+
+    <!-- ================================================
+         VUE MES SOLDES
+         ================================================ -->
+    <VBox fx:id="viewMesSoldes" visible="false" managed="false" spacing="20">
+
+        <!-- En-tête -->
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: linear-gradient(to right, #667eea, #7c8ff5); -fx-background-radius: 16; -fx-padding: 24px 28px; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.35), 18, 0, 0, 6);">
+            <VBox HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="💰 Mes Soldes"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Label fx:id="lblAnneeEnCours" text="Année 2026 — données en temps réel"
+                       style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.80);"/>
+            </VBox>
+            <!-- Badge utilisateur connecté -->
+            <HBox alignment="CENTER" spacing="8"
+                  style="-fx-background-color: rgba(255,255,255,0.18); -fx-background-radius: 10; -fx-padding: 10px 16px; -fx-border-color: rgba(255,255,255,0.35); -fx-border-width: 1; -fx-border-radius: 10;">
+                <Label text="👤" style="-fx-font-size: 14px;"/>
+                <Label fx:id="lblNomUtilisateur" text="—"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            </HBox>
+        </HBox>
+
+        <!-- 4 cartes résumé en haut -->
+        <HBox spacing="12">
+            <!-- CP Restants -->
+            <VBox HBox.hgrow="ALWAYS" spacing="0"
+                  style="-fx-background-color: white; -fx-background-radius: 14; -fx-border-color: #e8eeff; -fx-border-width: 1; -fx-border-radius: 14; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.10), 12, 0, 0, 3);">
+                <Region style="-fx-background-color: #667eea; -fx-background-radius: 14 14 0 0; -fx-pref-height: 3;"/>
+                <VBox spacing="8" style="-fx-padding: 16px 18px;">
+                    <Label text="CP RESTANTS" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                    <Label fx:id="lblCPRestants" text="—"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+                    <Label fx:id="lblCPRestantsDetail" text="sur — acquis"
+                           style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+            </VBox>
+
+            <!-- CP Consommés -->
+            <VBox HBox.hgrow="ALWAYS" spacing="0"
+                  style="-fx-background-color: white; -fx-background-radius: 14; -fx-border-color: #d1fae5; -fx-border-width: 1; -fx-border-radius: 14; -fx-effect: dropshadow(gaussian, rgba(16,185,129,0.10), 12, 0, 0, 3);">
+                <Region style="-fx-background-color: #10b981; -fx-background-radius: 14 14 0 0; -fx-pref-height: 3;"/>
+                <VBox spacing="8" style="-fx-padding: 16px 18px;">
+                    <Label text="CONSOMMÉS" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                    <Label fx:id="lblCPConsommes" text="—"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #10b981;"/>
+                    <Label text="jours pris cette année" style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+            </VBox>
+
+            <!-- En attente -->
+            <VBox HBox.hgrow="ALWAYS" spacing="0"
+                  style="-fx-background-color: white; -fx-background-radius: 14; -fx-border-color: #fef3c7; -fx-border-width: 1; -fx-border-radius: 14; -fx-effect: dropshadow(gaussian, rgba(245,158,11,0.10), 12, 0, 0, 3);">
+                <Region style="-fx-background-color: #f59e0b; -fx-background-radius: 14 14 0 0; -fx-pref-height: 3;"/>
+                <VBox spacing="8" style="-fx-padding: 16px 18px;">
+                    <Label text="EN ATTENTE" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                    <Label fx:id="lblCPEnAttente" text="—"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #f59e0b;"/>
+                    <Label text="jours non encore validés" style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+            </VBox>
+
+            <!-- Maladie -->
+            <VBox HBox.hgrow="ALWAYS" spacing="0"
+                  style="-fx-background-color: white; -fx-background-radius: 14; -fx-border-color: #fee2e2; -fx-border-width: 1; -fx-border-radius: 14; -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.10), 12, 0, 0, 3);">
+                <Region style="-fx-background-color: #ef4444; -fx-background-radius: 14 14 0 0; -fx-pref-height: 3;"/>
+                <VBox spacing="8" style="-fx-padding: 16px 18px;">
+                    <Label text="MALADIE" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                    <Label fx:id="lblCPMaladie" text="—"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #ef4444;"/>
+                    <Label text="jours d'arrêt maladie" style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+            </VBox>
+        </HBox>
+
+        <!-- Graphique + Détail côte à côte -->
+        <HBox spacing="14" alignment="TOP_LEFT">
+
+            <!-- Graphique donut -->
+            <VBox spacing="0" prefWidth="420"
+                  style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.08), 14, 0, 0, 4); -fx-border-color: #e8eeff; -fx-border-width: 1; -fx-border-radius: 14;">
+                <HBox alignment="CENTER_LEFT" spacing="10"
+                      style="-fx-padding: 18px 22px 14px 22px; -fx-border-color: #f0f4ff; -fx-border-width: 0 0 1 0;">
+                    <Label text="🥧" style="-fx-font-size: 16px;"/>
+                    <VBox spacing="2">
+                        <Label text="Répartition des soldes"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                        <Label fx:id="lblGraphSubtitle" text="—"
+                               style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                    </VBox>
+                </HBox>
+                <VBox style="-fx-padding: 10px 16px 16px 16px;">
+                    <PieChart fx:id="chartSoldes" prefHeight="280" legendVisible="true"
+                              style="-fx-background-color: transparent;"/>
+                </VBox>
+            </VBox>
+
+            <!-- Détail par type -->
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
+
+                <!-- Congés Payés avec barre de progression -->
+                <VBox spacing="0"
+                      style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.08), 12, 0, 0, 3); -fx-border-color: #e8eeff; -fx-border-width: 1; -fx-border-radius: 14;">
+                    <Region style="-fx-background-color: #667eea; -fx-background-radius: 14 14 0 0; -fx-pref-height: 3;"/>
+                    <VBox spacing="12" style="-fx-padding: 16px 18px;">
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <StackPane style="-fx-background-color: #eef2ff; -fx-background-radius: 10; -fx-min-width: 38; -fx-min-height: 38; -fx-max-width: 38; -fx-max-height: 38;">
+                                <Label text="☀️" style="-fx-font-size: 16px;"/>
+                            </StackPane>
+                            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                                <Label text="CONGÉS PAYÉS — Droit légal tunisien"
+                                       style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                                <Label text="1 jour acquis par mois travaillé"
+                                       style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                            </VBox>
+                            <Label fx:id="lblSoldeCP" text="—"
+                                   style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+                        </HBox>
+                        <!-- Barre de progression -->
+                        <VBox spacing="5">
+                            <HBox>
+                                <Label fx:id="lblCPProgLabel" text="— consommés sur — acquis"
+                                       style="-fx-font-size: 10px; -fx-text-fill: #94a3b8;" HBox.hgrow="ALWAYS"/>
+                                <Label fx:id="lblCPProgPct" text="—%"
+                                       style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+                            </HBox>
+                            <StackPane>
+                                <Region fx:id="progCPTrack"
+                                        style="-fx-background-color: #f1f5f9; -fx-background-radius: 6; -fx-pref-height: 8;"/>
+                                <HBox alignment="CENTER_LEFT">
+                                    <Region fx:id="progCPFill"
+                                            style="-fx-background-color: #667eea; -fx-background-radius: 6; -fx-pref-height: 8;"/>
+                                </HBox>
+                            </StackPane>
+                        </VBox>
+                        <HBox spacing="16">
+                            <Label fx:id="lblCPAcquis" text="Acquis : — j"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #667eea; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblCPPris" text="Pris : — j"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #10b981; -fx-font-weight: bold;"/>
+                            <Label fx:id="lblCPRestantBas" text="Restant : — j"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #94a3b8; -fx-font-weight: bold;"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <!-- Congé Maladie -->
+                <VBox spacing="0"
+                      style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.08), 12, 0, 0, 3); -fx-border-color: #fee2e2; -fx-border-width: 1; -fx-border-radius: 14;">
+                    <Region style="-fx-background-color: #ef4444; -fx-background-radius: 14 14 0 0; -fx-pref-height: 3;"/>
+                    <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-padding: 14px 18px;">
+                        <StackPane style="-fx-background-color: #fee2e2; -fx-background-radius: 10; -fx-min-width: 38; -fx-min-height: 38; -fx-max-width: 38; -fx-max-height: 38;">
+                            <Label text="🏥" style="-fx-font-size: 16px;"/>
+                        </StackPane>
+                        <VBox spacing="2" HBox.hgrow="ALWAYS">
+                            <Label text="CONGÉ MALADIE" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                            <Label text="Sur justificatif médical uniquement"
+                                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                        </VBox>
+                        <VBox alignment="CENTER_RIGHT" spacing="2">
+                            <Label text="CONSOMMÉ" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #94a3b8;"/>
+                            <Label fx:id="lblCongesMaladie" text="—"
+                                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #ef4444;"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Congé Sans Solde -->
+                <VBox spacing="0"
+                      style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 3); -fx-border-color: #e2e8f0; -fx-border-width: 1; -fx-border-radius: 14;">
+                    <Region style="-fx-background-color: #94a3b8; -fx-background-radius: 14 14 0 0; -fx-pref-height: 3;"/>
+                    <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-padding: 14px 18px;">
+                        <StackPane style="-fx-background-color: #f1f5f9; -fx-background-radius: 10; -fx-min-width: 38; -fx-min-height: 38; -fx-max-width: 38; -fx-max-height: 38;">
+                            <Label text="📋" style="-fx-font-size: 16px;"/>
+                        </StackPane>
+                        <VBox spacing="2" HBox.hgrow="ALWAYS">
+                            <Label text="CONGÉ SANS SOLDE" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #94a3b8; -fx-letter-spacing: 1;"/>
+                            <Label text="Avec accord préalable de l'employeur"
+                                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                        </VBox>
+                        <VBox alignment="CENTER_RIGHT" spacing="2">
+                            <Label text="CONSOMMÉ" style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #94a3b8;"/>
+                            <Label fx:id="lblCongesSansSolde" text="—"
+                                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #64748b;"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Total consommé -->
+                <HBox alignment="CENTER_LEFT" spacing="0"
+                      style="-fx-background-color: linear-gradient(to right, #f0fdf4, #dcfce7); -fx-background-radius: 12; -fx-border-color: #a7f3d0; -fx-border-width: 1.5; -fx-border-radius: 12;">
+                    <Region style="-fx-background-color: #10b981; -fx-background-radius: 12 0 0 12; -fx-pref-width: 4; -fx-max-height: 999;"/>
+                    <HBox alignment="CENTER_LEFT" spacing="12" HBox.hgrow="ALWAYS" style="-fx-padding: 14px 16px;">
+                        <StackPane style="-fx-background-color: #d1fae5; -fx-background-radius: 10; -fx-min-width: 38; -fx-min-height: 38; -fx-max-width: 38; -fx-max-height: 38;">
+                            <Label text="📊" style="-fx-font-size: 16px;"/>
+                        </StackPane>
+                        <VBox spacing="2" HBox.hgrow="ALWAYS">
+                            <Label text="TOTAL CONSOMMÉ — tous types approuvés"
+                                   style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-text-fill: #059669; -fx-letter-spacing: 1;"/>
+                            <Label fx:id="lblCongesConsommesDetail" text="— congés · — absences"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #1e293b; -fx-font-weight: 600;"/>
+                        </VBox>
+                        <Label fx:id="lblCongesConsommes" text="—"
+                               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #059669;"/>
+                    </HBox>
+                </HBox>
+
+            </VBox>
+        </HBox>
+
+        <!-- Jours fériés Tunisie -->
+        <VBox spacing="0"
+              style="-fx-background-color: white; -fx-background-radius: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 3); -fx-border-color: #e8eeff; -fx-border-width: 1; -fx-border-radius: 14;">
+            <HBox alignment="CENTER_LEFT" spacing="10"
+                  style="-fx-padding: 18px 22px 14px 22px; -fx-border-color: #f0f4ff; -fx-border-width: 0 0 1 0;">
+                <Label text="🇹🇳" style="-fx-font-size: 20px;"/>
+                <VBox spacing="2">
+                    <Label text="Jours fériés en Tunisie — 2026"
+                           style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <Label text="Jours fériés officiels, nationaux et religieux"
+                           style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+                </VBox>
+            </HBox>
+            <VBox fx:id="containerFeriesTunisie" spacing="8" style="-fx-padding: 14px 16px;"/>
+        </VBox>
+
+    </VBox>
+    <!-- FIN viewMesSoldes -->
+
+</StackPane>

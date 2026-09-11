@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="communication.controllers.PostCardController"
+      style="-fx-background-color: #FFFFFF;
+             -fx-background-radius: 22px;
+             -fx-border-color: #E8EAF6;
+             -fx-border-width: 1.5;
+             -fx-border-radius: 22px;
+             -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.09), 22, 0, 0, 6);">
+
+    <!-- ══════════════════════════════════════════
+         HEADER STACK (Normal / Share)
+    ══════════════════════════════════════════ -->
+    <StackPane>
+
+        <!-- Normal post header -->
+        <HBox fx:id="normalHeader"
+              spacing="12" alignment="CENTER_LEFT"
+              style="-fx-padding: 18 18 14 18;
+                     -fx-background-color: transparent;
+                     -fx-background-radius: 22px 22px 0 0;">
+
+            <!-- Author avatar -->
+            <StackPane minWidth="46" maxWidth="46" minHeight="46" maxHeight="46"
+                       style="-fx-background-color: linear-gradient(to bottom right, #A29BFE, #6C5CE7);
+                              -fx-background-radius: 9999px;
+                              -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.35), 8, 0, 0, 2);">
+                <Label fx:id="authorAvatar" text="JD"
+                       style="-fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 15px;
+                              -fx-alignment: center;"/>
+            </StackPane>
+
+            <!-- Author info -->
+            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                <Label fx:id="authorName" text="John Doe"
+                       style="-fx-font-size: 14px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+                <Label fx:id="postMeta" text="@johndoe • 2h"
+                       style="-fx-font-size: 11.5px; -fx-text-fill: #A0A8CC;"/>
+            </VBox>
+
+            <!-- Right: visibility badge (added dynamically) + menu -->
+            <HBox spacing="8" alignment="CENTER_RIGHT">
+                <Button fx:id="menuBtn" text="⋮"
+                        styleClass="btn-menu"
+                        style="-fx-background-color: transparent;
+                               -fx-text-fill: #A0A8CC;
+                               -fx-font-size: 20px;
+                               -fx-cursor: hand;
+                               -fx-border-width: 0;
+                               -fx-padding: 2 8;
+                               -fx-background-radius: 8px;"/>
+            </HBox>
+        </HBox>
+
+        <!-- Share header -->
+        <HBox fx:id="shareHeader"
+              spacing="12" alignment="CENTER_LEFT"
+              visible="false" managed="false"
+              style="-fx-padding: 14 18 12 18;
+                     -fx-background-color: #FAFBFF;
+                     -fx-background-radius: 22px 22px 0 0;
+                     -fx-border-color: #E8EAF6;
+                     -fx-border-width: 0 0 1 0;">
+            <StackPane minWidth="36" maxWidth="36" minHeight="36" maxHeight="36"
+                       style="-fx-background-color: linear-gradient(to bottom right, #A29BFE, #6C5CE7);
+                              -fx-background-radius: 9999px;">
+                <Label fx:id="sharerAvatar" text=""
+                       style="-fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 12px; -fx-alignment: center;"/>
+            </StackPane>
+            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Label fx:id="sharerName"
+                           style="-fx-font-weight: 700; -fx-font-size: 13px; -fx-text-fill: #1A1D2E;"/>
+                    <Label text="a partagé"
+                           style="-fx-font-size: 13px; -fx-text-fill: #A0A8CC;"/>
+                </HBox>
+                <Label fx:id="shareTime"
+                       style="-fx-font-size: 11px; -fx-text-fill: #A0A8CC;"/>
+            </VBox>
+            <Button fx:id="shareMenuBtn" text="⋮"
+                    styleClass="btn-menu"
+                    style="-fx-background-color: transparent; -fx-text-fill: #A0A8CC;
+                           -fx-font-size: 20px; -fx-cursor: hand; -fx-border-width: 0; -fx-padding: 2 8;"
+                    visible="false" managed="false"/>
+        </HBox>
+    </StackPane>
+
+    <!-- Divider -->
+    <Region style="-fx-background-color: #F0F2FA; -fx-pref-height: 1; -fx-min-height: 1; -fx-max-height: 1;"/>
+
+    <!-- ══════════════════════════════════════════
+         SHARE MESSAGE (if reshare)
+    ══════════════════════════════════════════ -->
+    <VBox fx:id="shareMessageBox" visible="false" managed="false"
+          style="-fx-padding: 12 20 6 20; -fx-background-color: #FAFBFF;">
+        <Label fx:id="shareMessage" wrapText="true"
+               style="-fx-font-size: 13.5px; -fx-text-fill: #5A5F7D;
+                      -fx-font-style: italic; -fx-line-spacing: 2;"/>
+    </VBox>
+
+    <!-- ══════════════════════════════════════════
+         MAIN CONTENT
+    ══════════════════════════════════════════ -->
+    <VBox style="-fx-padding: 16 20 14 20;">
+        <Label fx:id="postContent" wrapText="true"
+               style="-fx-font-size: 14.5px; -fx-text-fill: #1A1D2E;
+                      -fx-line-spacing: 3; -fx-font-family: 'Segoe UI';"/>
+    </VBox>
+
+    <!-- ══════════════════════════════════════════
+         IMAGE
+    ══════════════════════════════════════════ -->
+    <VBox fx:id="imageContainer" visible="false" managed="false"
+          style="-fx-padding: 0 16 16 16;">
+        <ImageView fx:id="postImage" fitWidth="664" preserveRatio="true"
+                   style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 3);"/>
+    </VBox>
+
+    <!-- ══════════════════════════════════════════
+         ORIGINAL POST (for reshares)
+    ══════════════════════════════════════════ -->
+    <VBox fx:id="originalPostContainer" visible="false" managed="false"
+          style="-fx-padding: 0 18 16 18;">
+        <VBox fx:id="originalPostBox"
+              style="-fx-background-color: #F4F5FB;
+                     -fx-border-color: #DDE0F0;
+                     -fx-border-width: 1.5;
+                     -fx-border-radius: 14px;
+                     -fx-background-radius: 14px;
+                     -fx-padding: 14;
+                     -fx-spacing: 8;">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <StackPane minWidth="32" maxWidth="32" minHeight="32" maxHeight="32"
+                           style="-fx-background-color: linear-gradient(to bottom right, #A29BFE, #6C5CE7);
+                                  -fx-background-radius: 9999px;">
+                    <Label fx:id="originalAuthorAvatar" text=""
+                           style="-fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 11px; -fx-alignment: center;"/>
+                </StackPane>
+                <VBox spacing="1">
+                    <Label fx:id="originalAuthorName"
+                           style="-fx-font-weight: 700; -fx-font-size: 12.5px; -fx-text-fill: #1A1D2E;"/>
+                    <Label fx:id="originalPostMeta"
+                           style="-fx-font-size: 11px; -fx-text-fill: #A0A8CC;"/>
+                </VBox>
+            </HBox>
+            <Label fx:id="originalPostContent" wrapText="true"
+                   style="-fx-font-size: 12.5px; -fx-text-fill: #5A5F7D; -fx-line-spacing: 2;"/>
+            <ImageView fx:id="originalPostImage" fitWidth="400" preserveRatio="true"
+                       visible="false" managed="false"/>
+        </VBox>
+    </VBox>
+
+    <!-- ══════════════════════════════════════════
+         STATS ROW
+    ══════════════════════════════════════════ -->
+    <HBox spacing="18" alignment="CENTER_LEFT"
+          style="-fx-padding: 8 20 4 20;
+                 -fx-border-color: #F0F2FA;
+                 -fx-border-width: 1 0 0 0;">
+        <Label fx:id="likesLabel" text="👍 0"
+               style="-fx-font-size: 12px; -fx-text-fill: #A0A8CC;"/>
+        <Label fx:id="commentsLabel" text="💬 0"
+               style="-fx-font-size: 12px; -fx-text-fill: #A0A8CC;"/>
+        <Label fx:id="sharesLabel" text="📤 0"
+               style="-fx-font-size: 12px; -fx-text-fill: #A0A8CC;"/>
+    </HBox>
+
+    <!-- ══════════════════════════════════════════
+         ACTION BUTTONS
+    ══════════════════════════════════════════ -->
+    <HBox spacing="2"
+          style="-fx-padding: 4 10 4 10;
+                 -fx-border-color: #F0F2FA;
+                 -fx-border-width: 1 0 0 0;">
+        <Button fx:id="likeBtn" text="👍  Like"
+                styleClass="btn-action"
+                HBox.hgrow="ALWAYS"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #5A5F7D;
+                       -fx-font-size: 13px; -fx-font-weight: 600;
+                       -fx-cursor: hand; -fx-border-width: 0;
+                       -fx-background-radius: 12px;
+                       -fx-padding: 9 6; -fx-alignment: CENTER;"/>
+        <Button fx:id="commentBtn" text="💬  Commenter"
+                styleClass="btn-action"
+                HBox.hgrow="ALWAYS"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #5A5F7D;
+                       -fx-font-size: 13px; -fx-font-weight: 600;
+                       -fx-cursor: hand; -fx-border-width: 0;
+                       -fx-background-radius: 12px;
+                       -fx-padding: 9 6; -fx-alignment: CENTER;"/>
+        <Button fx:id="shareBtn" text="📤  Partager"
+                styleClass="btn-action"
+                HBox.hgrow="ALWAYS"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #5A5F7D;
+                       -fx-font-size: 13px; -fx-font-weight: 600;
+                       -fx-cursor: hand; -fx-border-width: 0;
+                       -fx-background-radius: 12px;
+                       -fx-padding: 9 6; -fx-alignment: CENTER;"/>
+        <Button fx:id="saveBtn" text="🔖  Sauver"
+                styleClass="btn-action"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #5A5F7D;
+                       -fx-font-size: 13px; -fx-font-weight: 600;
+                       -fx-cursor: hand; -fx-border-width: 0;
+                       -fx-background-radius: 12px;
+                       -fx-padding: 9 6; -fx-alignment: CENTER;"/>
+    </HBox>
+
+    <!-- ══════════════════════════════════════════
+         COMMENTS SECTION
+    ══════════════════════════════════════════ -->
+    <VBox fx:id="commentsSection"
+          style="-fx-background-color: #FAFBFF;
+                 -fx-background-radius: 0 0 22px 22px;
+                 -fx-padding: 14 16 16 16;
+                 -fx-spacing: 12;
+                 -fx-border-color: #F0F2FA;
+                 -fx-border-width: 1 0 0 0;">
+
+        <!-- Input row -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <StackPane minWidth="34" maxWidth="34" minHeight="34" maxHeight="34"
+                       style="-fx-background-color: linear-gradient(to bottom right, #A29BFE, #6C5CE7);
+                              -fx-background-radius: 9999px;">
+                <Label fx:id="currentUserAvatar" text=""
+                       style="-fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 11px; -fx-alignment: center;"/>
+            </StackPane>
+            <TextField fx:id="commentInput"
+                       promptText="Écrivez un commentaire..."
+                       styleClass="comment-field"
+                       HBox.hgrow="ALWAYS"
+                       style="-fx-background-color: #EAECF5;
+                              -fx-background-radius: 50px;
+                              -fx-border-color: transparent;
+                              -fx-border-width: 1.5;
+                              -fx-border-radius: 50px;
+                              -fx-padding: 9 18;
+                              -fx-font-size: 13px;
+                              -fx-text-fill: #1A1D2E;
+                              -fx-prompt-text-fill: #A0A8CC;"/>
+            <Button fx:id="commentSendBtn" text="➤"
+                    visible="false" managed="false"
+                    style="-fx-background-color: linear-gradient(to right, #6C5CE7, #A29BFE);
+                           -fx-text-fill: white; -fx-font-size: 13px;
+                           -fx-background-radius: 9999px;
+                           -fx-min-width: 34; -fx-min-height: 34;
+                           -fx-max-width: 34; -fx-max-height: 34;
+                           -fx-cursor: hand; -fx-border-width: 0;
+                           -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.4), 8, 0, 0, 2);"/>
+        </HBox>
+
+        <!-- Comments list -->
+        <VBox fx:id="commentsList" spacing="10"/>
+
+        <!-- View more -->
+        <Button fx:id="viewMoreCommentsBtn" text="↓  Voir plus de commentaires"
+                visible="false" managed="false"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #6C5CE7;
+                       -fx-font-size: 12.5px; -fx-font-weight: 700;
+                       -fx-cursor: hand; -fx-border-width: 0;
+                       -fx-padding: 6 0 2 0;"/>
+    </VBox>
+
+</VBox>

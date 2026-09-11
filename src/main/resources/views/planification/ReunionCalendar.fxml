@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="planification.controllers.ReunionCalendarController"
+            style="-fx-background-color: #f1f5f9;">
+
+    <fx:define>
+        <ToggleGroup fx:id="viewToggleGroup"/>
+    </fx:define>
+
+    <!-- ═══════════════════ TOP TOOLBAR ═══════════════════ -->
+    <top>
+        <VBox style="-fx-background-color: white;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);">
+
+            <!-- Main toolbar -->
+            <HBox spacing="10" alignment="CENTER_LEFT"
+                  style="-fx-padding: 12 24 10 24;">
+
+                <Button fx:id="prevBtn" text="‹" onAction="#handlePrev"
+                        style="-fx-background-color: #f1f5f9; -fx-text-fill: #475569;
+                               -fx-font-size: 18px; -fx-padding: 4 12;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+
+                <Button fx:id="todayBtn" text="Aujourd'hui" onAction="#handleToday"
+                        style="-fx-background-color: #f1f5f9; -fx-text-fill: #475569;
+                               -fx-font-size: 13px; -fx-padding: 6 14;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+
+                <Button fx:id="nextBtn" text="›" onAction="#handleNext"
+                        style="-fx-background-color: #f1f5f9; -fx-text-fill: #475569;
+                               -fx-font-size: 18px; -fx-padding: 4 12;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+
+                <Label fx:id="currentPeriodLabel" text="Février 2026"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1e293b;
+                              -fx-padding: 0 0 0 8;"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- 4-button view toggle -->
+                <ToggleButton fx:id="dayBtn" text="Jour"
+                              toggleGroup="$viewToggleGroup" onAction="#handleViewChange"
+                              style="-fx-background-color: #f1f5f9; -fx-text-fill: #475569;
+                                     -fx-font-size: 13px; -fx-padding: 6 14;
+                                     -fx-background-radius: 8 0 0 8; -fx-cursor: hand;"/>
+                <ToggleButton fx:id="weekBtn" text="Semaine"
+                              toggleGroup="$viewToggleGroup" selected="true" onAction="#handleViewChange"
+                              style="-fx-background-color: #667eea; -fx-text-fill: white;
+                                     -fx-font-size: 13px; -fx-padding: 6 14;
+                                     -fx-background-radius: 0; -fx-cursor: hand;"/>
+                <ToggleButton fx:id="monthBtn" text="Mois"
+                              toggleGroup="$viewToggleGroup" onAction="#handleViewChange"
+                              style="-fx-background-color: #f1f5f9; -fx-text-fill: #475569;
+                                     -fx-font-size: 13px; -fx-padding: 6 14;
+                                     -fx-background-radius: 0; -fx-cursor: hand;"/>
+                <ToggleButton fx:id="yearBtn" text="Année"
+                              toggleGroup="$viewToggleGroup" onAction="#handleViewChange"
+                              style="-fx-background-color: #f1f5f9; -fx-text-fill: #475569;
+                                     -fx-font-size: 13px; -fx-padding: 6 14;
+                                     -fx-background-radius: 0 8 8 0; -fx-cursor: hand;"/>
+
+                <Region style="-fx-min-width: 8;"/>
+
+                <Button fx:id="addBtn" text="＋  Nouvelle réunion" onAction="#handleAdd"
+                        style="-fx-background-color: #667eea; -fx-text-fill: white;
+                               -fx-font-weight: bold; -fx-font-size: 13px;
+                               -fx-padding: 8 18; -fx-background-radius: 8; -fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- Color legend strip -->
+            <HBox spacing="18" alignment="CENTER_LEFT"
+                  style="-fx-padding: 0 24 10 24; -fx-background-color: white;">
+                <Label text="Légende :"
+                       style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #94a3b8;"/>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Rectangle width="10" height="10" arcWidth="3" arcHeight="3" style="-fx-fill: #ef4444;"/>
+                    <Label text="🤝 Réunion" style="-fx-font-size: 11px; -fx-text-fill: #475569;"/>
+                </HBox>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Rectangle width="10" height="10" arcWidth="3" arcHeight="3" style="-fx-fill: #8b5cf6;"/>
+                    <Label text="🎉 Événement" style="-fx-font-size: 11px; -fx-text-fill: #475569;"/>
+                </HBox>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Rectangle width="10" height="10" arcWidth="3" arcHeight="3" style="-fx-fill: #3b82f6;"/>
+                    <Label text="🪑 Réservation" style="-fx-font-size: 11px; -fx-text-fill: #475569;"/>
+                </HBox>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Rectangle width="10" height="10" arcWidth="3" arcHeight="3" style="-fx-fill: #10b981;"/>
+                    <Label text="🚀 Onboarding" style="-fx-font-size: 11px; -fx-text-fill: #475569;"/>
+                </HBox>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Rectangle width="10" height="10" arcWidth="3" arcHeight="3" style="-fx-fill: #f97316;"/>
+                    <Label text="👋 Offboarding" style="-fx-font-size: 11px; -fx-text-fill: #475569;"/>
+                </HBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="entryCountLabel" text=""
+                       style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ═══════════════════ CENTER ═══════════════════ -->
+    <center>
+        <HBox spacing="0">
+
+            <!-- LEFT PANEL -->
+            <VBox spacing="0" prefWidth="224"
+                  style="-fx-background-color: white;
+                         -fx-border-color: transparent #e2e8f0 transparent transparent;
+                         -fx-border-width: 0 1 0 0;">
+
+                <!-- Mini Calendar Header -->
+                <HBox alignment="CENTER_LEFT" spacing="4"
+                      style="-fx-padding: 14 8 8 8;">
+                    <Button fx:id="miniPrevBtn" text="‹" onAction="#handleMiniPrev"
+                            style="-fx-background-color: transparent; -fx-text-fill: #94a3b8;
+                                   -fx-font-size: 14px; -fx-padding: 2 6; -fx-cursor: hand;"/>
+                    <Label fx:id="miniMonthLabel" text="Février 2026" HBox.hgrow="ALWAYS"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold;
+                                  -fx-text-fill: #1e293b; -fx-alignment: CENTER;"/>
+                    <Button fx:id="miniNextBtn" text="›" onAction="#handleMiniNext"
+                            style="-fx-background-color: transparent; -fx-text-fill: #94a3b8;
+                                   -fx-font-size: 14px; -fx-padding: 2 6; -fx-cursor: hand;"/>
+                </HBox>
+
+                <GridPane fx:id="miniCalGrid" hgap="1" vgap="2"
+                          style="-fx-padding: 0 8 10 8;"/>
+
+                <Separator style="-fx-background-color: #f1f5f9;"/>
+
+                <Label text="📅  Prochains événements"
+                       style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #94a3b8;
+                              -fx-padding: 12 14 6 14;"/>
+
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                            VBox.vgrow="ALWAYS"
+                            style="-fx-background-color: transparent; -fx-background: transparent;
+                                   -fx-border-color: transparent;">
+                    <content>
+                        <VBox fx:id="upcomingList" spacing="2"
+                              style="-fx-padding: 0 8 10 8;"/>
+                    </content>
+                </ScrollPane>
+
+            </VBox>
+
+            <!-- MAIN CALENDAR AREA -->
+            <StackPane HBox.hgrow="ALWAYS">
+                <VBox fx:id="calendarContainer" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
+            </StackPane>
+
+        </HBox>
+    </center>
+
+    <!-- FOOTER -->
+    <bottom>
+        <HBox alignment="CENTER_LEFT" prefHeight="28"
+              style="-fx-background-color: #f9f9f9; -fx-padding: 0 24;
+                     -fx-border-color: #e2e8f0 transparent transparent transparent; -fx-border-width: 1 0 0 0;">
+            <Label fx:id="statusLabel"
+                   text="Double-clic sur le calendrier pour créer · Clic sur un événement pour les détails"
+                   style="-fx-text-fill: #94a3b8; -fx-font-size: 11px;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

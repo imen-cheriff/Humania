@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="planification.controllers.OnboardingController"
+           style="-fx-background-color: #f1f5f9;">
+
+    <ScrollPane fitToWidth="true" fitToHeight="false"
+                hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+        <content>
+            <VBox spacing="0" style="-fx-background-color: #f1f5f9;" fillWidth="true">
+
+                <!-- ── Page Header ── -->
+                <VBox style="-fx-background-color: white; -fx-padding: 32 40 24 40;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);">
+                    <Label text="🚀  Onboarding"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <Label text="Intégrez vos nouveaux collaborateurs avec un parcours automatisé"
+                           style="-fx-font-size: 14px; -fx-text-fill: #64748b; -fx-padding: 4 0 0 0;"/>
+                </VBox>
+
+                <!-- ── Body ── -->
+                <VBox spacing="24" style="-fx-padding: 32 40 40 40;" fillWidth="true">
+
+                    <!-- ── Selector card using GridPane for fixed column widths ── -->
+                    <VBox spacing="12"
+                          style="-fx-background-color: white; -fx-background-radius: 12;
+                                 -fx-border-color: #e2e8f0; -fx-border-radius: 12;
+                                 -fx-padding: 20;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);">
+
+                        <GridPane hgap="16" vgap="12">
+                            <columnConstraints>
+                                <!-- Label employé -->
+                                <ColumnConstraints minWidth="120" maxWidth="120" prefWidth="120"/>
+                                <!-- ComboBox employé -->
+                                <ColumnConstraints minWidth="240" maxWidth="260" prefWidth="260"/>
+                                <!-- Label département -->
+                                <ColumnConstraints minWidth="100" maxWidth="120" prefWidth="110"/>
+                                <!-- ComboBox département -->
+                                <ColumnConstraints minWidth="180" maxWidth="200" prefWidth="200"/>
+                                <!-- spacer -->
+                                <ColumnConstraints hgrow="ALWAYS"/>
+                            </columnConstraints>
+
+                            <!-- Row 0: Employé + Département -->
+                            <Label text="Nouvel employé :"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                   style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+                            <ComboBox fx:id="employeeCombo"
+                                      GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                      maxWidth="260" prefWidth="260"
+                                      promptText="Sélectionner un employé..."
+                                      style="-fx-background-color: white; -fx-border-color: #e2e8f0;
+                                             -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13px;"/>
+                            <Label text="Département :"
+                                   GridPane.columnIndex="2" GridPane.rowIndex="0"
+                                   style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+                            <ComboBox fx:id="departmentCombo"
+                                      GridPane.columnIndex="3" GridPane.rowIndex="0"
+                                      maxWidth="200" prefWidth="200"
+                                      promptText="Département..."
+                                      style="-fx-background-color: white; -fx-border-color: #e2e8f0;
+                                             -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13px;"/>
+
+                            <!-- Row 1: Date + Bouton -->
+                            <Label text="Date d'arrivée :"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                   style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+                            <DatePicker fx:id="arrivalDatePicker"
+                                        GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                        maxWidth="260" prefWidth="260"
+                                        style="-fx-background-color: white; -fx-border-color: #e2e8f0;
+                                               -fx-border-radius: 8; -fx-background-radius: 8;"/>
+                            <Button fx:id="generateBtn" text="⚡  Générer le parcours"
+                                    GridPane.columnIndex="3" GridPane.rowIndex="1"
+                                    onAction="#handleGenerate"
+                                    style="-fx-background-color: #667eea; -fx-text-fill: white;
+                                           -fx-font-weight: bold; -fx-font-size: 13px;
+                                           -fx-padding: 10 24; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                        </GridPane>
+                    </VBox>
+
+                    <!-- Stats row -->
+                    <HBox fx:id="statsRow" spacing="16" alignment="CENTER_LEFT"/>
+
+                    <!-- Main content: two columns -->
+                    <HBox spacing="20" alignment="TOP_LEFT">
+
+                        <!-- Left: Task checklist -->
+                        <VBox fx:id="taskPanel" spacing="0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: white; -fx-background-radius: 12;
+                                     -fx-border-color: #e2e8f0; -fx-border-radius: 12;
+                                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);">
+                            <padding><Insets top="0" right="0" bottom="0" left="0"/></padding>
+                        </VBox>
+
+                        <!-- Right: Info + Actions -->
+                        <VBox spacing="16" prefWidth="320" minWidth="280" maxWidth="340">
+                            <VBox fx:id="welcomeCard" spacing="12"
+                                  style="-fx-background-color: white; -fx-background-radius: 12;
+                                         -fx-border-color: #e2e8f0; -fx-border-radius: 12;
+                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);
+                                         -fx-padding: 20;">
+                                <Label text="👤  Informations employé"
+                                       style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                            </VBox>
+                            <VBox fx:id="autoActionsCard" spacing="12"
+                                  style="-fx-background-color: white; -fx-background-radius: 12;
+                                         -fx-border-color: #e2e8f0; -fx-border-radius: 12;
+                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);
+                                         -fx-padding: 20;">
+                                <Label text="⚙️  Actions automatiques"
+                                       style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                            </VBox>
+                        </VBox>
+                    </HBox>
+
+                </VBox>
+            </VBox>
+        </content>
+    </ScrollPane>
+</StackPane>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="recrutement.controllers.AnalysecvController"
+            style="-fx-background-color: #f4f6fb; -fx-background: #f4f6fb;">
+
+    <VBox spacing="20" style="-fx-background-color: #f4f6fb;">
+        <padding><Insets top="28" left="32" right="32" bottom="32"/></padding>
+
+        <!-- ══ HEADER ════════════════════════════════════════════════════════ -->
+        <HBox alignment="CENTER_LEFT" spacing="14">
+            <VBox spacing="3">
+                <Label text="🤖 Analyse CV — Intelligence Artificielle (n8n)"
+                       style="-fx-font-family:'Segoe UI'; -fx-font-size:22px;
+                      -fx-font-weight:700; -fx-text-fill:#1a2540;"/>
+                <Label text="Téléchargez un CV PDF pour obtenir une analyse IA instantanée via n8n"
+                       style="-fx-font-size:13px; -fx-text-fill:#64748b;"/>
+            </VBox>
+        </HBox>
+
+        <!-- Divider -->
+        <Region prefHeight="1" maxHeight="1"
+                style="-fx-background-color: linear-gradient(to right,transparent,#dde4f0 20%,#dde4f0 80%,transparent);"/>
+
+        <!-- ══ UPLOAD CARD ════════════════════════════════════════════════════ -->
+        <VBox spacing="16"
+              style="-fx-background-color:white; -fx-background-radius:14;
+                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.07),10,0,0,3);">
+            <padding><Insets top="22" left="24" right="24" bottom="22"/></padding>
+
+            <Label text="📂 Sélection du CV"
+                   style="-fx-font-size:14px; -fx-font-weight:700; -fx-text-fill:#1a2540;"/>
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Button fx:id="btnChoisirCV" text="📂  Choisir un PDF"
+                        onAction="#handleChoisirCV"
+                        style="-fx-background-color:#e3eeff; -fx-text-fill:#5b8dee;
+                       -fx-font-size:13px; -fx-font-weight:700;
+                       -fx-background-radius:8; -fx-cursor:hand;
+                       -fx-border-color:transparent; -fx-padding:10 22 10 22;"/>
+
+                <Label fx:id="lblFileName" text="Aucun fichier sélectionné"
+                       style="-fx-font-size:13px; -fx-text-fill:#94a3b8;"/>
+            </HBox>
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Button fx:id="btnAnalyser" text="🚀  Lancer l'analyse IA"
+                        onAction="#handleAnalyser"
+                        style="-fx-background-color: linear-gradient(to right,#5b8dee,#7c6ef5);
+                       -fx-text-fill:white; -fx-font-size:13px; -fx-font-weight:700;
+                       -fx-background-radius:8; -fx-cursor:hand;
+                       -fx-border-color:transparent; -fx-padding:10 28 10 28;"/>
+
+                <ProgressIndicator fx:id="spinner" prefWidth="22" prefHeight="22"/>
+
+                <Label fx:id="lblStatus" text=""
+                       style="-fx-font-size:13px; -fx-text-fill:#7f8c8d;"/>
+            </HBox>
+        </VBox>
+
+        <!-- ══ RÉSULTATS (cachés jusqu'à analyse) ════════════════════════════ -->
+        <VBox fx:id="resultPane" spacing="18">
+
+            <!-- Score + Spider chart -->
+            <HBox spacing="18" alignment="CENTER_LEFT">
+
+                <!-- Score badge -->
+                <VBox alignment="CENTER" spacing="6"
+                      style="-fx-background-color:white; -fx-background-radius:14;
+                     -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,3);
+                     -fx-min-width:180; -fx-pref-width:180;">
+                    <padding><Insets top="24" left="24" right="24" bottom="24"/></padding>
+
+                    <Label text="Score IA" style="-fx-font-size:12px; -fx-text-fill:#94a3b8; -fx-font-weight:600;"/>
+                    <Label fx:id="lblScoreValue" text="–"
+                           style="-fx-font-size:42px; -fx-font-weight:700; -fx-text-fill:#1a2540;"/>
+                    <Label fx:id="lblScoreDesc" text="En attente d'analyse"
+                           style="-fx-font-size:12px; -fx-text-fill:#64748b; -fx-font-weight:600;"
+                           wrapText="true"/>
+                </VBox>
+
+                <!-- Radar chart -->
+                <VBox alignment="CENTER"
+                      style="-fx-background-color:white; -fx-background-radius:14;
+                     -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,3);"
+                      HBox.hgrow="ALWAYS">
+                    <padding><Insets top="12" left="12" right="12" bottom="12"/></padding>
+
+                    <Label text="Analyse par axe"
+                           style="-fx-font-size:13px; -fx-font-weight:700; -fx-text-fill:#1a2540;"/>
+                    <Canvas fx:id="radarCanvas" width="420" height="320"/>
+                </VBox>
+            </HBox>
+
+            <!-- Évaluation textuelle -->
+            <VBox spacing="10"
+                  style="-fx-background-color:white; -fx-background-radius:14;
+                   -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,3);">
+                <padding><Insets top="18" left="22" right="22" bottom="18"/></padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label text="🤖" style="-fx-font-size:18px;"/>
+                    <Label text="Évaluation IA"
+                           style="-fx-font-size:14px; -fx-font-weight:700; -fx-text-fill:#1a2540;"/>
+                </HBox>
+
+                <TextArea fx:id="txtAssessment"
+                          editable="false" wrapText="true" prefRowCount="6"
+                          style="-fx-font-family:System; -fx-font-size:13px;
+                         -fx-control-inner-background:#f8faff;
+                         -fx-background-radius:8; -fx-border-color:#e2e8f0;
+                         -fx-border-radius:8;"/>
+            </VBox>
+
+        </VBox>
+
+    </VBox>
+</ScrollPane>

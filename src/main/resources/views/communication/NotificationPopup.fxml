@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="communication.controllers.NotificationPopupController"
+      styleClass="notification-popup"
+      style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #E5E7EB; -fx-border-width: 1; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0, 0, 4); -fx-padding: 0; -fx-pref-width: 360; -fx-max-height: 500;">
+
+    <!-- Header -->
+    <HBox style="-fx-padding: 16; -fx-border-color: #E5E7EB; -fx-border-width: 0 0 1 0;" alignment="CENTER_LEFT">
+        <Label text="Notifications" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="markAllReadBtn" text="Tout marquer lu"
+                style="-fx-background-color: transparent; -fx-text-fill: #7C3AED; -fx-font-size: 12px; -fx-font-weight: 600; -fx-cursor: hand; -fx-border-width: 0; -fx-padding: 4 8;"/>
+    </HBox>
+
+    <!-- Notifications List -->
+    <ScrollPane fitToWidth="true"
+                VBox.vgrow="ALWAYS"
+                prefHeight="420"
+                minHeight="100"
+                style="-fx-background-color: transparent; -fx-border-width: 0; -fx-background: transparent;">
+        <VBox fx:id="notificationsList" spacing="0" style="-fx-background-color: white;"/>
+    </ScrollPane>
+
+    <!-- Empty State -->
+    <VBox fx:id="emptyState" alignment="CENTER" spacing="8"
+          style="-fx-padding: 40; -fx-background-color: white;"
+          visible="false" managed="false">
+        <Label text="🔔" style="-fx-font-size: 48px;"/>
+        <Label text="Aucune notification" style="-fx-font-size: 14px; -fx-text-fill: #6B7280; -fx-font-weight: 600;"/>
+        <Label text="Vous êtes à jour !" style="-fx-font-size: 12px; -fx-text-fill: #9CA3AF;"/>
+    </VBox>
+
+</VBox>

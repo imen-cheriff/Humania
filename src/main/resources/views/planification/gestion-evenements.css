@@ -1,0 +1,390 @@
+/* ═══════════════════════════════════════════════════════════
+   gestion-evenements.css — Gestion des Événements Styles
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── MAIN CONTAINER ─────────────────────────────────────── */
+.main-container {
+    -fx-background-color: #F3F4F6;
+}
+
+/* ─── PAGE HEADER ────────────────────────────────────────── */
+.page-header {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 22 28 22 28;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: transparent transparent #E5E7EB transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
+}
+
+.page-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: #111827;
+    -fx-font-family: "Arial";
+}
+
+.page-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #9CA3AF;
+    -fx-font-family: "Arial";
+}
+
+/* ─── ADD BUTTON ─────────────────────────────────────────── */
+.btn-add {
+    -fx-background-color: #3B82F6;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: BOLD;
+    -fx-font-family: "Arial";
+    -fx-background-radius: 10px;
+    -fx-padding: 11 22 11 22;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.35), 10, 0, 0, 4);
+}
+
+.btn-add:hover {
+    -fx-background-color: #2563EB;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* ─── SEARCH BAR ─────────────────────────────────────────── */
+.search-bar-container {
+    -fx-background-color: #F3F4F6;
+    -fx-padding: 0 28 0 28;
+}
+
+.search-box {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 10 18 10 18;
+    -fx-pref-width: 400px;
+    -fx-max-width: 400px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 6, 0, 0, 2);
+}
+
+.search-box:focused-within {
+    -fx-border-color: #3B82F6;
+}
+
+.search-icon {
+    -fx-font-size: 14px;
+    -fx-text-fill: #9CA3AF;
+}
+
+.search-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-fill: #374151;
+    -fx-font-family: "Arial";
+    -fx-pref-width: 330px;
+    -fx-padding: 0;
+}
+
+.search-field:focused {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* ─── SCROLL PANE ────────────────────────────────────────── */
+.cards-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.cards-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.cards-scroll .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+
+.cards-scroll .scroll-bar:vertical {
+    -fx-pref-width: 6px;
+    -fx-background-color: transparent;
+}
+
+.cards-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #D1D5DB;
+    -fx-background-radius: 4px;
+}
+
+.cards-scroll .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+/* ─── GRID PANE ──────────────────────────────────────────── */
+.cards-grid {
+    -fx-background-color: transparent;
+    -fx-padding: 20 28 20 28;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EVENT CARD — New flat white design (ref: Advanced React Workshop)
+   ═══════════════════════════════════════════════════════════ */
+.event-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 14px;
+    -fx-border-radius: 14px;
+    -fx-border-color: #E5E7EB;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 3);
+    -fx-pref-height: 420px;
+    -fx-min-height: 420px;
+    -fx-max-height: 420px;
+    -fx-max-width: Infinity;
+    -fx-cursor: default;
+}
+
+.event-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 6);
+    -fx-scale-x: 1.012;
+    -fx-scale-y: 1.012;
+    -fx-border-color: #D1D5DB;
+}
+
+/* ─── CARD HEADER (white, no gradient banner) ────────────── */
+.card-header {
+    -fx-padding: 18 16 10 16;
+}
+
+/* ─── CARD TITLE ─────────────────────────────────────────── */
+.card-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: #111827;
+    -fx-font-family: "Arial";
+    -fx-wrap-text: true;
+}
+
+/* ─── CARD DESCRIPTION ───────────────────────────────────── */
+.card-description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6B7280;
+    -fx-font-family: "Arial";
+    -fx-wrap-text: true;
+    -fx-line-spacing: 2px;
+}
+
+/* ─── STATUS BADGE (top-right, dark pill) ────────────────── */
+.badge {
+    -fx-background-radius: 20px;
+    -fx-font-size: 11px;
+    -fx-font-weight: BOLD;
+    -fx-font-family: "Arial";
+    -fx-padding: 5 12 5 12;
+}
+
+.badge-avenir {
+    -fx-background-color: #111827;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 20px;
+}
+
+.badge-encours {
+    -fx-background-color: #0284C7;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 20px;
+}
+
+.badge-termine {
+    -fx-background-color: #6B7280;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 20px;
+}
+
+.badge-complet {
+    -fx-background-color: #DC2626;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 20px;
+    -fx-font-size: 11px;
+    -fx-font-weight: BOLD;
+    -fx-font-family: "Arial";
+    -fx-padding: 5 12 5 12;
+}
+
+/* ─── CATEGORY TAG (amber pill under description) ────────── */
+.tag-category {
+    -fx-font-size: 11px;
+    -fx-font-weight: BOLD;
+    -fx-font-family: "Arial";
+    -fx-padding: 4 12 4 12;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1.5px;
+    -fx-text-fill: #D97706;
+    -fx-background-color: #FFFBEB;
+    -fx-border-color: #FDE68A;
+}
+
+/* ─── CARD BODY ──────────────────────────────────────────── */
+.card-body {
+    -fx-padding: 0 16 0 16;
+}
+
+/* ─── INFO GRID (2 columns) ──────────────────────────────── */
+.info-icon {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6B7280;
+    -fx-min-width: 18px;
+    -fx-pref-width: 18px;
+    -fx-alignment: CENTER;
+}
+
+.info-text {
+    -fx-font-size: 13px;
+    -fx-text-fill: #374151;
+    -fx-font-family: "Arial";
+}
+
+.info-desc {
+    -fx-font-size: 12px;
+    -fx-text-fill: #9CA3AF;
+    -fx-font-family: "Arial";
+    -fx-wrap-text: true;
+    -fx-line-spacing: 2px;
+}
+
+/* ─── CAPACITY BAR ───────────────────────────────────────── */
+.capacity-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6B7280;
+    -fx-font-family: "Arial";
+}
+
+.capacity-pct {
+    -fx-font-size: 12px;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: #374151;
+    -fx-font-family: "Arial";
+}
+
+.capacity-bar {
+    -fx-accent: #111827;
+    -fx-background-color: #E5E7EB;
+    -fx-background-radius: 4px;
+    -fx-pref-height: 6px;
+    -fx-min-height: 6px;
+    -fx-max-height: 6px;
+}
+
+.capacity-bar .bar {
+    -fx-background-color: #111827;
+    -fx-background-radius: 4px;
+}
+
+.capacity-bar .track {
+    -fx-background-color: #E5E7EB;
+    -fx-background-radius: 4px;
+}
+
+/* ─── TAGS ROW ───────────────────────────────────────────── */
+.tag {
+    -fx-font-size: 11px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: BOLD;
+    -fx-padding: 4 10 4 10;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1.5px;
+    -fx-text-fill: #374151;
+    -fx-background-color: #F3F4F6;
+    -fx-border-color: #E5E7EB;
+}
+
+/* ─── CARD DIVIDER ───────────────────────────────────────── */
+.card-divider {
+    -fx-background-color: #E5E7EB;
+    -fx-min-height: 1px;
+    -fx-max-height: 1px;
+    -fx-pref-height: 1px;
+}
+
+/* ─── ACTION BUTTONS ─────────────────────────────────────── */
+.card-actions {
+    -fx-padding: 12 16 16 16;
+}
+
+/* "View Details" — outline style */
+.btn-modifier {
+    -fx-background-color: transparent;
+    -fx-text-fill: #111827;
+    -fx-font-size: 13px;
+    -fx-font-weight: BOLD;
+    -fx-font-family: "Arial";
+    -fx-background-radius: 10px;
+    -fx-padding: 10 0 10 0;
+    -fx-cursor: hand;
+    -fx-border-color: #D1D5DB;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1.5px;
+    -fx-max-width: Infinity;
+}
+
+.btn-modifier:hover {
+    -fx-background-color: #F9FAFB;
+    -fx-border-color: #9CA3AF;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* "Delete" — red outline */
+.btn-supprimer {
+    -fx-background-color: transparent;
+    -fx-text-fill: #EF4444;
+    -fx-font-size: 13px;
+    -fx-font-weight: BOLD;
+    -fx-font-family: "Arial";
+    -fx-background-radius: 10px;
+    -fx-padding: 10 0 10 0;
+    -fx-cursor: hand;
+    -fx-border-color: #EF4444;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1.5px;
+    -fx-max-width: Infinity;
+}
+
+.btn-supprimer:hover {
+    -fx-background-color: #FEF2F2;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* ─── PRIMARY CTA — GÉRER (dark filled, like "Register") ─── */
+.btn-gerer {
+    -fx-background-color: #111827;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: BOLD;
+    -fx-font-family: "Arial";
+    -fx-background-radius: 10px;
+    -fx-padding: 11 0 11 0;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0, 0, 2);
+    -fx-max-width: Infinity;
+}
+
+.btn-gerer:hover {
+    -fx-background-color: #1F2937;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);
+}
+
+.btn-gerer:disabled {
+    -fx-background-color: #D1D5DB;
+    -fx-text-fill: #9CA3AF;
+    -fx-effect: none;
+    -fx-cursor: default;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}

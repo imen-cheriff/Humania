@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane
+        xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="recrutement.controllers.FormCandidatureExterneController"
+        prefWidth="600"
+        prefHeight="720"
+        style="-fx-background-color: #ffffff;
+           -fx-background-radius: 16;
+           -fx-border-radius: 16;
+           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 24, 0, 0, 6);">
+
+    <!-- ======================================================
+         EN-TÊTE
+    ====================================================== -->
+    <top>
+        <VBox style="-fx-background-color: #ffffff; -fx-background-radius: 16 16 0 0;">
+            <padding><Insets top="24" right="28" bottom="0" left="28"/></padding>
+
+            <HBox alignment="CENTER_LEFT">
+                <VBox HBox.hgrow="ALWAYS" spacing="4">
+                    <Label
+                            fx:id="formTitle"
+                            text="Ajouter une Candidature Externe"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 18px;
+                               -fx-font-weight: 700; -fx-text-fill: #0f172a;"/>
+                    <Label
+                            text="Remplissez les informations du candidat externe"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 12px;
+                               -fx-text-fill: #64748b;"/>
+                </VBox>
+                <Button
+                        fx:id="btnClose"
+                        text="✕"
+                        onAction="#handleClose"
+                        style="-fx-background-color: #f1f5f9; -fx-border-color: transparent;
+                           -fx-text-fill: #64748b; -fx-font-size: 14px; -fx-font-weight: 700;
+                           -fx-background-radius: 8; -fx-cursor: hand; -fx-padding: 6 10 6 10;"/>
+            </HBox>
+
+            <Region prefHeight="20"/>
+            <Separator style="-fx-background-color: #e2e8f0;"/>
+        </VBox>
+    </top>
+
+    <!-- ======================================================
+         CORPS
+    ====================================================== -->
+    <center>
+        <VBox spacing="16" style="-fx-background-color: #ffffff;">
+            <padding><Insets top="22" right="28" bottom="10" left="28"/></padding>
+
+            <!-- Ligne 1 : Prénom + Nom -->
+            <HBox spacing="14">
+                <VBox HBox.hgrow="ALWAYS" spacing="6">
+                    <Label text="PRÉNOM *"
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                                  -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <TextField
+                            fx:id="txtPrenom"
+                            promptText="Ex: Marie"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;
+                               -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0;
+                               -fx-border-radius: 8; -fx-background-radius: 8;
+                               -fx-padding: 9 12 9 12; -fx-text-fill: #0f172a;"/>
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS" spacing="6">
+                    <Label text="NOM *"
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                                  -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <TextField
+                            fx:id="txtNom"
+                            promptText="Ex: Dupont"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;
+                               -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0;
+                               -fx-border-radius: 8; -fx-background-radius: 8;
+                               -fx-padding: 9 12 9 12; -fx-text-fill: #0f172a;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Ligne 2 : Date dépôt -->
+            <VBox spacing="6">
+                <Label text="DATE DE DÉPÔT"
+                       style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                              -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                <DatePicker
+                        fx:id="datePickerDepot"
+                        style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;"/>
+            </VBox>
+
+            <!-- Ligne 3 : Statut + Étape Pipeline -->
+            <HBox spacing="14">
+                <VBox HBox.hgrow="ALWAYS" spacing="6">
+                    <Label text="STATUT *"
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                                  -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <ComboBox
+                            fx:id="cmbStatut"
+                            prefWidth="10000"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;
+                               -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0;
+                               -fx-border-radius: 8; -fx-background-radius: 8;"/>
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS" spacing="6">
+                    <Label text="ÉTAPE PIPELINE"
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                                  -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <ComboBox
+                            fx:id="cmbEtapePipeline"
+                            prefWidth="10000"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;
+                               -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0;
+                               -fx-border-radius: 8; -fx-background-radius: 8;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Ligne 4 : Scoring IA + Salaire prétend -->
+            <HBox spacing="14">
+                <VBox HBox.hgrow="ALWAYS" spacing="6">
+                    <Label text="SCORING IA (0 – 10)"
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                                  -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <TextField
+                            fx:id="txtScoringIA"
+                            promptText="Ex: 8.2"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;
+                               -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0;
+                               -fx-border-radius: 8; -fx-background-radius: 8;
+                               -fx-padding: 9 12 9 12; -fx-text-fill: #0f172a;"/>
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS" spacing="6">
+                    <Label text="SALAIRE PRÉTEND (€)"
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                                  -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <TextField
+                            fx:id="txtSalaire"
+                            promptText="Ex: 45000"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;
+                               -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0;
+                               -fx-border-radius: 8; -fx-background-radius: 8;
+                               -fx-padding: 9 12 9 12; -fx-text-fill: #0f172a;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Ligne 5 : URL CV + URL Lettre motivation -->
+            <HBox spacing="14">
+                <VBox HBox.hgrow="ALWAYS" spacing="6">
+                    <Label text="URL / NOM FICHIER CV"
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                                  -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <TextField
+                            fx:id="txtCvUrl"
+                            promptText="CV_Dupont_Marie.pdf"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;
+                               -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0;
+                               -fx-border-radius: 8; -fx-background-radius: 8;
+                               -fx-padding: 9 12 9 12; -fx-text-fill: #0f172a;"/>
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS" spacing="6">
+                    <Label text="URL / NOM LETTRE MOTIV."
+                           style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                                  -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                    <TextField
+                            fx:id="txtLettreUrl"
+                            promptText="LM_Dupont_Marie.pdf"
+                            style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;
+                               -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0;
+                               -fx-border-radius: 8; -fx-background-radius: 8;
+                               -fx-padding: 9 12 9 12; -fx-text-fill: #0f172a;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Ligne 6 : Commentaires RH -->
+            <VBox spacing="6">
+                <Label text="COMMENTAIRES RH"
+                       style="-fx-font-family: 'Segoe UI'; -fx-font-size: 11px;
+                              -fx-font-weight: 700; -fx-text-fill: #64748b;"/>
+                <TextArea
+                        fx:id="txtCommentaires"
+                        promptText="Remarques ou observations sur le candidat..."
+                        prefHeight="85"
+                        wrapText="true"
+                        style="-fx-font-family: 'Segoe UI'; -fx-font-size: 13px;
+                           -fx-background-color: #f8fafc; -fx-border-color: #e2e8f0;
+                           -fx-border-radius: 8; -fx-background-radius: 8;
+                           -fx-padding: 9 12 9 12; -fx-text-fill: #0f172a;"/>
+            </VBox>
+
+        </VBox>
+    </center>
+
+    <!-- ======================================================
+         PIED — Boutons
+    ====================================================== -->
+    <bottom>
+        <VBox style="-fx-background-color: #ffffff; -fx-background-radius: 0 0 16 16;">
+            <Separator style="-fx-background-color: #e2e8f0;"/>
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <padding><Insets top="16" right="28" bottom="20" left="28"/></padding>
+
+                <Button
+                        fx:id="btnAnnuler"
+                        text="Annuler"
+                        onAction="#handleClose"
+                        style="-fx-background-color: #f1f5f9; -fx-border-color: transparent;
+                           -fx-text-fill: #475569; -fx-font-family: 'Segoe UI';
+                           -fx-font-size: 13px; -fx-font-weight: 600;
+                           -fx-background-radius: 8; -fx-padding: 10 20 10 20;
+                           -fx-cursor: hand;"/>
+
+                <Button
+                        fx:id="btnEnregistrer"
+                        text="💾  Enregistrer"
+                        onAction="#handleEnregistrer"
+                        style="-fx-background-color: #3b82f6; -fx-border-color: transparent;
+                           -fx-text-fill: white; -fx-font-family: 'Segoe UI';
+                           -fx-font-size: 13px; -fx-font-weight: 700;
+                           -fx-background-radius: 8; -fx-padding: 10 22 10 22;
+                           -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>

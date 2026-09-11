@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="competence.controllers.SkillsMatrixController"
+            style="-fx-background-color:#F5F7FA;">
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background:#F5F7FA;-fx-background-color:#F5F7FA;-fx-border-color:transparent;">
+            <VBox spacing="20" style="-fx-padding:30;-fx-background-color:#F5F7FA;">
+
+                <!-- ══ HEADER ═══════════════════════════════════════════ -->
+                <HBox alignment="CENTER_LEFT">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Skills Matrix"
+                               style="-fx-font-size:28;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                        <Label text="Team competency overview with gap analysis"
+                               style="-fx-font-size:14;-fx-text-fill:#6C757D;"/>
+                    </VBox>
+                    <Button fx:id="btnExport" text="⬇  Export CSV"
+                            onAction="#handleExport"
+                            style="-fx-background-color:white;-fx-text-fill:#2563EB;-fx-font-weight:bold;
+                                   -fx-padding:12 24;-fx-background-radius:8;
+                                   -fx-border-color:#2563EB;-fx-border-radius:8;-fx-cursor:hand;"/>
+                </HBox>
+
+                <!-- ══ STATS ════════════════════════════════════════════ -->
+                <GridPane hgap="16">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                    </columnConstraints>
+
+                    <!-- Card 1 - Team Members (bleu) -->
+                    <VBox GridPane.columnIndex="0" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:12;
+                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#3B82F6;-fx-background-radius:12 12 0 0;"/>
+                        <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                            <HBox spacing="14" alignment="CENTER_LEFT">
+                                <Label text="👥"
+                                       style="-fx-font-size:20;-fx-background-color:#EFF6FF;
+                              -fx-padding:10;-fx-background-radius:8;"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="lblTeamMembers" text="0"
+                                           style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                                    <Label text="Team Members"
+                                           style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="🏢  Employés évalués"
+                                   style="-fx-font-size:11;-fx-text-fill:#3B82F6;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Card 2 - Critical Gaps (orange/rouge) -->
+                    <VBox GridPane.columnIndex="1" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:12;
+                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#F59E0B;-fx-background-radius:12 12 0 0;"/>
+                        <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                            <HBox spacing="14" alignment="CENTER_LEFT">
+                                <Label text="🚨"
+                                       style="-fx-font-size:20;-fx-background-color:#FEF3C7;
+                              -fx-padding:10;-fx-background-radius:8;"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="lblCriticalGaps" text="0"
+                                           style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#DC2626;"/>
+                                    <Label text="Critical Gaps"
+                                           style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="🔻  Compétences sous niveau 3"
+                                   style="-fx-font-size:11;-fx-text-fill:#F59E0B;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Card 3 - Avg Level (vert) -->
+                    <VBox GridPane.columnIndex="2" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:12;
+                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#10B981;-fx-background-radius:12 12 0 0;"/>
+                        <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                            <HBox spacing="14" alignment="CENTER_LEFT">
+                                <Label text="📈"
+                                       style="-fx-font-size:20;-fx-background-color:#D1FAE5;
+                              -fx-padding:10;-fx-background-radius:8;"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="lblAvgLevel" text="0.0"
+                                           style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                                    <Label text="Avg. Level"
+                                           style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="⭐  Niveau moyen de l'équipe"
+                                   style="-fx-font-size:11;-fx-text-fill:#10B981;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Card 4 - Total Skills (violet) -->
+                    <VBox GridPane.columnIndex="3" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:12;
+                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.08),10,0,0,2);">
+                        <Region prefHeight="5"
+                                style="-fx-background-color:#8B5CF6;-fx-background-radius:12 12 0 0;"/>
+                        <VBox spacing="12" style="-fx-padding:18 20 18 20;">
+                            <HBox spacing="14" alignment="CENTER_LEFT">
+                                <Label text="🎯"
+                                       style="-fx-font-size:20;-fx-background-color:#EDE9FE;
+                              -fx-padding:10;-fx-background-radius:8;"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="lblTotalSkills" text="0"
+                                           style="-fx-font-size:32;-fx-font-weight:bold;-fx-text-fill:#111827;"/>
+                                    <Label text="Total Skills"
+                                           style="-fx-font-size:12;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="🗂️  Compétences référencées"
+                                   style="-fx-font-size:11;-fx-text-fill:#8B5CF6;-fx-font-weight:bold;"/>
+                        </VBox>
+                    </VBox>
+                </GridPane>
+
+                <!-- ══ SEARCH BAR ════════════════════════════════════════ -->
+                <HBox spacing="15" alignment="CENTER_LEFT"
+                      style="-fx-background-color:white;-fx-padding:14 18;-fx-background-radius:12;
+                             -fx-border-color:#E5E7EB;-fx-border-width:1;-fx-border-radius:12;
+                             -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.04),6,0,0,1);">
+
+                    <!-- Recherche employés -->
+                    <VBox spacing="4">
+                        <Label text="🔍 Filter Employees" style="-fx-font-size:10;-fx-text-fill:#6B7280;-fx-font-weight:bold;"/>
+                        <TextField fx:id="searchEmployeesField"
+                                   promptText="Search employees or roles…"
+                                   prefWidth="220"
+                                   style="-fx-background-color:#F5F7FA;-fx-border-color:#E5E7EB;
+                                          -fx-border-radius:6;-fx-background-radius:6;-fx-padding:8 12;-fx-font-size:13;"/>
+                    </VBox>
+
+                    <!-- Recherche compétences -->
+                    <VBox spacing="4">
+                        <Label text="🎯 Filter Skills" style="-fx-font-size:10;-fx-text-fill:#6B7280;-fx-font-weight:bold;"/>
+                        <TextField fx:id="searchSkillsField"
+                                   promptText="Search skills…"
+                                   prefWidth="180"
+                                   style="-fx-background-color:#F5F7FA;-fx-border-color:#E5E7EB;
+                                          -fx-border-radius:6;-fx-background-radius:6;-fx-padding:8 12;-fx-font-size:13;"/>
+                    </VBox>
+
+                    <!-- Catégorie -->
+                    <VBox spacing="4">
+                        <Label text="📁 Category" style="-fx-font-size:10;-fx-text-fill:#6B7280;-fx-font-weight:bold;"/>
+                        <ComboBox fx:id="cbFilterCategory"
+                                  promptText="All Categories"
+                                  prefWidth="170"
+                                  style="-fx-background-color:#F5F7FA;-fx-background-radius:6;"/>
+                    </VBox>
+
+                    <!-- Gaps only -->
+                    <CheckBox fx:id="chkShowGapsOnly"
+                              text="Gaps only"
+                              onAction="#handleShowGapsOnly"
+                              style="-fx-font-size:13;-fx-text-fill:#374151;-fx-padding:18 0 0 0;"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <!-- Add button -->
+                    <Button fx:id="btnAddSkillAssessment"
+                            text="＋  Add Assessment"
+                            onAction="#handleAddSkillAssessment"
+                            style="-fx-background-color:#2563EB;-fx-text-fill:white;
+                                   -fx-font-weight:bold;-fx-font-size:13;
+                                   -fx-padding:10 20;-fx-background-radius:8;-fx-cursor:hand;"/>
+                </HBox>
+
+                <!-- ══ HEATMAP CARD ══════════════════════════════════════ -->
+                <VBox style="-fx-background-color:white;-fx-background-radius:14;
+                             -fx-border-color:#E5E7EB;-fx-border-width:1;-fx-border-radius:14;
+                             -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.07),12,0,0,3);">
+
+                    <!-- Card header -->
+                    <HBox alignment="CENTER_LEFT"
+                          style="-fx-padding:16 20;-fx-border-color:#F1F5F9;-fx-border-width:0 0 1 0;">
+                        <Label text="Team Competency Matrix"
+                               style="-fx-font-size:16;-fx-font-weight:bold;-fx-text-fill:#111827;"
+                               HBox.hgrow="ALWAYS"/>
+                        <Label text="  Double-click pour modifier  ·  Pagination Skills en haut à droite  ·  Pagination Employés en bas à droite"
+                               style="-fx-font-size:11;-fx-text-fill:#9CA3AF;"/>
+                    </HBox>
+
+                    <!--
+                        heatmapContainer: the controller fills this VBox with:
+                          [0] HBox(fixedLeftPanel | ScrollPane(skillsGrid))
+                          [1] HBox pagination bar
+                    -->
+                    <VBox fx:id="heatmapContainer" spacing="0"
+                          style="-fx-background-color:white;"/>
+
+                </VBox>
+
+                <!-- ══ LEGEND ════════════════════════════════════════════ -->
+                <HBox spacing="18" alignment="CENTER_LEFT"
+                      style="-fx-background-color:white;-fx-padding:14 20;-fx-background-radius:12;
+                             -fx-border-color:#E5E7EB;-fx-border-width:1;-fx-border-radius:12;">
+                    <Label text="Levels:" style="-fx-font-size:11;-fx-font-weight:bold;-fx-text-fill:#64748B;"/>
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="1" style="-fx-background-color:#FEE2E2;-fx-text-fill:#DC2626;-fx-font-weight:bold;-fx-padding:3 8;-fx-background-radius:6;-fx-font-size:11;"/>
+                        <Label text="Beginner" style="-fx-font-size:11;-fx-text-fill:#64748B;"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="2" style="-fx-background-color:#FEF3C7;-fx-text-fill:#D97706;-fx-font-weight:bold;-fx-padding:3 8;-fx-background-radius:6;-fx-font-size:11;"/>
+                        <Label text="Elementary" style="-fx-font-size:11;-fx-text-fill:#64748B;"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="3" style="-fx-background-color:#FEF9C3;-fx-text-fill:#CA8A04;-fx-font-weight:bold;-fx-padding:3 8;-fx-background-radius:6;-fx-font-size:11;"/>
+                        <Label text="Intermediate" style="-fx-font-size:11;-fx-text-fill:#64748B;"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="4" style="-fx-background-color:#DCFCE7;-fx-text-fill:#16A34A;-fx-font-weight:bold;-fx-padding:3 8;-fx-background-radius:6;-fx-font-size:11;"/>
+                        <Label text="Advanced" style="-fx-font-size:11;-fx-text-fill:#64748B;"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="5" style="-fx-background-color:#BFDBFE;-fx-text-fill:#2563EB;-fx-font-weight:bold;-fx-padding:3 8;-fx-background-radius:6;-fx-font-size:11;"/>
+                        <Label text="Expert" style="-fx-font-size:11;-fx-text-fill:#64748B;"/>
+                    </HBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="→ N" style="-fx-font-size:11;-fx-font-weight:bold;-fx-text-fill:#DC2626;"/>
+                        <Label text="Gap to target" style="-fx-font-size:11;-fx-text-fill:#DC2626;"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER">
+                        <Label text="→ N" style="-fx-font-size:11;-fx-font-weight:bold;-fx-text-fill:#16A34A;"/>
+                        <Label text="Target reached" style="-fx-font-size:11;-fx-text-fill:#16A34A;"/>
+                    </HBox>
+                </HBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

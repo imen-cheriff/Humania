@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+       xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="attendance.gui.AccueilController"
+       spacing="24" style="-fx-padding: 30px;">
+
+    <!-- En-tête -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <VBox>
+            <Label text="Bonjour, Insaf 👋"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+            <Label text="Voici un aperçu de votre activité"
+                   style="-fx-font-size: 13px; -fx-text-fill: #64748b;">
+                <VBox.margin><Insets top="4"/></VBox.margin>
+            </Label>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="➕ Nouvelle demande" onAction="#nouvelleDemandeAction"
+                style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 11px 22px; -fx-background-radius: 8; -fx-cursor: hand;"/>
+    </HBox>
+
+    <!-- 3 Cartes stats - Style capture d'écran -->
+    <HBox spacing="14">
+        <!-- Carte 1: Total Congés (Bleu) -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 2);"
+              spacing="0" HBox.hgrow="ALWAYS">
+            <!-- Barre de couleur en haut -->
+            <Region style="-fx-background-color: #3b82f6; -fx-background-radius: 12 12 0 0; -fx-min-height: 4px;"/>
+
+            <!-- Contenu -->
+            <VBox spacing="16" style="-fx-padding: 24px;">
+                <!-- Icône + Nombre -->
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <!-- Icône avec fond -->
+                    <StackPane style="-fx-background-color: #dbeafe; -fx-background-radius: 10; -fx-min-width: 48px; -fx-min-height: 48px; -fx-max-width: 48px; -fx-max-height: 48px;">
+                        <Label text="👥" style="-fx-font-size: 24px;"/>
+                    </StackPane>
+
+                    <!-- Nombre -->
+                    <Label fx:id="lblTotalConges" text="12"
+                           style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                </HBox>
+
+                <!-- Label -->
+                <Label text="Total Congés"
+                       style="-fx-font-size: 14px; -fx-text-fill: #64748b;"/>
+
+
+            </VBox>
+        </VBox>
+
+        <!-- Carte 2: Total Absences (Orange) -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 2);"
+              spacing="0" HBox.hgrow="ALWAYS">
+            <!-- Barre de couleur en haut -->
+            <Region style="-fx-background-color: #f59e0b; -fx-background-radius: 12 12 0 0; -fx-min-height: 4px;"/>
+
+            <!-- Contenu -->
+            <VBox spacing="16" style="-fx-padding: 24px;">
+                <!-- Icône + Nombre -->
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <!-- Icône avec fond -->
+                    <StackPane style="-fx-background-color: #fef3c7; -fx-background-radius: 10; -fx-min-width: 48px; -fx-min-height: 48px; -fx-max-width: 48px; -fx-max-height: 48px;">
+                        <Label text="⚠️" style="-fx-font-size: 24px;"/>
+                    </StackPane>
+
+                    <!-- Nombre -->
+                    <Label fx:id="lblTotalAbsences" text="1"
+                           style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                </HBox>
+
+                <!-- Label -->
+                <Label text="Total Absences"
+                       style="-fx-font-size: 14px; -fx-text-fill: #64748b;"/>
+
+
+            </VBox>
+        </VBox>
+
+        <!-- Carte 3: Types configurés (Vert) -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 2);"
+              spacing="0" HBox.hgrow="ALWAYS">
+            <!-- Barre de couleur en haut -->
+            <Region style="-fx-background-color: #10b981; -fx-background-radius: 12 12 0 0; -fx-min-height: 4px;"/>
+
+            <!-- Contenu -->
+            <VBox spacing="16" style="-fx-padding: 24px;">
+                <!-- Icône + Nombre -->
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <!-- Icône avec fond -->
+                    <StackPane style="-fx-background-color: #d1fae5; -fx-background-radius: 10; -fx-min-width: 48px; -fx-min-height: 48px; -fx-max-width: 48px; -fx-max-height: 48px;">
+                        <Label text="✓" style="-fx-font-size: 24px; -fx-text-fill: #10b981;"/>
+                    </StackPane>
+
+                    <!-- Nombre -->
+                    <Label fx:id="lblTotalTypes" text="3,3"
+                           style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                </HBox>
+
+                <!-- Label -->
+                <Label text="Types configurés"
+                       style="-fx-font-size: 14px; -fx-text-fill: #64748b;"/>
+
+                <!-- Badge optionnel -->
+                <Label text="types disponibles"
+                       style="-fx-font-size: 12px; -fx-text-fill: #10b981; -fx-font-weight: 600;"/>
+            </VBox>
+        </VBox>
+
+
+    </HBox>
+
+    <!-- Graphiques -->
+    <HBox spacing="18">
+        <VBox style="-fx-background-color: white; -fx-background-radius: 14; -fx-padding: 24px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);"
+              spacing="14" HBox.hgrow="ALWAYS">
+            <Label text="📈 Évolution des absences" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+            <LineChart fx:id="chartEvolution" prefHeight="260" createSymbols="true" legendVisible="false"
+                       style="-fx-background-color: transparent;">
+                <xAxis><CategoryAxis side="BOTTOM"/></xAxis>
+                <yAxis><NumberAxis side="LEFT"/></yAxis>
+            </LineChart>
+        </VBox>
+        <VBox style="-fx-background-color: white; -fx-background-radius: 14; -fx-padding: 24px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);"
+              spacing="14" prefWidth="340">
+            <Label text="📊 Répartition par type" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+            <PieChart fx:id="chartRepartition" prefHeight="260" legendVisible="true"/>
+        </VBox>
+    </HBox>
+
+    <!-- ================================================
+         SOLDES DES EMPLOYÉS - DESIGN MODERNE
+         ================================================ -->
+    <VBox style="-fx-background-color: white; -fx-background-radius: 14; -fx-padding: 24px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);"
+          spacing="20">
+
+        <!-- En-tête avec icône et description -->
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <StackPane style="-fx-background-color: #ede9fe; -fx-background-radius: 10; -fx-padding: 10px;">
+                <Label text="👥" style="-fx-font-size: 20px;"/>
+            </StackPane>
+            <VBox spacing="2">
+                <Label text="Soldes des Employés"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                <Label text="Vue d'ensemble des congés et absences de l'équipe"
+                       style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+            </VBox>
+        </HBox>
+
+        <!-- Conteneur employés (rempli dynamiquement avec cartes modernes) -->
+        <VBox fx:id="containerLeaveBalances" spacing="12"/>
+
+    </VBox>
+
+</VBox>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="planification.controllers.OffboardingController"
+           style="-fx-background-color: #f1f5f9;">
+
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+        <content>
+            <VBox spacing="0" style="-fx-background-color: #f1f5f9;">
+
+                <!-- ── Page Header ── -->
+                <VBox style="-fx-background-color: white; -fx-padding: 32 40 24 40;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);">
+                    <Label text="👋  Offboarding"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                    <Label text="Gérez les départs de vos collaborateurs avec un processus structuré"
+                           style="-fx-font-size: 14px; -fx-text-fill: #64748b; -fx-padding: 4 0 0 0;"/>
+                </VBox>
+
+                <!-- ── Body ── -->
+                <VBox spacing="24" style="-fx-padding: 32 40 40 40;">
+
+                    <!-- Selector card — 2 rows, no infinite hgrow on inputs -->
+                    <VBox spacing="12"
+                          style="-fx-background-color: white; -fx-background-radius: 12;
+                                 -fx-border-color: #e2e8f0; -fx-border-radius: 12;
+                                 -fx-padding: 20;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);">
+
+                        <!-- Row 1 : Employé + Motif -->
+                        <HBox spacing="16" alignment="CENTER_LEFT">
+                            <Label text="Employé partant :"
+                                   prefWidth="120"
+                                   style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+                            <ComboBox fx:id="employeeCombo"
+                                      prefWidth="260"
+                                      promptText="Sélectionner un employé..."
+                                      style="-fx-background-color: white; -fx-border-color: #e2e8f0;
+                                             -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13px;"/>
+                            <Label text="Motif :"
+                                   prefWidth="60"
+                                   style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+                            <ComboBox fx:id="reasonCombo"
+                                      prefWidth="220"
+                                      promptText="Motif de départ..."
+                                      style="-fx-background-color: white; -fx-border-color: #e2e8f0;
+                                             -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13px;"/>
+                        </HBox>
+
+                        <!-- Row 2 : Date + Bouton -->
+                        <HBox spacing="16" alignment="CENTER_LEFT">
+                            <Label text="Date de départ :"
+                                   prefWidth="120"
+                                   style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+                            <DatePicker fx:id="departureDatePicker"
+                                        prefWidth="200"
+                                        style="-fx-background-color: white; -fx-border-color: #e2e8f0;
+                                               -fx-border-radius: 8; -fx-background-radius: 8;"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button fx:id="generateBtn" text="⚡  Générer le parcours"
+                                    onAction="#handleGenerate"
+                                    style="-fx-background-color: #ef4444; -fx-text-fill: white;
+                                           -fx-font-weight: bold; -fx-font-size: 13px;
+                                           -fx-padding: 10 24; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                        </HBox>
+
+                    </VBox>
+
+                    <!-- Stats row -->
+                    <HBox fx:id="statsRow" spacing="16" alignment="CENTER_LEFT"/>
+
+                    <!-- Main content: two columns -->
+                    <HBox spacing="20" alignment="TOP_LEFT">
+
+                        <VBox fx:id="taskPanel" spacing="0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: white; -fx-background-radius: 12;
+                                     -fx-border-color: #e2e8f0; -fx-border-radius: 12;
+                                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);">
+                            <padding><Insets top="0" right="0" bottom="0" left="0"/></padding>
+                        </VBox>
+
+                        <VBox spacing="16" prefWidth="320" minWidth="280">
+                            <VBox fx:id="welcomeCard" spacing="12"
+                                  style="-fx-background-color: white; -fx-background-radius: 12;
+                                         -fx-border-color: #e2e8f0; -fx-border-radius: 12;
+                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);
+                                         -fx-padding: 20;">
+                                <Label text="👤  Informations employé"
+                                       style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                            </VBox>
+                            <VBox fx:id="autoActionsCard" spacing="12"
+                                  style="-fx-background-color: white; -fx-background-radius: 12;
+                                         -fx-border-color: #e2e8f0; -fx-border-radius: 12;
+                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);
+                                         -fx-padding: 20;">
+                                <Label text="⚙️  Actions automatiques"
+                                       style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+                            </VBox>
+                        </VBox>
+                    </HBox>
+
+                </VBox>
+            </VBox>
+        </content>
+    </ScrollPane>
+</StackPane>

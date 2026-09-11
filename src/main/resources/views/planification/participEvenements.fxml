@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="800.0" prefWidth="1280.0" spacing="0"
+      styleClass="main-container"
+      stylesheets="@particip-evenements.css"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="planification.controllers.PartEventCont">
+
+    <!-- ══════════════ HEADER ══════════════ -->
+    <HBox alignment="CENTER_LEFT" styleClass="page-header">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label styleClass="page-title" text="Événements" />
+            <Label styleClass="page-subtitle" text="Découvrez et participez aux événements à venir" />
+        </VBox>
+    </HBox>
+
+    <!-- ══════════════ SEARCH BAR ══════════════ -->
+    <HBox styleClass="search-bar-container">
+        <VBox.margin><Insets bottom="16" left="28" right="28" top="16" /></VBox.margin>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="search-box">
+            <Label styleClass="search-icon" text="🔍" />
+            <TextField fx:id="searchField" onKeyReleased="#handleSearch"
+                       promptText="Rechercher un événement..."
+                       styleClass="search-field" HBox.hgrow="ALWAYS" />
+        </HBox>
+    </HBox>
+
+
+    <!-- ══════════════ FILTER BAR ══════════════ -->
+    <HBox fx:id="filterBar" alignment="CENTER_LEFT" spacing="8" styleClass="filter-bar">
+        <VBox.margin><Insets bottom="4" left="28" right="28" top="0" /></VBox.margin>
+
+        <!-- Statut temporel -->
+        <Label styleClass="filter-label" text="Statut :" />
+        <ToggleButton fx:id="btnStatutTous"    text="Tous"      styleClass="filter-toggle" selected="true"  onAction="#handleStatutFilter" userData="ALL"     />
+        <ToggleButton fx:id="btnStatutAvenir"  text="📅 À venir" styleClass="filter-toggle" selected="false" onAction="#handleStatutFilter" userData="AVENIR"  />
+        <ToggleButton fx:id="btnStatutEncours" text="▶ En cours" styleClass="filter-toggle" selected="false" onAction="#handleStatutFilter" userData="ENCOURS" />
+        <ToggleButton fx:id="btnStatutTermine" text="✓ Terminé"  styleClass="filter-toggle" selected="false" onAction="#handleStatutFilter" userData="TERMINE" />
+    </HBox>
+
+    <!-- ══════════════ CARDS GRID AREA ══════════════ -->
+    <StackPane fx:id="centerStack" VBox.vgrow="ALWAYS">
+        <ScrollPane fitToWidth="true" styleClass="cards-scroll" StackPane.alignment="TOP_LEFT">
+            <GridPane fx:id="cardsContainer"
+                      hgap="24" vgap="24"
+                      styleClass="cards-grid">
+                <GridPane.margin><Insets bottom="30" left="28" right="28" top="10" /></GridPane.margin>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
+                </columnConstraints>
+            </GridPane>
+        </ScrollPane>
+    </StackPane>
+
+</VBox>

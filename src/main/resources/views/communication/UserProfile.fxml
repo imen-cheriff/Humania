@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="communication.controllers.UserProfileController"
+            style="-fx-background-color: #EEF0FB;">
+
+    <!-- ════════════════════════════════════════════════════
+         NO TOP BAR — navigation is in the sidebar
+    ════════════════════════════════════════════════════ -->
+
+    <!-- ════════════════════════════════════════════════════
+         MAIN CONTENT
+    ════════════════════════════════════════════════════ -->
+    <center>
+        <ScrollPane fx:id="contentScrollPane" fitToWidth="true"
+                    style="-fx-background-color: transparent; -fx-background: #EEF0FB;
+                           -fx-border-width: 0; -fx-padding: 0;"
+                    styleClass="scroll-pane">
+
+            <VBox style="-fx-background-color: #EEF0FB; -fx-spacing: 0; -fx-padding: 0 0 40 0;">
+
+                <!-- ╔═══════════════════════════════════════════╗
+                     ║   HERO SECTION: Cover + Avatar + Info    ║
+                     ╚═══════════════════════════════════════════╝ -->
+                <VBox style="-fx-background-color: #FFFFFF;
+                             -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.09), 20, 0, 0, 6);">
+
+                    <!-- Cover photo area -->
+                    <StackPane fx:id="coverImageContainer" prefHeight="220"
+                               style="-fx-background-color: linear-gradient(to bottom right, #4834D4, #A29BFE, #6C5CE7);"/>
+
+                    <!-- White card below cover with avatar overlapping -->
+                    <VBox style="-fx-background-color: #FFFFFF;
+                                 -fx-padding: 0 40 28 40;
+                                 -fx-alignment: center;
+                                 -fx-spacing: 6;">
+
+                        <!-- Avatar ring (translated up to overlap cover) -->
+                        <StackPane fx:id="avatarContainer" prefWidth="108" prefHeight="108"
+                                   style="-fx-translate-y: -54;
+                                          -fx-alignment: center;
+                                          -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.35), 14, 0, 0, 5);"/>
+
+                        <!-- Name + role + company block (pull up to close gap after translateY) -->
+                        <VBox style="-fx-translate-y: -42; -fx-alignment: center; -fx-spacing: 6;">
+
+                            <Label fx:id="userFullName"
+                                   style="-fx-font-size: 24px; -fx-font-weight: 900;
+                                          -fx-text-fill: #1A1D2E;
+                                          -fx-font-family: 'Segoe UI Black', 'Segoe UI', sans-serif;"/>
+
+                            <!-- Role badge -->
+                            <HBox alignment="CENTER">
+                                <Label fx:id="userTitle"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #6C5CE7;
+                                              -fx-font-weight: 800;
+                                              -fx-background-color: #EDE9FE;
+                                              -fx-background-radius: 50px;
+                                              -fx-padding: 4 14;
+                                              -fx-letter-spacing: 1px;"/>
+                            </HBox>
+
+                            <Label fx:id="userCompany"
+                                   style="-fx-font-size: 12.5px; -fx-text-fill: #A0A8CC; -fx-font-weight: 600;"/>
+
+                            <!-- Action buttons -->
+                            <HBox spacing="12" alignment="CENTER" style="-fx-padding: 14 0 0 0;">
+                                <Button fx:id="backBtn" text="← Retour"
+                                        style="-fx-background-color: transparent; -fx-border-width: 0;
+                                               -fx-font-size: 13px; -fx-text-fill: #6B7280;
+                                               -fx-padding: 8 12; -fx-cursor: hand; -fx-font-weight: 500;"/>
+                                <Button fx:id="editProfileBtn" text="✏  Modifier le profil"/>
+                                <Button fx:id="followBtn" text="+ Suivre"/>
+                                <Button fx:id="messageBtn" text="💬  Message"/>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                </VBox>
+
+                <!-- ╔═══════════════════════════════════════════╗
+                     ║   STATS ROW                               ║
+                     ╚═══════════════════════════════════════════╝ -->
+                <VBox fx:id="statsBox"
+                      style="-fx-padding: 20 24 0 24; -fx-spacing: 0; -fx-background-color: #EEF0FB;">
+                    <VBox.margin><Insets top="18"/></VBox.margin>
+                </VBox>
+
+                <!-- ╔═══════════════════════════════════════════╗
+                     ║   ABOUT SECTION                           ║
+                     ╚═══════════════════════════════════════════╝ -->
+                <VBox spacing="12"
+                      style="-fx-padding: 20 24; -fx-background-color: #FFFFFF;
+                             -fx-background-radius: 20px;
+                             -fx-border-color: #E8EAF6; -fx-border-width: 1.5;
+                             -fx-border-radius: 20px;
+                             -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.07), 16, 0, 0, 4);">
+                    <VBox.margin><Insets top="18" right="24" left="24"/></VBox.margin>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <StackPane minWidth="34" maxWidth="34" minHeight="34" maxHeight="34"
+                                   style="-fx-background-color: #EDE9FE; -fx-background-radius: 10px;">
+                            <Label text="💡" style="-fx-font-size: 16px;"/>
+                        </StackPane>
+                        <Label text="À propos"
+                               style="-fx-font-size: 14px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+                    </HBox>
+
+                    <Region style="-fx-background-color: #EAECF5; -fx-pref-height: 1;"/>
+
+                    <Label fx:id="aboutContent" wrapText="true"
+                           style="-fx-font-size: 13.5px; -fx-text-fill: #1A1D2E; -fx-line-spacing: 3;"/>
+                </VBox>
+
+                <!-- ╔═══════════════════════════════════════════╗
+                     ║   CONTACT INFO                            ║
+                     ╚═══════════════════════════════════════════╝ -->
+                <VBox spacing="12"
+                      style="-fx-padding: 20 24; -fx-background-color: #FFFFFF;
+                             -fx-background-radius: 20px;
+                             -fx-border-color: #E8EAF6; -fx-border-width: 1.5;
+                             -fx-border-radius: 20px;
+                             -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.07), 16, 0, 0, 4);">
+                    <VBox.margin><Insets top="14" right="24" left="24"/></VBox.margin>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <StackPane minWidth="34" maxWidth="34" minHeight="34" maxHeight="34"
+                                   style="-fx-background-color: #E0F7F6; -fx-background-radius: 10px;">
+                            <Label text="📋" style="-fx-font-size: 16px;"/>
+                        </StackPane>
+                        <Label text="Contact"
+                               style="-fx-font-size: 14px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+                    </HBox>
+
+                    <Region style="-fx-background-color: #EAECF5; -fx-pref-height: 1;"/>
+
+                    <VBox fx:id="contactInfoBox" spacing="10"/>
+                </VBox>
+
+                <!-- ╔═══════════════════════════════════════════╗
+                     ║   RECENT PUBLICATIONS                     ║
+                     ╚═══════════════════════════════════════════╝ -->
+                <VBox spacing="12"
+                      style="-fx-padding: 20 24; -fx-background-color: #FFFFFF;
+                             -fx-background-radius: 20px;
+                             -fx-border-color: #E8EAF6; -fx-border-width: 1.5;
+                             -fx-border-radius: 20px;
+                             -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.07), 16, 0, 0, 4);">
+                    <VBox.margin><Insets top="14" right="24" bottom="8" left="24"/></VBox.margin>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <StackPane minWidth="34" maxWidth="34" minHeight="34" maxHeight="34"
+                                   style="-fx-background-color: #FFF4EC; -fx-background-radius: 10px;">
+                            <Label text="📝" style="-fx-font-size: 16px;"/>
+                        </StackPane>
+                        <Label text="Publications récentes"
+                               style="-fx-font-size: 14px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+                    </HBox>
+
+                    <Region style="-fx-background-color: #EAECF5; -fx-pref-height: 1;"/>
+
+                    <VBox fx:id="recentActivityBox" spacing="10"/>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

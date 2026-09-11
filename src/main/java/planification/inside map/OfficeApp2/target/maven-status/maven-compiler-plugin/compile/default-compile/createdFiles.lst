@@ -1,0 +1,5 @@
+module-info.class
+com\officeapp\model\Floor.class
+com\officeapp\controller\MainController$1.class
+com\officeapp\controller\MainController.class
+com\officeapp\MainApp.class

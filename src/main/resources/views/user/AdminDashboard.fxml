@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Rectangle?>
+
+<VBox spacing="0" style="-fx-background-color: #f0f2f5;" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="utilisateur.controllers.AdminDashboardController">
+
+    <!-- Top NavBar -->
+    <HBox alignment="CENTER_LEFT" spacing="16" style="
+        -fx-background-color: white;
+        -fx-border-color: transparent transparent #e5e7eb transparent;
+        -fx-border-width: 0 0 1 0;
+        -fx-padding: 14 24 14 24;
+    ">
+        <Label text="Dashboard" style="-fx-text-fill: #1a1a2e; -fx-font-weight: bold; -fx-font-size: 16;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField promptText="Rechercher..." prefWidth="260" style="
+            -fx-background-radius: 20;
+            -fx-border-radius: 20;
+            -fx-border-color: #e5e7eb;
+            -fx-background-color: #f9fafb;
+            -fx-padding: 7 16;
+            -fx-font-size: 13;
+        "/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Gestion utilisateurs" onMouseClicked="#openGestionUtilisateurs" style="
+            -fx-background-radius: 8;
+            -fx-border-radius: 8;
+            -fx-border-color: #e5e7eb;
+            -fx-background-color: white;
+            -fx-text-fill: #374151;
+            -fx-padding: 6 12;
+            -fx-cursor: hand;
+        "/>
+        <!-- Notification Bell -->
+        <Label text="🔔" style="-fx-font-size: 18; -fx-cursor: hand;"/>
+        <!-- Avatar + Name (bound to current user in controller) -->
+        <HBox alignment="CENTER_LEFT" spacing="10" fx:id="userBlock" onMouseClicked="#openProfile" style="-fx-cursor: hand;">
+            <Label fx:id="avatarLabel" text="?" style="
+                -fx-background-color: #6366f1;
+                -fx-text-fill: white;
+                -fx-font-weight: bold;
+                -fx-font-size: 14;
+                -fx-background-radius: 50;
+                -fx-min-width: 36;
+                -fx-min-height: 36;
+                -fx-max-width: 36;
+                -fx-max-height: 36;
+                -fx-alignment: CENTER;
+            "/>
+            <VBox spacing="1">
+                <Label fx:id="usernameLabel" text="—" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-text-fill: #1a1a2e;"/>
+                <Label fx:id="emailLabel" text="—" style="-fx-font-size: 11; -fx-text-fill: #6b7280;"/>
+            </VBox>
+        </HBox>
+    </HBox>
+
+    <!-- Main Content -->
+    <VBox spacing="24" VBox.vgrow="ALWAYS" style="-fx-background-color: #f0f2f5;">
+        <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+
+        <!-- Page Title -->
+        <VBox spacing="4">
+            <Label text="Tableau de bord" style="-fx-text-fill: #1a1a2e;">
+                <font><Font name="System Bold" size="24"/></font>
+            </Label>
+            <Label text="Bienvenue sur votre espace HUMANIA"
+                   style="-fx-text-fill: #6b7280; -fx-font-size: 13;"/>
+        </VBox>
+
+        <!-- Stat Cards Row (3 cards: Total, Actifs, Inactifs) -->
+        <HBox spacing="16">
+
+            <!-- Total utilisateurs -->
+            <HBox spacing="16" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" style="
+                -fx-background-color: white;
+                -fx-background-radius: 14;
+                -fx-border-color: #e5e7eb;
+                -fx-border-radius: 14;
+                -fx-padding: 20 24;
+                -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);
+            ">
+                <Label text="👥" style="
+                    -fx-background-color: #ede9fe;
+                    -fx-background-radius: 12;
+                    -fx-font-size: 22;
+                    -fx-padding: 10 12;
+                "/>
+                <VBox spacing="2">
+                    <Label fx:id="totalLabel" text="10" style="-fx-text-fill: #1a1a2e; -fx-font-weight: bold; -fx-font-size: 26;"/>
+                    <Label text="Total" style="-fx-text-fill: #6b7280; -fx-font-size: 12;"/>
+                    <Label text="utilisateurs" style="-fx-text-fill: #6b7280; -fx-font-size: 12;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Actifs -->
+            <HBox spacing="16" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" style="
+                -fx-background-color: white;
+                -fx-background-radius: 14;
+                -fx-border-color: #e5e7eb;
+                -fx-border-radius: 14;
+                -fx-padding: 20 24;
+                -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);
+            ">
+                <Label text="✅" style="
+                    -fx-background-color: #dcfce7;
+                    -fx-background-radius: 12;
+                    -fx-font-size: 22;
+                    -fx-padding: 10 12;
+                "/>
+                <VBox spacing="2">
+                    <Label fx:id="actifsLabel" text="8" style="-fx-text-fill: #1a1a2e; -fx-font-weight: bold; -fx-font-size: 26;"/>
+                    <Label text="Actifs" style="-fx-text-fill: #6b7280; -fx-font-size: 12;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Inactifs -->
+            <HBox spacing="16" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" style="
+                -fx-background-color: white;
+                -fx-background-radius: 14;
+                -fx-border-color: #e5e7eb;
+                -fx-border-radius: 14;
+                -fx-padding: 20 24;
+                -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);
+            ">
+                <Label text="⛔" style="
+                    -fx-background-color: #ffedd5;
+                    -fx-background-radius: 12;
+                    -fx-font-size: 22;
+                    -fx-padding: 10 12;
+                "/>
+                <VBox spacing="2">
+                    <Label fx:id="inactifsLabel" text="2" style="-fx-text-fill: #1a1a2e; -fx-font-weight: bold; -fx-font-size: 26;"/>
+                    <Label text="Inactifs" style="-fx-text-fill: #6b7280; -fx-font-size: 12;"/>
+                </VBox>
+            </HBox>
+
+        </HBox>
+
+        <!-- Recent Activity -->
+        <VBox spacing="0" style="
+            -fx-background-color: white;
+            -fx-background-radius: 14;
+            -fx-border-color: #e5e7eb;
+            -fx-border-radius: 14;
+            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);
+        ">
+            <padding><Insets top="20" right="24" bottom="8" left="24"/></padding>
+
+            <Label text="Activité récente" style="-fx-font-weight: bold; -fx-font-size: 15; -fx-text-fill: #1a1a2e;">
+                <VBox.margin><Insets bottom="12"/></VBox.margin>
+            </Label>
+
+            <!-- Activity items will be populated by controller -->
+            <VBox fx:id="activityList" spacing="0"/>
+
+        </VBox>
+
+    </VBox>
+</VBox>

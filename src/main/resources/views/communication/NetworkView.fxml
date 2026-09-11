@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="communication.controllers.NetworkController"
+            style="-fx-background-color: #EEF0FB;">
+
+    <!-- TOP: Header -->
+    <top>
+        <VBox style="-fx-background-color: #FFFFFF;
+                     -fx-border-color: #E8EAF6;
+                     -fx-border-width: 0 0 1.5 0;
+                     -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.06), 12, 0, 0, 3);">
+            <padding><Insets top="20" right="28" bottom="16" left="28"/></padding>
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <Button fx:id="backBtn" text="← Retour"
+                        style="-fx-background-color: #F0EEFF;
+                               -fx-text-fill: #6C5CE7;
+                               -fx-border-width: 0;
+                               -fx-font-size: 12.5px;
+                               -fx-font-weight: 700;
+                               -fx-cursor: hand;
+                               -fx-background-radius: 10px;
+                               -fx-padding: 8 16;
+                               -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.18), 6, 0, 0, 2);"/>
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Mon Réseau"
+                           style="-fx-font-weight: 900; -fx-font-size: 22px; -fx-text-fill: #1A1D2E;
+                                  -fx-font-family: 'Segoe UI Black', 'Segoe UI', sans-serif;"/>
+                    <Label fx:id="headerCountLabel" text="0 abonnements · 0 suiveurs · 0 en attente"
+                           style="-fx-font-size: 12.5px; -fx-text-fill: #A0A8CC; -fx-font-weight: 500;"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- CENTER: Tabs + Cards -->
+    <center>
+        <VBox style="-fx-background-color: #EEF0FB;">
+            <padding><Insets top="0" right="28" bottom="28" left="28"/></padding>
+
+            <!-- Tabs -->
+            <HBox spacing="0" style="-fx-background-color: #FFFFFF;
+                                     -fx-background-radius: 0 0 16px 16px;
+                                     -fx-border-color: #E8EAF6;
+                                     -fx-border-width: 0 0 1.5 0;
+                                     -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.04), 8, 0, 0, 2);">
+                <padding><Insets top="0" right="24" bottom="0" left="24"/></padding>
+                <Button fx:id="followingTab" text="Abonnements (0)"
+                        style="-fx-background-color: transparent; -fx-border-color: transparent transparent #6C5CE7 transparent; -fx-border-width: 0 0 2.5 0; -fx-text-fill: #6C5CE7; -fx-font-weight: 700; -fx-font-size: 13px; -fx-padding: 14 22; -fx-cursor: hand;"/>
+                <Button fx:id="followersTab" text="Suiveurs (0)"
+                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0 0 2.5 0; -fx-text-fill: #A0A8CC; -fx-font-weight: 500; -fx-font-size: 13px; -fx-padding: 14 22; -fx-cursor: hand;"/>
+                <Button fx:id="pendingTab" text="En attente (0)"
+                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-width: 0 0 2.5 0; -fx-text-fill: #A0A8CC; -fx-font-weight: 500; -fx-font-size: 13px; -fx-padding: 14 22; -fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- Cards Container -->
+            <ScrollPane fitToWidth="true"
+                        style="-fx-background-color: transparent; -fx-background: #EEF0FB; -fx-border-width: 0; -fx-padding: 0;"
+                        styleClass="scroll-pane"
+                        VBox.vgrow="ALWAYS">
+                <FlowPane fx:id="cardsContainer" hgap="18" vgap="18"
+                          style="-fx-background-color: transparent;">
+                    <padding><Insets top="20" right="8" bottom="20" left="8"/></padding>
+                </FlowPane>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+</BorderPane>

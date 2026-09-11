@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane style="-fx-background-color: #f0f2f5;"
+            prefWidth="1000" prefHeight="660"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="utilisateur.controllers.MfaSetupController">
+
+    <center>
+        <StackPane>
+            <VBox alignment="CENTER" spacing="20" maxWidth="480"
+                  style="-fx-background-color: white; -fx-padding: 40 40;
+                         -fx-background-radius: 20;
+                         -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 20, 0, 0, 5);">
+
+                <!-- Title -->
+                <VBox alignment="CENTER" spacing="6">
+                    <Label text="🔐 Activer l'authentification à deux facteurs"
+                           style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1a202c;
+                                  -fx-wrap-text: true; -fx-text-alignment: center;"
+                           wrapText="true" maxWidth="400"/>
+                    <Label text="Scannez le QR code avec Google Authenticator ou Authy."
+                           style="-fx-font-size: 12px; -fx-text-fill: #718096; -fx-wrap-text: true;"
+                           wrapText="true" maxWidth="380"/>
+                </VBox>
+
+                <!-- QR Code -->
+                <VBox alignment="CENTER" spacing="8"
+                      style="-fx-border-color: #e2e8f0; -fx-border-radius: 12;
+                             -fx-background-radius: 12; -fx-padding: 16;
+                             -fx-background-color: #f7fafc;">
+                    <ImageView fx:id="qrImageView" fitWidth="220" fitHeight="220" preserveRatio="true"/>
+                    <Label text="Ou saisissez ce code manuellement dans l'application :"
+                           style="-fx-font-size: 11px; -fx-text-fill: #a0aec0;"/>
+                    <Label fx:id="secretLabel" text=""
+                           style="-fx-font-family: 'Courier New'; -fx-font-size: 13px;
+                                  -fx-font-weight: bold; -fx-text-fill: #4a5568;
+                                  -fx-background-color: #edf2f7; -fx-padding: 6 12;
+                                  -fx-background-radius: 6;"/>
+                </VBox>
+
+                <!-- Step instructions -->
+                <VBox spacing="6" maxWidth="400">
+                    <Label text="Étapes :" style="-fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+                    <Label text="1. Installez Google Authenticator sur votre téléphone."
+                           style="-fx-font-size: 12px; -fx-text-fill: #4a5568;"/>
+                    <Label text="2. Scannez le QR code ci-dessus."
+                           style="-fx-font-size: 12px; -fx-text-fill: #4a5568;"/>
+                    <Label text="3. Saisissez le code à 6 chiffres affiché dans l'application."
+                           style="-fx-font-size: 12px; -fx-text-fill: #4a5568;"/>
+                </VBox>
+
+                <!-- Code input -->
+                <VBox spacing="6" prefWidth="380">
+                    <Label text="Code de confirmation"
+                           style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+                    <TextField fx:id="codeField" promptText="Entrez le code à 6 chiffres"
+                               prefWidth="380"
+                               style="-fx-font-size: 22px; -fx-font-weight: bold;
+                                      -fx-alignment: center;
+                                      -fx-background-color: #f7fafc;
+                                      -fx-border-color: #e2e8f0; -fx-border-radius: 10;
+                                      -fx-background-radius: 10; -fx-padding: 12;"/>
+                    <Label fx:id="errorLabel" text=""
+                           style="-fx-text-fill: #e53e3e; -fx-font-size: 12px;"/>
+                    <Label fx:id="statusLabel" text=""
+                           style="-fx-text-fill: #38a169; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                </VBox>
+
+                <!-- Buttons -->
+                <HBox spacing="12" alignment="CENTER">
+                    <Button text="Annuler" prefWidth="160" prefHeight="44"
+                            onAction="#handleCancel"
+                            style="-fx-background-color: transparent;
+                                   -fx-border-color: #e2e8f0; -fx-border-radius: 10;
+                                   -fx-background-radius: 10; -fx-text-fill: #718096;
+                                   -fx-font-size: 13px; -fx-cursor: hand;"/>
+                    <Button text="✔ Activer MFA" prefWidth="200" prefHeight="44"
+                            onAction="#handleConfirm"
+                            style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+                                   -fx-text-fill: white; -fx-background-radius: 10;
+                                   -fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand;"/>
+                </HBox>
+
+            </VBox>
+        </StackPane>
+    </center>
+
+</BorderPane>

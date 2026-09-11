@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="communication.controllers.ChatController"
+      prefHeight="680"
+      maxWidth="Infinity"
+      HBox.hgrow="ALWAYS"
+      style="-fx-background-color: #EEF0FB;">
+
+    <!-- ════════════════════════════════════
+         LEFT: Conversations sidebar
+    ════════════════════════════════════ -->
+    <VBox prefWidth="304" minWidth="304"
+          style="-fx-background-color: #FFFFFF;
+                 -fx-border-color: #E8EAF6;
+                 -fx-border-width: 0 1.5 0 0;
+                 -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.08), 18, 0, 3, 0);">
+
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" spacing="12"
+              style="-fx-padding: 24 18 14 20; -fx-background-color: white;">
+            <VBox spacing="2">
+                <Label text="Messages"
+                       style="-fx-font-size: 22px; -fx-font-weight: 900;
+                              -fx-text-fill: #1A1D2E; -fx-font-family: 'Segoe UI Black', 'Segoe UI', sans-serif;"/>
+                <Label text="Vos conversations"
+                       style="-fx-font-size: 11px; -fx-text-fill: #A0A8CC;"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="newChatBtn" text="✏"
+                    style="-fx-background-color: #F0EEFF;
+                           -fx-text-fill: #6C5CE7;
+                           -fx-font-size: 15px; -fx-font-weight: 700;
+                           -fx-background-radius: 14px;
+                           -fx-cursor: hand; -fx-border-width: 0;
+                           -fx-padding: 9 13;
+                           -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.22), 7, 0, 0, 2);"/>
+        </HBox>
+
+        <!-- Search -->
+        <HBox style="-fx-padding: 0 14 14 14;">
+            <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" spacing="0"
+                  style="-fx-background-color: #F4F5FB;
+                         -fx-background-radius: 50px;
+                         -fx-border-color: #E8EAF6;
+                         -fx-border-width: 1.5;
+                         -fx-border-radius: 50px;
+                         -fx-padding: 0 16;">
+                <Label text="🔍" style="-fx-font-size: 13px; -fx-padding: 0 6 0 0;"/>
+                <TextField fx:id="searchField"
+                           promptText="Rechercher..."
+                           HBox.hgrow="ALWAYS"
+                           styleClass="search-bar"
+                           style="-fx-background-color: transparent;
+                                  -fx-background-radius: 0;
+                                  -fx-border-width: 0;
+                                  -fx-padding: 10 0;
+                                  -fx-font-size: 13px;
+                                  -fx-text-fill: #1A1D2E;
+                                  -fx-prompt-text-fill: #A0A8CC;"/>
+            </HBox>
+        </HBox>
+
+        <!-- Tabs -->
+        <HBox spacing="0" style="-fx-padding: 0 14 16 14;">
+            <Button fx:id="privateTabBtn" text="Privé"
+                    maxWidth="Infinity" HBox.hgrow="ALWAYS"
+                    style="-fx-background-color: #6C5CE7;
+                           -fx-text-fill: white;
+                           -fx-font-weight: 800; -fx-font-size: 12.5px;
+                           -fx-background-radius: 12px 0 0 12px;
+                           -fx-border-width: 0;
+                           -fx-cursor: hand; -fx-padding: 10 0;
+                           -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.35), 6, 0, 0, 2);"/>
+            <Button fx:id="groupTabBtn" text="Groupes"
+                    maxWidth="Infinity" HBox.hgrow="ALWAYS"
+                    style="-fx-background-color: #F4F5FB;
+                           -fx-text-fill: #5A5F7D;
+                           -fx-font-weight: 600; -fx-font-size: 12.5px;
+                           -fx-background-radius: 0 12px 12px 0;
+                           -fx-border-color: #E8EAF6;
+                           -fx-border-width: 1;
+                           -fx-cursor: hand; -fx-padding: 10 0;"/>
+        </HBox>
+
+        <!-- Conversations list -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                    style="-fx-background-color: transparent; -fx-background: transparent;
+                           -fx-border-width: 0; -fx-padding: 0;"
+                    styleClass="scroll-pane">
+            <VBox fx:id="conversationsList" spacing="3"
+                  style="-fx-padding: 2 10 10 10;"/>
+        </ScrollPane>
+    </VBox>
+
+    <!-- ════════════════════════════════════
+         RIGHT: Chat main area
+    ════════════════════════════════════ -->
+    <VBox HBox.hgrow="ALWAYS"
+          style="-fx-background-color: #EEF0FB;">
+
+        <!-- Chat Header -->
+        <HBox fx:id="chatHeader" alignment="CENTER_LEFT" spacing="14"
+              style="-fx-padding: 18 24;
+                     -fx-background-color: white;
+                     -fx-border-color: #E8EAF6;
+                     -fx-border-width: 0 0 1.5 0;
+                     -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.05), 10, 0, 2, 0);">
+
+            <!-- Avatar -->
+            <StackPane fx:id="chatAvatarPane"
+                       minWidth="48" minHeight="48"
+                       maxWidth="48" maxHeight="48"
+                       style="-fx-background-color: linear-gradient(to bottom right, #A29BFE, #6C5CE7);
+                              -fx-background-radius: 9999px;
+                              -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.4), 10, 0, 0, 3);">
+                <Label fx:id="chatAvatarLabel" text="?"
+                       style="-fx-text-fill: white; -fx-font-weight: 900; -fx-font-size: 18px;
+                              -fx-alignment: center;"/>
+            </StackPane>
+
+            <!-- Name + status -->
+            <VBox spacing="4">
+                <Label fx:id="chatNameLabel" text="Sélectionnez une conversation"
+                       style="-fx-font-size: 16px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Region minWidth="8" maxWidth="8" minHeight="8" maxHeight="8"
+                            style="-fx-background-color: #00B894; -fx-background-radius: 9999px;"/>
+                    <Label fx:id="chatStatusLabel" text=""
+                           style="-fx-font-size: 11.5px; -fx-text-fill: #00B894; -fx-font-weight: 600;"/>
+                </HBox>
+            </VBox>
+        </HBox>
+
+        <!-- Messages area -->
+        <ScrollPane fx:id="messagesScrollPane" fitToWidth="true"
+                    VBox.vgrow="ALWAYS"
+                    style="-fx-background-color: transparent; -fx-background: #EEF0FB;
+                           -fx-border-width: 0; -fx-padding: 0;"
+                    styleClass="scroll-pane">
+            <VBox fx:id="messagesList" spacing="6"
+                  style="-fx-padding: 20 24 20 24;"/>
+        </ScrollPane>
+
+        <!-- Input bar -->
+        <HBox fx:id="inputBox" alignment="CENTER" spacing="12"
+              style="-fx-padding: 14 20;
+                     -fx-background-color: white;
+                     -fx-border-color: #E8EAF6;
+                     -fx-border-width: 1.5 0 0 0;">
+            <TextField fx:id="messageInput"
+                       promptText="Tapez un message..."
+                       HBox.hgrow="ALWAYS"
+                       styleClass="chat-input"
+                       style="-fx-background-color: #F4F5FB;
+                              -fx-background-radius: 50px;
+                              -fx-border-color: #E8EAF6;
+                              -fx-border-width: 1.5;
+                              -fx-border-radius: 50px;
+                              -fx-padding: 12 22;
+                              -fx-font-size: 13.5px;
+                              -fx-text-fill: #1A1D2E;
+                              -fx-prompt-text-fill: #A0A8CC;"/>
+            <Button fx:id="sendBtn" text="➤"
+                    style="-fx-background-color: linear-gradient(to right, #6C5CE7, #A29BFE);
+                           -fx-text-fill: white;
+                           -fx-font-size: 16px; -fx-font-weight: 700;
+                           -fx-background-radius: 9999px;
+                           -fx-min-width: 48; -fx-min-height: 48;
+                           -fx-max-width: 48; -fx-max-height: 48;
+                           -fx-cursor: hand; -fx-border-width: 0;
+                           -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.45), 12, 0, 0, 4);"/>
+        </HBox>
+    </VBox>
+</HBox>

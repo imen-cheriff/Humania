@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<!--
+    MainView.fxml
+    ─────────────
+    Root is an AnchorPane (900x600) so children stack by z-order and can be
+    positioned absolutely via layoutX/Y from the controller.
+
+    Layer order (bottom → top):
+      1. mapImageView       – floor background image
+      2. elevatorHighlight  – glowing elevator zone indicator
+      3. characterView      – employee sprite
+      4. elevatorPopup      – floor-selector popup (hidden until triggered)
+-->
+<AnchorPane
+    xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.officeapp.controller.MainController"
+    prefWidth="900"
+    prefHeight="600"
+    style="-fx-background-color: #1a1a2e;">
+
+    <!-- Layer 1 – Floor background image, stretched to fill scene -->
+    <ImageView
+        fx:id="mapImageView"
+        fitWidth="900"
+        fitHeight="600"
+        preserveRatio="false"
+        smooth="true"
+        AnchorPane.topAnchor="0"
+        AnchorPane.leftAnchor="0"/>
+
+    <!-- Layer 2 – Elevator zone highlight box (size/position set in code) -->
+    <Pane fx:id="elevatorHighlight"
+          style="-fx-background-color: rgba(100,180,255,0.15);
+                 -fx-border-color: rgba(80,160,255,0.7);
+                 -fx-border-width: 2;
+                 -fx-border-radius: 5;
+                 -fx-background-radius: 5;"
+          visible="false"/>
+
+    <!-- Layer 3 – Employee character sprite (layoutX/Y set in code) -->
+    <ImageView
+        fx:id="characterView"
+        fitWidth="60"
+        fitHeight="90"
+        preserveRatio="true"
+        smooth="true"/>
+
+    <!-- Layer 4 – Elevator floor-selector popup (shown on elevator entry) -->
+    <Pane fx:id="elevatorPopup"
+          prefWidth="210"
+          prefHeight="240"
+          visible="false"
+          style="-fx-background-color: rgba(15,20,45,0.96);
+                 -fx-border-color: #4477bb;
+                 -fx-border-width: 2;
+                 -fx-border-radius: 12;
+                 -fx-background-radius: 12;
+                 -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.8),20,0,0,5);">
+        <!-- Buttons and title are added in MainController.buildElevatorPopupContent() -->
+    </Pane>
+
+</AnchorPane>

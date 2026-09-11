@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      spacing="10" alignment="TOP_LEFT"
+      style="-fx-padding: 2 0;">
+
+    <!-- Avatar -->
+    <StackPane minWidth="34" maxWidth="34" minHeight="34" maxHeight="34"
+               style="-fx-background-color: linear-gradient(to bottom right, #A29BFE, #6C5CE7);
+                      -fx-background-radius: 9999px;
+                      -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.25), 5, 0, 0, 1);">
+        <Label fx:id="commentAuthorAvatar" text=""
+               style="-fx-text-fill: white; -fx-font-weight: 800; -fx-font-size: 11px;
+                      -fx-alignment: center; -fx-min-width: 34; -fx-max-width: 34;
+                      -fx-min-height: 34; -fx-max-height: 34;"/>
+    </StackPane>
+
+    <!-- Comment content -->
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+
+        <!-- Bubble -->
+        <VBox style="-fx-background-color: #EAECF5;
+                     -fx-background-radius: 4px 18px 18px 18px;
+                     -fx-padding: 10 14 10 14;
+                     -fx-spacing: 4;">
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label fx:id="commentAuthorName" text="John Doe"
+                       style="-fx-font-size: 12.5px; -fx-font-weight: 800; -fx-text-fill: #1A1D2E;"/>
+                <Label fx:id="commentTime" text="• 2h"
+                       style="-fx-font-size: 10.5px; -fx-text-fill: #A0A8CC;"/>
+            </HBox>
+            <Label fx:id="commentText" wrapText="true"
+                   style="-fx-font-size: 13px; -fx-text-fill: #1A1D2E; -fx-line-spacing: 2;"/>
+        </VBox>
+
+        <!-- Actions -->
+        <HBox spacing="16" alignment="CENTER_LEFT" style="-fx-padding: 0 4;">
+            <Button fx:id="commentLikeBtn" text="J'aime"
+                    styleClass="comment-like-btn"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #A0A8CC;
+                           -fx-font-size: 11.5px; -fx-font-weight: 700;
+                           -fx-cursor: hand; -fx-border-width: 0; -fx-padding: 0;"/>
+            <Label fx:id="commentLikesLabel"
+                   style="-fx-font-size: 11px; -fx-text-fill: #A0A8CC;"
+                   visible="false" managed="false"/>
+            <Button fx:id="commentMenuBtn" text="⋮"
+                    style="-fx-background-color: transparent; -fx-text-fill: #A0A8CC;
+                           -fx-font-size: 14px; -fx-cursor: hand; -fx-border-width: 0; -fx-padding: 0;"
+                    visible="false" managed="false"/>
+        </HBox>
+    </VBox>
+
+</HBox>

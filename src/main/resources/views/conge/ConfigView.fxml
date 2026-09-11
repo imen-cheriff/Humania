@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="attendance.gui.ConfigController">
+
+    <!-- ================================================
+         VUE TYPE CONGE
+         ================================================ -->
+    <VBox fx:id="viewTypeConge" spacing="20">
+        <Label text="⚙️ Types de Congé" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+
+        <VBox spacing="16" style="-fx-background-color: white; -fx-padding: 24px; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);">
+            <HBox spacing="20">
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label text="Libellé" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                    <TextField fx:id="txtLibelleTC" promptText="Ex: Congé annuel"
+                               style="-fx-padding: 10px; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-border-width: 1; -fx-background-radius: 8;"/>
+                </VBox>
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label text="Description" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                    <TextField fx:id="txtDescriptionTC" promptText="Description du type de congé"
+                               style="-fx-padding: 10px; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-border-width: 1; -fx-background-radius: 8;"/>
+                </VBox>
+            </HBox>
+            <HBox spacing="12">
+                <Button text="➕ Ajouter" onAction="#ajouterTC"
+                        style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="✏️ Modifier" onAction="#modifierTC"
+                        style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="🗑️ Supprimer" onAction="#supprimerTC"
+                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="🔄 Actualiser" onAction="#actualiserTC"
+                        style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+
+        <VBox style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);">
+            <Label text="Liste des types de congé" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1e293b;">
+                <VBox.margin><Insets bottom="14"/></VBox.margin>
+            </Label>
+            <TableView fx:id="tableTC" prefHeight="400" style="-fx-font-size: 13px;">
+                <columns>
+                    <TableColumn fx:id="colIdTC" text="ID" prefWidth="80"/>
+                    <TableColumn fx:id="colLibelleTC" text="Libellé" prefWidth="280"/>
+                    <TableColumn fx:id="colDescriptionTC" text="Description" prefWidth="500"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+
+    <!-- ================================================
+         VUE TYPE ABSENCE
+         ================================================ -->
+    <VBox fx:id="viewTypeAbsence" visible="false" managed="false" spacing="20">
+        <Label text="⚙️ Types d'Absence" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+
+        <VBox spacing="16" style="-fx-background-color: white; -fx-padding: 24px; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);">
+            <HBox spacing="20">
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label text="Libellé" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                    <TextField fx:id="txtLibelleTA" promptText="Ex: Maladie"
+                               style="-fx-padding: 10px; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-border-width: 1; -fx-background-radius: 8;"/>
+                </VBox>
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label text="Description" style="-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                    <TextField fx:id="txtDescriptionTA" promptText="Description du type d'absence"
+                               style="-fx-padding: 10px; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-border-width: 1; -fx-background-radius: 8;"/>
+                </VBox>
+            </HBox>
+            <HBox spacing="12">
+                <Button text="➕ Ajouter" onAction="#ajouterTA"
+                        style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="✏️ Modifier" onAction="#modifierTA"
+                        style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="🗑️ Supprimer" onAction="#supprimerTA"
+                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="🔄 Actualiser" onAction="#actualiserTA"
+                        style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10px 22px; -fx-background-radius: 8; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+
+        <VBox style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 10, 0, 0, 3);">
+            <Label text="Liste des types d'absence" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1e293b;">
+                <VBox.margin><Insets bottom="14"/></VBox.margin>
+            </Label>
+            <TableView fx:id="tableTA" prefHeight="400" style="-fx-font-size: 13px;">
+                <columns>
+                    <TableColumn fx:id="colIdTA" text="ID" prefWidth="80"/>
+                    <TableColumn fx:id="colLibelleTA" text="Libellé" prefWidth="280"/>
+                    <TableColumn fx:id="colDescriptionTA" text="Description" prefWidth="500"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+
+</StackPane>

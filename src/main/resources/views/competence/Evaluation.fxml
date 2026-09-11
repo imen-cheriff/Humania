@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="competence.controllers.EvaluationsController"
+            style="-fx-background-color: #F1F5F9;">
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background:#F1F5F9;-fx-background-color:#F1F5F9;-fx-border-color:transparent;">
+
+            <VBox spacing="24" style="-fx-padding:30 36 36 36;-fx-background-color:#F1F5F9;">
+
+                <!-- ══ HERO HEADER ════════════════════════════════════════════ -->
+                <HBox style="-fx-background-color:linear-gradient(to right,#4F46E5,#7C3AED,#EC4899);
+                             -fx-background-radius:18;-fx-padding:26 28 22 28;"
+                      alignment="CENTER_LEFT" spacing="18">
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Évaluations de Compétences"
+                               style="-fx-font-size:24;-fx-font-weight:bold;-fx-text-fill:white;"/>
+                        <Label text="Passez vos évaluations · Suivez votre progression · Montez en niveau"
+                               style="-fx-font-size:12;-fx-text-fill:rgba(255,255,255,0.75);"/>
+                    </VBox>
+                    <Button fx:id="btnNewCampaign" text="＋  Nouvelle Évaluation"
+                            onAction="#handleNewCampaign"
+                            style="-fx-background-color:rgba(255,255,255,0.2);
+                                   -fx-text-fill:white;-fx-font-weight:bold;-fx-font-size:12;
+                                   -fx-padding:10 20;-fx-background-radius:22;-fx-cursor:hand;
+                                   -fx-border-color:rgba(255,255,255,0.35);-fx-border-radius:22;-fx-border-width:1;"/>
+                </HBox>
+
+                <!-- ══ STAT CARDS ═════════════════════════════════════════════ -->
+                <HBox spacing="16">
+
+                    <!-- Ouvertes -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:14;
+                                 -fx-border-color:#C7D2FE;-fx-border-radius:14;-fx-border-width:1;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.05),8,0,0,2);">
+                        <Region prefHeight="4"
+                                style="-fx-background-color:#6366F1;-fx-background-radius:14 14 0 0;"/>
+                        <VBox spacing="8" style="-fx-padding:14 16;">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="🔓"
+                                       style="-fx-font-size:20;-fx-background-color:#EEF2FF;
+                                              -fx-padding:8;-fx-background-radius:10;"/>
+                                <VBox spacing="1">
+                                    <Label fx:id="lblActiveCampaigns" text="0"
+                                           style="-fx-font-size:28;-fx-font-weight:bold;-fx-text-fill:#4F46E5;"/>
+                                    <Label text="Ouvertes"
+                                           style="-fx-font-size:11;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="🎯  Disponibles maintenant"
+                                   style="-fx-font-size:10;-fx-text-fill:#9CA3AF;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- En attente -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:14;
+                                 -fx-border-color:#FDE68A;-fx-border-radius:14;-fx-border-width:1;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.05),8,0,0,2);">
+                        <Region prefHeight="4"
+                                style="-fx-background-color:#F59E0B;-fx-background-radius:14 14 0 0;"/>
+                        <VBox spacing="8" style="-fx-padding:14 16;">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="⏳"
+                                       style="-fx-font-size:20;-fx-background-color:#FFFBEB;
+                                              -fx-padding:8;-fx-background-radius:10;"/>
+                                <VBox spacing="1">
+                                    <Label fx:id="lblPendingReviews" text="0"
+                                           style="-fx-font-size:28;-fx-font-weight:bold;-fx-text-fill:#D97706;"/>
+                                    <Label text="À passer"
+                                           style="-fx-font-size:11;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="⚠  Non encore passées"
+                                   style="-fx-font-size:10;-fx-text-fill:#9CA3AF;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Terminées ce mois -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:14;
+                                 -fx-border-color:#BBF7D0;-fx-border-radius:14;-fx-border-width:1;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.05),8,0,0,2);">
+                        <Region prefHeight="4"
+                                style="-fx-background-color:#10B981;-fx-background-radius:14 14 0 0;"/>
+                        <VBox spacing="8" style="-fx-padding:14 16;">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="✅"
+                                       style="-fx-font-size:20;-fx-background-color:#ECFDF5;
+                                              -fx-padding:8;-fx-background-radius:10;"/>
+                                <VBox spacing="1">
+                                    <Label fx:id="lblCompletedMonth" text="0"
+                                           style="-fx-font-size:28;-fx-font-weight:bold;-fx-text-fill:#059669;"/>
+                                    <Label text="Ce mois"
+                                           style="-fx-font-size:11;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="🏆  Évaluations réussies"
+                                   style="-fx-font-size:10;-fx-text-fill:#9CA3AF;"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Score moyen -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0"
+                          style="-fx-background-color:white;-fx-background-radius:14;
+                                 -fx-border-color:#FDE68A;-fx-border-radius:14;-fx-border-width:1;
+                                 -fx-effect:dropshadow(gaussian,rgba(0,0,0,0.05),8,0,0,2);">
+                        <Region prefHeight="4"
+                                style="-fx-background-color:#F59E0B;-fx-background-radius:14 14 0 0;"/>
+                        <VBox spacing="8" style="-fx-padding:14 16;">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="⭐"
+                                       style="-fx-font-size:20;-fx-background-color:#FFFBEB;
+                                              -fx-padding:8;-fx-background-radius:10;"/>
+                                <VBox spacing="1">
+                                    <Label fx:id="lblAvgRating" text="—"
+                                           style="-fx-font-size:28;-fx-font-weight:bold;-fx-text-fill:#D97706;"/>
+                                    <Label text="Score moyen"
+                                           style="-fx-font-size:11;-fx-text-fill:#6B7280;"/>
+                                </VBox>
+                            </HBox>
+                            <Label text="📊  Moyenne personnelle"
+                                   style="-fx-font-size:10;-fx-text-fill:#9CA3AF;"/>
+                        </VBox>
+                    </VBox>
+                </HBox>
+
+                <!-- ══ FILTRES ════════════════════════════════════════════════ -->
+                <HBox spacing="12" alignment="CENTER_LEFT"
+                      style="-fx-background-color:white;-fx-background-radius:12;
+                             -fx-border-color:#E2E8F6;-fx-border-radius:12;-fx-border-width:1;
+                             -fx-padding:12 16;">
+                    <Label text="🔍" style="-fx-font-size:14;-fx-text-fill:#9CA3AF;"/>
+                    <TextField fx:id="searchField"
+                               promptText="Rechercher une évaluation..."
+                               style="-fx-background-color:transparent;-fx-border-color:transparent;
+                                      -fx-font-size:13;-fx-pref-width:240;"
+                               HBox.hgrow="ALWAYS"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <ComboBox fx:id="filterStatus" style="-fx-font-size:12;-fx-background-radius:8;"/>
+                    <ComboBox fx:id="filterType"   style="-fx-font-size:12;-fx-background-radius:8;"/>
+                    <Button fx:id="btnClearFilters" text="✕  Réinitialiser"
+                            style="-fx-background-color:transparent;-fx-text-fill:#6B7280;
+                                   -fx-font-size:12;-fx-cursor:hand;
+                                   -fx-border-color:#E5E7EB;-fx-border-radius:8;
+                                   -fx-background-radius:8;-fx-padding:7 14;"/>
+                </HBox>
+
+                <!-- ══ DEUX COLONNES : Évaluations + Timeline/Historique ══════ -->
+                <HBox spacing="20" alignment="TOP_LEFT">
+
+                    <!-- Colonne gauche — liste des évaluations -->
+                    <VBox HBox.hgrow="ALWAYS" spacing="0">
+                        <Label text="📋  Campagnes d'Évaluation"
+                               style="-fx-font-size:14;-fx-font-weight:bold;
+                                      -fx-text-fill:#111827;-fx-padding:0 0 12 0;"/>
+                        <VBox fx:id="vboxCampaigns" spacing="14"/>
+                    </VBox>
+
+                    <!-- Colonne droite — timeline + historique -->
+                    <VBox fx:id="vboxRecentEvaluations" spacing="14" prefWidth="380" minWidth="320"/>
+
+                </HBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
