@@ -1,6 +1,18 @@
+<div align="center">
+
 # Humania — JavaFX HR Management Platform
 
 A full-featured JavaFX desktop application for end-to-end human resources management, with role-based access and AI-assisted workflows.
+
+[![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)](https://openjdk.org/)
+[![JavaFX](https://img.shields.io/badge/JavaFX-21-blue?logo=java)](https://openjfx.io/)
+[![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Maven](https://img.shields.io/badge/Build-Maven-C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+</div>
+
+This repo is the JavaFX desktop application (Sprint 1) of Humania, a two-part HR management platform. A companion Symfony web application (Sprint 2) extends the same modules to the browser — see [Related Project](#related-project) below.
 
 ---
 
@@ -63,7 +75,8 @@ Set at minimum your database credentials (`db.url`, `db.username`, `db.password`
 ### 3. Build & Run
 
 ```bash
-# Clone / unzip the project
+# Clone the project
+git clone https://github.com/<your-username>/Humania.git
 cd Humania
 
 # Build
@@ -120,3 +133,15 @@ Humania/
 - **Service layer pattern** — controllers never touch SQL directly; all DB access goes through `services/`
 - **Role-based routing** — dashboards and menus adapt to the logged-in user's role
 - **Session management** — centralized via `utils/Session` and `utils/UserSession`
+
+---
+
+## Related Project
+
+- **[HumaniaWeb — Symfony Web App](https://github.com/imen-cheriff/HumaniaWeb)** — Sprint 2, browser-based extension of this platform (PHP/Symfony/Twig)
+
+---
+
+## License
+
+Distributed under the [MIT License](LICENSE).
